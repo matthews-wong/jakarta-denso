@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation"
 
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
+import About from "./components/About"
 import Loading from "./loading"
 
 // Hash to section ID mapping
@@ -96,6 +97,7 @@ export default function Home() {
 
       <Navbar />
       <Hero />
+      <About />
 
       {/* Services Section */}
       <div ref={servicesRef} id="services">

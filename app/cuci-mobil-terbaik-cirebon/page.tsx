@@ -1,589 +1,455 @@
 "use client"
 
 import Image from "next/image"
-import Head from "next/head"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
+import { Droplets, Shield, Clock, Users, Star, MapPin, Phone, Sparkles, CheckCircle2 } from "lucide-react"
 
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false })
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false })
 const WhatsAppButton = dynamic(() => import("../components/WhatsAppButton"), { ssr: false })
 
-// export const metadata: Metadata = {
-//   title: "Cuci Mobil Premium & Servis AC Mobil Cirebon - Jakarta Intl Denso Cirebon",
-//   description:
-//     "Pionir cuci mobil & servis AC di Cirebon sejak 2004. Layanan cuci mobil murah, cuci mobil terbaik dengan teknisi profesional, air PDAM berkualitas, dan lokasi strategis di Jl. Garuda Raya.",
-//   keywords:
-//     "cuci mobil cirebon, cuci mobil murah, cuci mobil terbaik, servis ac mobil cirebon, jakarta intl denso, cuci mobil premium, cuci mobil profesional, cuci mobil berkualitas, cuci mobil hidrolik, cuci mobil snow wash",
-//   openGraph: {
-//     title: "Cuci Mobil Premium & Servis AC Mobil Cirebon - Jakarta Intl Denso",
-//     description:
-//       "Pionir cuci mobil & servis AC di Cirebon sejak 2004. Layanan cuci mobil murah dan terbaik dengan teknisi profesional.",
-//     images: [
-//       {
-//         url: "/images/blog-cuci-mobil.jpeg",
-//         width: 1200,
-//         height: 630,
-//         alt: "Cuci Mobil Premium Cirebon",
-//       },
-//     ],
-//     locale: "id_ID",
-//     type: "website",
-//   },
-// }
-
 const CuciMobilCirebon = () => {
-  const pageTitle = "Cuci Mobil Premium & Servis AC Mobil Cirebon - Jakarta Intl Denso Cirebon"
-  const pageDescription =
-    "Pionir cuci mobil & servis AC di Cirebon sejak 2004. Layanan cuci mobil murah, cuci mobil terbaik dengan teknisi profesional, air PDAM berkualitas, dan lokasi strategis di Jl. Garuda Raya. Booking sekarang untuk pelayanan terbaik!"
-  const whatsappNumber = "62819647333"
+    const whatsappNumber = "62819647333"
 
-  // Car wash steps
-  const carWashSteps = [
-    {
-      title: "Mobil Masuk",
-      description: "Mobil memasuki area pencucian dan diperiksa kondisinya oleh teknisi kami",
-      icon: "🚗",
-    },
-    {
-      title: "Naik Hidrolik",
-      description: "Mobil dinaikkan ke hidrolik untuk memudahkan akses ke semua bagian kendaraan",
-      icon: "⬆️",
-    },
-    {
-      title: "Penyemprotan Snow",
-      description: "Menggunakan snow foam premium untuk mengangkat kotoran dan debu tanpa merusak cat",
-      icon: "❄️",
-    },
-    {
-      title: "Pembersihan Manual",
-      description:
-        "Proses hand wash dengan kain microfiber untuk hasil yang lebih bersih dan menghilangkan kotoran yang membandel",
-      icon: "🧽",
-    },
-    {
-      title: "Pembilasan",
-      description: "Menggunakan air PDAM berkualitas untuk membilas semua sisa sabun dengan sempurna",
-      icon: "💦",
-    },
-    {
-      title: "Pembersihan Interior",
-      description: "Penyedotan debu dan pembersihan dashboard, jok, karpet, dan bagian dalam lainnya",
-      icon: "🧹",
-    },
-    {
-      title: "Pengeringan",
-      description: "Pengeringan menyeluruh menggunakan kanebo premium untuk hasil akhir yang sempurna tanpa bekas air",
-      icon: "✨",
-    },
-  ]
+    const carWashSteps = [
+        { title: "Mobil Masuk", description: "Pemeriksaan kondisi awal kendaraan", icon: "🚗", step: 1 },
+        { title: "Naik Hidrolik", description: "Akses menyeluruh ke seluruh bagian", icon: "⬆️", step: 2 },
+        { title: "Snow Foam", description: "Angkat kotoran tanpa merusak cat", icon: "❄️", step: 3 },
+        { title: "Hand Wash", description: "Pembersihan manual dengan microfiber", icon: "🧽", step: 4 },
+        { title: "Pembilasan", description: "Air PDAM berkualitas premium", icon: "💦", step: 5 },
+        { title: "Interior Clean", description: "Vakum dan poles dashboard", icon: "🧹", step: 6 },
+        { title: "Pengeringan", description: "Hasil sempurna tanpa bekas air", icon: "✨", step: 7 },
+    ]
 
-  // For SEO - structured data
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Jakarta Intl Denso Cirebon",
-    description: pageDescription,
-    image: "/images/blog-cuci-mobil.jpeg",
-    telephone: whatsappNumber,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Jl. Garuda Raya",
-      addressLocality: "Cirebon",
-      addressRegion: "Jawa Barat",
-      postalCode: "45153",
-      addressCountry: "ID",
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "08:00",
-      closes: "18:00",
-    },
-    priceRange: "$$",
-  }
+    const services = [
+        {
+            title: "Cuci Mobil Premium",
+            description: "Layanan cuci menyeluruh dengan perhatian pada setiap detail",
+            icon: Droplets,
+            features: ["Exterior wash", "Interior vacuum", "Tire dressing", "Dashboard polish"],
+        },
+        {
+            title: "Servis AC Mobil",
+            description: "Perbaikan dan perawatan sistem AC oleh teknisi berpengalaman",
+            icon: Sparkles,
+            features: ["Isi freon", "Perbaikan kompresor", "Pembersihan evaporator", "Cek kelistrikan"],
+        },
+        {
+            title: "Detailing Mobil",
+            description: "Perawatan estetika mobil untuk tampilan sempurna",
+            icon: Star,
+            features: ["Polishing", "Coating", "Interior detailing", "Headlight restoration"],
+        },
+    ]
 
-  return (
-    <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta
-          name="keywords"
-          content="cuci mobil cirebon, cuci mobil murah, cuci mobil terbaik, servis ac mobil cirebon, jakarta intl denso, cuci mobil premium, cuci mobil profesional, cuci mobil berkualitas, cuci mobil hidrolik, cuci mobil snow wash"
-        />
-        <meta property="og:title" content="Cuci Mobil Premium & Servis AC Mobil Cirebon - Jakarta Intl Denso" />
-        <meta
-          property="og:description"
-          content="Pionir cuci mobil & servis AC di Cirebon sejak 2004. Layanan cuci mobil murah dan terbaik dengan teknisi profesional."
-        />
-        <meta property="og:image" content="/images/blog-cuci-mobil.jpeg" />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content="id_ID" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      </Head>
+    const stats = [
+        { value: "50+", label: "Mobil/Hari", suffix: "rata-rata" },
+        { value: "10,000+", label: "Pelanggan", suffix: "puas" },
+        { value: "20+", label: "Tahun", suffix: "pengalaman" },
+        { value: "18+", label: "Teknisi", suffix: "profesional" },
+    ]
 
-      {/* Navbar */}
-      <Navbar />
+    return (
+        <>
+            <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-700 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/blog-cuci-mobil.jpeg"
-            alt="Layanan cuci mobil premium di Cirebon"
-            fill
-            priority
-            className="object-cover opacity-30"
-            sizes="100vw"
-          />
-        </div>
+            {/* Modern Hero Section */}
+            <section className="relative min-h-screen flex items-center overflow-hidden">
+                {/* Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-[#27398f] to-slate-900" />
 
-        <div className="container mx-auto px-4 z-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-          >
-            Pionir Cuci Mobil Premium di Cirebon Sejak 2004
-          </motion.h1>
+                {/* Animated Orbs */}
+                <div className="absolute top-20 right-20 w-96 h-96 bg-[#27398f]/30 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#ed3f36]/20 rounded-full blur-3xl animate-pulse delay-1000" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#27398f]/10 rounded-full blur-3xl" />
 
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-white mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed"
-          >
-            Percayakan perawatan mobil Anda kepada teknisi profesional dengan pengalaman 20+ tahun dalam industri
-            otomotif.
-          </motion.p>
-
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-white text-blue-900 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg hover:bg-blue-100 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
-          >
-            Booking Sekarang
-          </motion.button>
-        </div>
-      </section>
-
-      {/* About Us Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <div className="relative h-[300px] sm:h-[400px] rounded-lg overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/cuci-mobil12.jpeg"
-                  alt="Sejarah Jakarta Intl Denso Cirebon"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            <div className="w-full md:w-1/2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-                Kami adalah Pionir Cuci Mobil Cirebon
-              </h2>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-4">
-                Sejak 2004, <strong>Jakarta Intl Denso Cirebon</strong> telah menjadi nama yang dipercaya dalam industri
-                perawatan kendaraan di Cirebon.
-              </p>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-6 md:mb-8">
-                Kami menawarkan layanan terbaik dengan tim profesional, penggunaan air PDAM berkualitas, dan lokasi
-                strategis di Jl. Garuda Raya, pusat kota Cirebon.
-              </p>
-
-              <ul className="space-y-3 md:space-y-4">
-                {[
-                  "Cuci mobil premium dengan teknisi berpengalaman",
-                  "Servis AC mobil oleh teknisi terbaik",
-                  "Garansi kepuasan 100% untuk setiap layanan",
-                  "Fasilitas tunggu nyaman dengan WiFi gratis",
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="text-blue-600 mr-2 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Daily Car Wash Section */}
-      <section className="py-12 md:py-20 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <div className="relative h-[300px] sm:h-[400px] rounded-lg overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/blog-cuci-mobil.jpeg"
-                  alt="Layanan cuci mobil harian terbaik di Cirebon"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            <div className="w-full md:w-1/2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-                Layanan Cuci Mobil Terbaik di Cirebon
-              </h2>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-4">
-                Setiap hari, kami rata-rata mencuci <strong>50 mobil</strong> dengan standar kualitas tertinggi. Kami
-                menjamin kepuasan pelanggan dengan layanan cuci mobil yang cepat, bersih, dan ramah lingkungan.
-              </p>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-6 md:mb-8">
-                Dengan pengalaman lebih dari 20 tahun, kami memahami betul kebutuhan perawatan mobil Anda. Teknisi kami
-                yang profesional menggunakan peralatan modern dan air PDAM berkualitas untuk memberikan hasil terbaik.
-              </p>
-
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                {[
-                  { title: "Mobil", value: "50+", suffix: "per hari" },
-                  { title: "Pelanggan", value: "10,000+", suffix: "puas" },
-                  { title: "Pengalaman", value: "20+", suffix: "tahun" },
-                  { title: "Teknisi", value: "18+", suffix: "profesional" },
-                ].map((stat, index) => (
-                  <div key={index} className="bg-white p-3 sm:p-4 rounded-lg shadow-md">
-                    <p className="text-xs sm:text-sm text-gray-600">{stat.title}</p>
-                    <p className="text-xl sm:text-2xl font-bold text-blue-600">{stat.value}</p>
-                    <p className="text-xs text-gray-500">{stat.suffix}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Step by Step Car Wash Process - Clean Uniform Design */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 relative inline-block">
-              Proses Cuci Mobil Premium Kami
-              <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-blue-600 rounded-full"></span>
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto mt-6">
-              Kami mengikuti 7 langkah sistematis untuk memberikan hasil cuci mobil terbaik dan terpercaya
-            </p>
-          </div>
-
-          {/* Mobile View (Interactive Timeline) - Unchanged */}
-          <div className="lg:hidden">
-            <div className="relative px-2">
-              {/* Vertical timeline line */}
-              <div className="absolute left-8 top-6 bottom-6 w-1 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
-
-              <div className="space-y-16">
-                {carWashSteps.map((step, index) => (
-                  <div key={index} className="relative">
-                    {/* Step number bubble */}
-                    <div className="absolute left-8 top-4 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-blue-600 rounded-full z-10"></div>
-
-                    {/* Content card with improved text containment */}
-                    <div className="ml-16 bg-white rounded-xl shadow-md p-5 border-l-4 border-blue-600 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-                      <div className="flex items-center mb-3">
-                        <div className="w-10 h-10 flex items-center justify-center bg-blue-600 text-white rounded-full text-xl mr-3 flex-shrink-0">
-                          {step.icon}
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 break-words">
-                          {index + 1}. {step.title}
-                        </h3>
-                      </div>
-                      <p className="text-sm sm:text-base text-gray-700 break-words">{step.description}</p>
-
-                      {/* Visual indicator for current step */}
-                      <div className="w-full h-1 bg-gray-200 rounded-full mt-4 overflow-hidden">
-                        <div
-                          className="h-full bg-blue-600 rounded-full"
-                          style={{ width: `${((index + 1) / carWashSteps.length) * 100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop View - Clean Uniform Design */}
-          <div className="hidden lg:block">
-            <div className="bg-white rounded-2xl shadow-lg p-8 relative">
-              {/* Progress bar */}
-              <div className="absolute top-0 left-0 w-full h-2 bg-blue-100 rounded-t-2xl overflow-hidden">
-                <div className="h-full bg-blue-600 animate-progressBar"></div>
-              </div>
-
-              {/* First row - 3 steps */}
-              <div className="grid grid-cols-3 gap-8 mb-10">
-                {carWashSteps.slice(0, 3).map((step, index) => (
-                  <div key={index} className="relative">
-                    <div className="bg-blue-50 rounded-xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:bg-blue-100 flex flex-col">
-                      <div className="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        {index + 1}
-                      </div>
-
-                      <div className="flex justify-center mb-5 mt-2">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md">
-                          {step.icon}
-                        </div>
-                      </div>
-
-                      <h3 className="text-center text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-center text-gray-700">{step.description}</p>
-                    </div>
-
-                    {/* Connecting line */}
-                    {index < 2 && (
-                      <div
-                        className="hidden lg:block absolute top-1/2 right-0 w-8 h-1 bg-blue-300"
-                        style={{ transform: "translateX(100%)" }}
-                      ></div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Down arrow */}
-              <div className="flex justify-center mb-10">
-                <div className="w-1 h-10 bg-blue-300"></div>
-              </div>
-
-              {/* Second row - 3 steps */}
-              <div className="grid grid-cols-3 gap-8 mb-10">
-                {carWashSteps.slice(3, 6).map((step, index) => (
-                  <div key={index + 3} className="relative">
-                    <div className="bg-blue-50 rounded-xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:bg-blue-100 flex flex-col">
-                      <div className="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        {index + 4}
-                      </div>
-
-                      <div className="flex justify-center mb-5 mt-2">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md">
-                          {step.icon}
-                        </div>
-                      </div>
-
-                      <h3 className="text-center text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-center text-gray-700">{step.description}</p>
-                    </div>
-
-                    {/* Connecting line */}
-                    {index < 2 && (
-                      <div
-                        className="hidden lg:block absolute top-1/2 right-0 w-8 h-1 bg-blue-300"
-                        style={{ transform: "translateX(100%)" }}
-                      ></div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Down arrow */}
-              <div className="flex justify-center mb-10">
-                <div className="w-1 h-10 bg-blue-300"></div>
-              </div>
-
-              {/* Final step */}
-              <div className="flex justify-center">
-                <div className="relative max-w-md w-full">
-                  <div className="bg-blue-600 text-white rounded-xl p-6 shadow-lg">
-                    <div className="absolute -top-4 -left-4 w-10 h-10 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                      7
-                    </div>
-
-                    <div className="flex justify-center mb-5 mt-2">
-                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md">
-                        {carWashSteps[6].icon}
-                      </div>
-                    </div>
-
-                    <h3 className="text-center text-xl font-bold mb-3">{carWashSteps[6].title}</h3>
-                    <p className="text-center">{carWashSteps[6].description}</p>
-
-                    <div className="mt-4 flex justify-center">
-                      <div className="px-4 py-1 bg-white text-blue-600 rounded-full text-sm font-medium">
-                        Langkah Final
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Animation keyframes */}
-          <style jsx>{`
-            @keyframes progressBar {
-              0% {
-                width: 0;
-              }
-              100% {
-                width: 100%;
-              }
-            }
-
-            .animate-progressBar {
-              animation: progressBar 3s ease-out forwards;
-            }
-          `}</style>
-
-          {/* Call-to-action button */}
-          <div className="text-center mt-16">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
-            >
-              Booking Cuci Mobil Sekarang
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-12 md:py-20 bg-gray-100">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-            Layanan Unggulan Kami
-          </h2>
-          <p className="text-base sm:text-lg text-gray-700 mb-8 md:mb-12 max-w-3xl mx-auto">
-            Kami menawarkan berbagai layanan perawatan mobil terbaik dengan harga terjangkau dan hasil maksimal
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                title: "Cuci Mobil Premium",
-                description: "Layanan cuci mobil menyeluruh dengan perhatian pada setiap detail",
-                icon: "🚿",
-                features: ["Exterior wash", "Interior vacuum", "Tire dressing", "Dashboard polish"],
-              },
-              {
-                title: "Servis AC Mobil",
-                description: "Perbaikan dan perawatan sistem AC oleh teknisi berpengalaman",
-                icon: "❄️",
-                features: ["Isi freon", "Perbaikan kompresor", "Pembersihan evaporator", "Pengecekan kelistrikan"],
-              },
-              {
-                title: "Detailing Mobil",
-                description: "Perawatan estetika mobil untuk tampilan sempurna",
-                icon: "✨",
-                features: ["Polishing", "Coating", "Interior detailing", "Headlight restoration"],
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 h-full flex flex-col"
-              >
-                <div className="text-3xl sm:text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-700 mb-6">{service.description}</p>
-                <ul className="text-left space-y-2 mt-auto">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-600 text-sm sm:text-base">
-                      <span className="text-green-500 mr-2 flex-shrink-0">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-12 md:py-20 bg-blue-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">Siap Untuk Mencoba Layanan Kami?</h2>
-          <p className="text-lg sm:text-xl mb-6 md:mb-10 max-w-3xl mx-auto">
-            Dapatkan Pengalaman Cuci Mobil Terbaik di Jakarta Intl Denso !
-          </p>
-          <button
-            className="bg-white text-blue-900 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg hover:bg-blue-100 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
-          >
-            Hubungi Kami via WhatsApp
-          </button>
-        </div>
-      </section>
-
-      {/* Location Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <div className="relative h-[300px] sm:h-[400px] rounded-lg overflow-hidden shadow-xl">
-                <Image
-                  src="/images/lokasi-kami.jpeg"
-                  alt="Lokasi Jakarta Intl Denso Cirebon di Jl. Garuda Raya"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            <div className="w-full md:w-1/2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-                Lokasi Strategis di Pusat Kota
-              </h2>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-6">
-                Jakarta Intl Denso Cirebon berlokasi strategis di Jl. Garuda Raya, mudah diakses dari seluruh penjuru
-                kota Cirebon.
-              </p>
-
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <span className="text-blue-600 text-xl mr-3 flex-shrink-0">📍</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Alamat</h4>
-                    <p className="text-gray-700">Jl. Garuda Raya No. 2, Cirebon, Jawa Barat 45131</p>
-                  </div>
+                {/* Hero Image Overlay */}
+                <div className="absolute inset-0">
+                    <Image
+                        src="/images/blog-cuci-mobil.jpeg"
+                        alt="Layanan cuci mobil premium di Cirebon"
+                        fill
+                        priority
+                        className="object-cover opacity-20"
+                        sizes="100vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/50" />
                 </div>
 
-                <div className="flex items-start">
-                  <span className="text-blue-600 text-xl mr-3 flex-shrink-0">⏰</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Jam Operasional</h4>
-                    <p className="text-gray-700">Senin - Minggu: 08.00 - 17.00 WIB</p>
-                  </div>
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-32">
+                    <div className="max-w-4xl mx-auto text-center">
+                        {/* Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8"
+                        >
+                            <Droplets className="w-4 h-4 text-cyan-400" />
+                            <span className="text-cyan-300 text-sm font-medium">Pionir Cuci Mobil Cirebon Sejak 2004</span>
+                        </motion.div>
+
+                        {/* Title */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+                        >
+                            Cuci Mobil{" "}
+                            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                                Premium
+                            </span>
+                            <br />
+                            di Cirebon
+                        </motion.h1>
+
+                        {/* Subtitle */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="text-lg sm:text-xl text-blue-100/80 mb-10 max-w-2xl mx-auto leading-relaxed"
+                        >
+                            Percayakan perawatan mobil Anda kepada teknisi profesional dengan pengalaman 20+ tahun.
+                            Hasil bersih maksimal, fasilitas modern, harga terjangkau.
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                            className="flex flex-col sm:flex-row gap-4 justify-center"
+                        >
+                            <button
+                                onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
+                                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-2xl shadow-lg shadow-cyan-500/25 hover:shadow-xl hover:shadow-cyan-500/30 transform hover:scale-105 transition-all duration-300"
+                            >
+                                <Phone className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                                Booking Sekarang
+                            </button>
+                            <a
+                                href="#layanan"
+                                className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+                            >
+                                Lihat Layanan
+                            </a>
+                        </motion.div>
+
+                        {/* Trust Badges */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.8 }}
+                            className="flex flex-wrap justify-center gap-6 mt-12"
+                        >
+                            <div className="flex items-center gap-2 text-white/70">
+                                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                                <span className="text-sm">Rating 4.9/5</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-white/70">
+                                <Shield className="w-5 h-5 text-green-400" />
+                                <span className="text-sm">Garansi Layanan</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-white/70">
+                                <Users className="w-5 h-5 text-cyan-400" />
+                                <span className="text-sm">160+ Reviews</span>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
 
-                <div className="flex items-start">
-                  <span className="text-blue-600 text-xl mr-3 flex-shrink-0">📱</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kontak</h4>
-                    <p className="text-gray-700">WhatsApp: 0819-647-333</p>
-                  </div>
+                {/* Wave Separator */}
+                <div className="absolute bottom-0 left-0 right-0">
+                    <svg className="w-full h-24 fill-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,60 C300,120 600,0 900,60 C1050,90 1150,90 1200,60 L1200,120 L0,120 Z" />
+                    </svg>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
-      <Footer />
-      <WhatsAppButton />
-    </>
-  )
+            {/* About Section */}
+            <section className="py-20 lg:py-28 bg-white">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        {/* Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative"
+                        >
+                            <div className="relative h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                                <Image
+                                    src="/images/cuci-mobil12.jpeg"
+                                    alt="Sejarah Jakarta Intl Denso Cirebon"
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                />
+                                {/* Floating Stats Card - inside image container */}
+                                <div className="absolute bottom-4 right-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
+                                    <div className="text-2xl font-bold text-[#27398f]">20+</div>
+                                    <div className="text-gray-600 text-xs">Tahun Pengalaman</div>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Content */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <span className="inline-block px-4 py-2 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full mb-6">
+                                Tentang Kami
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                                Pionir Cuci Mobil{" "}
+                                <span className="text-blue-600">Terpercaya</span> di Cirebon
+                            </h2>
+                            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Sejak 2004, <strong>Jakarta Intl Denso Cirebon</strong> telah menjadi nama yang dipercaya dalam industri
+                                perawatan kendaraan di Cirebon. Kami menggunakan teknologi modern dan produk berkualitas.
+                            </p>
+                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                                Fasilitas hidrolik modern, air PDAM berkualitas, dan ruang tunggu nyaman dengan WiFi gratis –
+                                semuanya untuk kenyamanan Anda.
+                            </p>
+
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                {["Cuci mobil premium dengan teknisi berpengalaman", "Servis AC mobil oleh spesialis", "Garansi kepuasan 100%", "Fasilitas tunggu nyaman"].map((item, index) => (
+                                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                                        <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                        <span className="text-gray-700 text-sm">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Stats Section */}
+            <section className="py-16 bg-gradient-to-r from-blue-600 to-cyan-600">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+                        {stats.map((stat, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="text-center"
+                            >
+                                <div className="text-4xl lg:text-5xl font-bold text-white mb-2">{stat.value}</div>
+                                <div className="text-blue-100 font-medium">{stat.label}</div>
+                                <div className="text-blue-200/70 text-sm">{stat.suffix}</div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Process Section */}
+            <section className="py-20 lg:py-28 bg-gray-50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <span className="inline-block px-4 py-2 bg-cyan-50 text-cyan-600 text-sm font-semibold rounded-full mb-6">
+                            Proses Kami
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                            7 Langkah Cuci Mobil <span className="text-cyan-600">Premium</span>
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Proses sistematis untuk hasil maksimal yang memuaskan
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {carWashSteps.map((step, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className={`relative p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${index === 6 ? "sm:col-span-2 lg:col-span-1 xl:col-span-1 bg-gradient-to-br from-[#27398f] to-[#ed3f36] text-white" : ""
+                                    }`}
+                            >
+                                <div className={`absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-lg ${index === 6 ? "bg-white text-[#27398f]" : "bg-[#27398f] text-white"
+                                    }`}>
+                                    {step.step}
+                                </div>
+                                <div className="text-4xl mb-4">{step.icon}</div>
+                                <h3 className={`text-lg font-bold mb-2 ${index === 6 ? "text-white" : "text-gray-900"}`}>
+                                    {step.title}
+                                </h3>
+                                <p className={`text-sm ${index === 6 ? "text-blue-100" : "text-gray-600"}`}>
+                                    {step.description}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <button
+                            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
+                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#27398f] to-[#ed3f36] text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                        >
+                            Booking Cuci Mobil Sekarang
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Services Section */}
+            <section id="layanan" className="py-20 lg:py-28 bg-white">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <span className="inline-block px-4 py-2 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full mb-6">
+                            Layanan Kami
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                            Layanan <span className="text-blue-600">Unggulan</span>
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Berbagai layanan perawatan mobil terbaik dengan harga terjangkau
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {services.map((service, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group p-8 bg-white rounded-3xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                            >
+                                <div className="w-14 h-14 bg-gradient-to-br from-[#27398f] to-[#ed3f36] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <service.icon className="w-7 h-7 text-white" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                                <p className="text-gray-600 mb-6">{service.description}</p>
+                                <ul className="space-y-3">
+                                    {service.features.map((feature, idx) => (
+                                        <li key={idx} className="flex items-center gap-3 text-gray-600 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            <section className="py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-[#27398f] to-slate-900 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[#27398f]/30 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#ed3f36]/20 rounded-full blur-3xl" />
+
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="text-center max-w-3xl mx-auto">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+                            Siap Mencoba Layanan <span className="text-[#ed3f36]">Terbaik</span> Kami?
+                        </h2>
+                        <p className="text-xl text-blue-100/80 mb-10">
+                            Dapatkan pengalaman cuci mobil premium di Jakarta Intl Denso Cirebon!
+                        </p>
+                        <button
+                            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
+                            className="inline-flex items-center justify-center px-10 py-5 bg-white text-blue-900 font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                        >
+                            <Phone className="w-5 h-5 mr-2" />
+                            Hubungi Kami via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Location Section */}
+            <section className="py-20 lg:py-28 bg-white">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl"
+                        >
+                            <Image
+                                src="/images/lokasi-kami.jpeg"
+                                alt="Lokasi Jakarta Intl Denso Cirebon"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                            />
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <span className="inline-block px-4 py-2 bg-blue-50 text-blue-600 text-sm font-semibold rounded-full mb-6">
+                                Lokasi
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                                Lokasi <span className="text-blue-600">Strategis</span>
+                            </h2>
+                            <p className="text-lg text-gray-600 mb-8">
+                                Berlokasi di pusat kota Cirebon, mudah diakses dari seluruh penjuru kota.
+                            </p>
+
+                            <div className="space-y-6">
+                                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <MapPin className="w-6 h-6 text-blue-600" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 mb-1">Alamat</h4>
+                                        <p className="text-gray-600">Jl. Garuda Raya No. 2, Cirebon, Jawa Barat 45131</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 bg-[#27398f]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <Clock className="w-6 h-6 text-[#27398f]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 mb-1">Jam Operasional</h4>
+                                        <p className="text-gray-600">Senin - Minggu: 08.00 - 17.00 WIB</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 bg-[#ed3f36]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <Phone className="w-6 h-6 text-[#ed3f36]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 mb-1">Kontak</h4>
+                                        <p className="text-gray-600">WhatsApp: 0819-647-333</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            <Footer />
+            <WhatsAppButton />
+        </>
+    )
 }
 
 export default CuciMobilCirebon
-

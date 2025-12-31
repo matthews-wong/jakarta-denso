@@ -1,515 +1,426 @@
 "use client"
 
 import Image from "next/image"
-import Head from "next/head"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
+import { Wrench, Shield, Clock, Users, Star, MapPin, Phone, Settings, CheckCircle2, ThermometerSun } from "lucide-react"
 
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false })
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false })
 const WhatsAppButton = dynamic(() => import("../components/WhatsAppButton"), { ssr: false })
 
 const ServiceACMesin = () => {
-  const pageTitle = "Service AC & Mesin Mobil Terpercaya Cirebon - Jakarta Intl Denso Cirebon"
-  const pageDescription =
-    "Layanan service AC dan mesin mobil terbaik di Cirebon. Teknisi berpengalaman, spare part berkualitas, dan garansi servis. Booking sekarang untuk performa mobil optimal!"
-  const whatsappNumber = "62819647333"
+    const whatsappNumber = "62819647333"
 
-  // Service steps
-  const serviceSteps = [
-    {
-      title: "Diagnosa Awal",
-      description: "Pemeriksaan menyeluruh kondisi AC dan mesin mobil",
-      icon: "🔍",
-    },
-    {
-      title: "Konsultasi",
-      description: "Diskusi dengan pelanggan mengenai masalah dan solusi yang direkomendasikan",
-      icon: "💬",
-    },
-    {
-      title: "Perbaikan AC",
-      description: "Perbaikan sistem AC, termasuk pengisian freon dan perbaikan komponen",
-      icon: "❄️",
-    },
-    {
-      title: "Servis Mesin",
-      description: "Perbaikan dan perawatan mesin untuk performa optimal",
-      icon: "🔧",
-    },
-    {
-      title: "Penggantian Spare Part",
-      description: "Penggantian komponen yang rusak dengan spare part berkualitas",
-      icon: "🔩",
-    },
-    {
-      title: "Pengujian",
-      description: "Tes performa AC dan mesin setelah perbaikan",
-      icon: "✅",
-    },
-    {
-      title: "Garansi Servis",
-      description: "Pemberian garansi untuk setiap layanan yang diberikan",
-      icon: "🛡️",
-    },
-  ]
+    const serviceSteps = [
+        { title: "Diagnosa Awal", description: "Pengecekan menyeluruh sistem AC & mesin", icon: "🔍", step: 1 },
+        { title: "Estimasi Biaya", description: "Transparansi harga sebelum pengerjaan", icon: "📝", step: 2 },
+        { title: "Pembongkaran", description: "Proses bongkar dengan alat presisi", icon: "🔧", step: 3 },
+        { title: "Pembersihan", description: "Cuci evaporator, kondensor & komponen lain", icon: "🚿", step: 4 },
+        { title: "Penggantian Part", description: "Ganti sparepart original/alternatif (sesuai request)", icon: "⚙️", step: 5 },
+        { title: "Pemasangan", description: "Perakitan kembali dengan standar pabrik", icon: "🛠️", step: 6 },
+        { title: "Testing & QC", description: "Uji performa suhu & tekanan freon", icon: "✅", step: 7 },
+    ]
 
-  // For SEO - structured data
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "AutoRepair",
-    name: "Jakarta Intl Denso Cirebon - Service AC & Mesin Mobil",
-    description: pageDescription,
-    image: "/images/cek-ac-mobil.jpeg",
-    telephone: whatsappNumber,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Jl. Garuda Raya",
-      addressLocality: "Cirebon",
-      addressRegion: "Jawa Barat",
-      postalCode: "45153",
-      addressCountry: "ID",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: -6.7320229,
-      longitude: 108.5523164,
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "08:00",
-      closes: "17:00",
-    },
-    priceRange: "$$",
-    serviceType: ["AC Repair", "Engine Repair", "Auto Maintenance"],
-  }
+    const services = [
+        {
+            title: "Service AC Mobil",
+            description: "Solusi lengkap untuk segala masalah AC mobil Anda",
+            icon: ThermometerSun,
+            features: ["Isi freon", "Ganti kompresor", "Cuci evaporator", "Flushing sistem AC"],
+        },
+        {
+            title: "Tune Up Mesin",
+            description: "Kembalikan performa mesin seperti baru",
+            icon: Settings,
+            features: ["Carbon clean", "Ganti oli", "Ganti busi", "Pembersihan injektor"],
+        },
+        {
+            title: "Perbaikan Kelistrikan",
+            description: "Diagnosa dan perbaikan sistem kelistrikan mobil",
+            icon: Wrench,
+            features: ["Scan ECU", "Perbaikan kabel", "Ganti aki", "Perbaikan alternator"],
+        },
+    ]
 
-  return (
-    <>
-      <Head>
-        <title>{pageTitle}</title>
-        <meta name="description" content={pageDescription} />
-        <meta
-          name="keywords"
-          content="service AC mobil, service mesin mobil, perbaikan AC mobil, Cirebon, Jakarta Intl Denso"
-        />
-        <meta property="og:title" content={pageTitle} />
-        <meta property="og:description" content={pageDescription} />
-        <meta property="og:image" content="/images/cek-ac-mobil.jpeg" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={pageTitle} />
-        <meta name="twitter:description" content={pageDescription} />
-        <meta name="twitter:image" content="/images/cek-ac-mobil.jpeg" />
-        <link rel="canonical" href="https://www.jakartaintldenso.com/service-ac-mesin" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-      </Head>
+    return (
+        <>
+            <Navbar />
 
-      <Navbar />
+            {/* Modern Hero Section */}
+            <section className="relative min-h-screen flex items-center overflow-hidden">
+                {/* Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-[#27398f] to-slate-900" />
 
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-700 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/service-ac-cirebon.jpg"
-            alt="Layanan service AC dan mesin mobil di Cirebon"
-            fill
-            priority
-            className="object-cover opacity-30"
-            sizes="100vw"
-          />
-        </div>
+                {/* Animated Orbs */}
+                <div className="absolute top-20 right-20 w-96 h-96 bg-[#27398f]/30 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#ed3f36]/20 rounded-full blur-3xl animate-pulse delay-1000" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#27398f]/10 rounded-full blur-3xl" />
 
-        <div className="container mx-auto px-4 z-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-          >
-            Service AC & Mesin Mobil Terpercaya
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-white mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed"
-          >
-            Solusi terbaik untuk performa optimal AC dan mesin mobil Anda di Cirebon.
-          </motion.p>
-
-          <motion.button
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-white text-blue-900 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg hover:bg-blue-100 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
-          >
-            Booking Sekarang
-          </motion.button>
-        </div>
-      </section>
-
-      {/* About Us Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <div className="relative h-[300px] sm:h-[400px] rounded-lg overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/cek-ac-mobil.jpeg"
-                  alt="Bengkel service AC dan mesin mobil Jakarta Intl Denso Cirebon"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            <div className="w-full md:w-1/2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-                Service AC & Mesin Mobil Terbaik di Cirebon
-              </h2>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-4">
-                Jakarta Intl Denso Cirebon menawarkan layanan service AC dan mesin mobil dengan standar kualitas
-                tertinggi. Kami menggunakan peralatan modern dan spare part berkualitas untuk menjamin performa optimal
-                kendaraan Anda.
-              </p>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-6 md:mb-8">
-                Tim teknisi kami yang berpengalaman dan terfikasi siap menangani berbagai masalah AC dan mesin mobil
-                dengan cepat dan akurat.
-              </p>
-
-              <ul className="space-y-3 md:space-y-4">
-                {[
-                  "Diagnosa komprehensif",
-                  "Perbaikan sistem AC",
-                  "Tune-up mesin",
-                  "Penggantian spare part berkualitas",
-                ].map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="text-blue-600 mr-2 flex-shrink-0">✓</span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Service AC & Mesin Process - Step by Step - Clean Uniform Design */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-white to-blue-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 relative inline-block">
-              Proses Service AC & Mesin Mobil
-              <span className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-32 h-1.5 bg-blue-600 rounded-full"></span>
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto mt-6">
-              Kami mengikuti 7 langkah sistematis untuk memberikan layanan service terbaik dan terpercaya
-            </p>
-          </div>
-
-          {/* Mobile View (Interactive Timeline) - Unchanged */}
-          <div className="lg:hidden">
-            <div className="relative px-2">
-              {/* Vertical timeline line */}
-              <div className="absolute left-8 top-6 bottom-6 w-1 bg-gradient-to-b from-blue-500 to-blue-700 rounded-full"></div>
-
-              <div className="space-y-16">
-                {serviceSteps.map((step, index) => (
-                  <div key={index} className="relative">
-                    {/* Step number bubble */}
-                    <div className="absolute left-8 top-4 transform -translate-x-1/2 w-6 h-6 bg-white border-4 border-blue-600 rounded-full z-10"></div>
-
-                    {/* Content card with improved text containment */}
-                    <div className="ml-16 bg-white rounded-xl shadow-md p-5 border-l-4 border-blue-600 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
-                      <div className="flex items-center mb-3">
-                        <div className="w-10 h-10 flex items-center justify-center bg-blue-600 text-white rounded-full text-xl mr-3 flex-shrink-0">
-                          {step.icon}
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 break-words">
-                          {index + 1}. {step.title}
-                        </h3>
-                      </div>
-                      <p className="text-sm sm:text-base text-gray-700 break-words">{step.description}</p>
-
-                      {/* Visual indicator for current step */}
-                      <div className="w-full h-1 bg-gray-200 rounded-full mt-4 overflow-hidden">
-                        <div
-                          className="h-full bg-blue-600 rounded-full"
-                          style={{ width: `${((index + 1) / serviceSteps.length) * 100}%` }}
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Desktop View - Clean Uniform Design */}
-          <div className="hidden lg:block">
-            <div className="bg-white rounded-2xl shadow-lg p-8 relative">
-              {/* Progress bar */}
-              <div className="absolute top-0 left-0 w-full h-2 bg-blue-100 rounded-t-2xl overflow-hidden">
-                <div className="h-full bg-blue-600 animate-progressBar"></div>
-              </div>
-
-              {/* First row - 3 steps */}
-              <div className="grid grid-cols-3 gap-8 mb-10">
-                {serviceSteps.slice(0, 3).map((step, index) => (
-                  <div key={index} className="relative">
-                    <div className="bg-blue-50 rounded-xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:bg-blue-100 flex flex-col">
-                      <div className="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        {index + 1}
-                      </div>
-
-                      <div className="flex justify-center mb-5 mt-2">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md">
-                          {step.icon}
-                        </div>
-                      </div>
-
-                      <h3 className="text-center text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-center text-gray-700">{step.description}</p>
-                    </div>
-
-                    {/* Connecting line */}
-                    {index < 2 && (
-                      <div
-                        className="hidden lg:block absolute top-1/2 right-0 w-8 h-1 bg-blue-300"
-                        style={{ transform: "translateX(100%)" }}
-                      ></div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Down arrow */}
-              <div className="flex justify-center mb-10">
-                <div className="w-1 h-10 bg-blue-300"></div>
-              </div>
-
-              {/* Second row - 3 steps */}
-              <div className="grid grid-cols-3 gap-8 mb-10">
-                {serviceSteps.slice(3, 6).map((step, index) => (
-                  <div key={index + 3} className="relative">
-                    <div className="bg-blue-50 rounded-xl p-6 h-full transition-all duration-300 hover:shadow-lg hover:bg-blue-100 flex flex-col">
-                      <div className="absolute -top-4 -left-4 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                        {index + 4}
-                      </div>
-
-                      <div className="flex justify-center mb-5 mt-2">
-                        <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md">
-                          {step.icon}
-                        </div>
-                      </div>
-
-                      <h3 className="text-center text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-center text-gray-700">{step.description}</p>
-                    </div>
-
-                    {/* Connecting line */}
-                    {index < 2 && (
-                      <div
-                        className="hidden lg:block absolute top-1/2 right-0 w-8 h-1 bg-blue-300"
-                        style={{ transform: "translateX(100%)" }}
-                      ></div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Down arrow */}
-              <div className="flex justify-center mb-10">
-                <div className="w-1 h-10 bg-blue-300"></div>
-              </div>
-
-              {/* Final step */}
-              <div className="flex justify-center">
-                <div className="relative max-w-md w-full">
-                  <div className="bg-blue-600 text-white rounded-xl p-6 shadow-lg">
-                    <div className="absolute -top-4 -left-4 w-10 h-10 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md">
-                      7
-                    </div>
-
-                    <div className="flex justify-center mb-5 mt-2">
-                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center text-2xl shadow-md">
-                        {serviceSteps[6].icon}
-                      </div>
-                    </div>
-
-                    <h3 className="text-center text-xl font-bold mb-3">{serviceSteps[6].title}</h3>
-                    <p className="text-center">{serviceSteps[6].description}</p>
-
-                    <div className="mt-4 flex justify-center">
-                      <div className="px-4 py-1 bg-white text-blue-600 rounded-full text-sm font-medium">
-                        Langkah Final
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Animation keyframes */}
-          <style jsx>{`
-            @keyframes progressBar {
-              0% { width: 0; }
-              100% { width: 100%; }
-            }
-            
-            .animate-progressBar {
-              animation: progressBar 3s ease-out forwards;
-            }
-          `}</style>
-
-          {/* Call-to-action button */}
-          <div className="text-center mt-16">
-            <button
-              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-full text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-              onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
-            >
-              Booking Service Sekarang
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
-            Layanan Service AC & Mesin Mobil
-          </h2>
-          <p className="text-base sm:text-lg text-gray-700 mb-8 md:mb-12 max-w-3xl mx-auto">
-            Kami menawarkan berbagai layanan service AC dan mesin mobil untuk menjaga performa optimal kendaraan Anda
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {[
-              {
-                title: "Service AC Mobil",
-                description: "Perbaikan dan perawatan sistem AC mobil Anda",
-                icon: "❄️",
-                features: ["Isi freon", "Perbaikan kompresor", "Pembersihan evaporator", "Pengecekan kebocoran"],
-              },
-              {
-                title: "Tune-up Mesin",
-                description: "Perawatan rutin untuk performa optimal mesin",
-                icon: "🔧",
-                features: ["Ganti oli", "Cek & ganti filter", "Setel timing", "Bersihkan injector"],
-              },
-              {
-                title: "Perbaikan Mesin",
-                description: "Diagnosa dan perbaikan masalah mesin",
-                icon: "🛠️",
-                features: ["Overhaul mesin", "Perbaikan transmisi", "Ganti timing belt", "Cek sistem kelistrikan"],
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition duration-300 h-full flex flex-col"
-              >
-                <div className="text-3xl sm:text-4xl mb-4">{service.icon}</div>
-                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-700 mb-6">{service.description}</p>
-                <ul className="text-left space-y-2 mt-auto">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-center text-gray-600 text-sm sm:text-base">
-                      <span className="text-green-500 mr-2 flex-shrink-0">✓</span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-12 md:py-20 bg-blue-900 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">Jaga Performa Optimal Mobil Anda</h2>
-          <p className="text-lg sm:text-xl mb-6 md:mb-10 max-w-3xl mx-auto">
-            Dapatkan diskon 10% untuk service AC dan mesin pertama Anda. Hubungi kami sekarang untuk reservasi!
-          </p>
-          <button
-            className="bg-white text-blue-900 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg hover:bg-blue-100 transition duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
-          >
-            Hubungi Kami via WhatsApp
-          </button>
-        </div>
-      </section>
-      {/* Location Section */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="w-full md:w-1/2 mb-8 md:mb-0">
-              <div className="relative h-[300px] sm:h-[400px] rounded-lg overflow-hidden shadow-xl">
-                <Image
-                  src="/images/lokasi-kami.jpeg"
-                  alt="Lokasi Jakarta Intl Denso Cirebon di Jl. Garuda Raya"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </div>
-
-            <div className="w-full md:w-1/2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 md:mb-6">
-                Lokasi Strategis di Pusat Kota
-              </h2>
-
-              <p className="text-base sm:text-lg text-gray-700 mb-6">
-                Jakarta Intl Denso Cirebon berlokasi strategis di Jl. Garuda Raya, mudah diakses dari seluruh penjuru
-                kota Cirebon.
-              </p>
-
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <span className="text-blue-600 text-xl mr-3 flex-shrink-0">📍</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Alamat</h4>
-                    <p className="text-gray-700">Jl. Garuda Raya No. 2, Cirebon, Jawa Barat 45131</p>
-                  </div>
+                {/* Hero Image Overlay */}
+                <div className="absolute inset-0">
+                    <Image
+                        src="/images/AC-Mobil.jpeg"
+                        alt="Service AC dan Mesin Mobil Terpercaya Cirebon"
+                        fill
+                        priority
+                        className="object-cover opacity-20"
+                        sizes="100vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-slate-900/50" />
                 </div>
 
-                <div className="flex items-start">
-                  <span className="text-blue-600 text-xl mr-3 flex-shrink-0">⏰</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Jam Operasional</h4>
-                    <p className="text-gray-700">Senin - Minggu: 08.00 - 17.00 WIB</p>
-                  </div>
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-32">
+                    <div className="max-w-4xl mx-auto text-center">
+                        {/* Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8"
+                        >
+                            <Wrench className="w-4 h-4 text-orange-400" />
+                            <span className="text-orange-300 text-sm font-medium">Spesialis AC & Mesin Sejak 2004</span>
+                        </motion.div>
+
+                        {/* Title */}
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+                        >
+                            Service AC & Mesin{" "}
+                            <span className="bg-gradient-to-r from-orange-400 via-red-400 to-orange-400 bg-clip-text text-transparent">
+                                Terpercaya
+                            </span>
+                            <br />
+                            di Cirebon
+                        </motion.h1>
+
+                        {/* Subtitle */}
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.4 }}
+                            className="text-lg sm:text-xl text-orange-100/80 mb-10 max-w-2xl mx-auto leading-relaxed"
+                        >
+                            Atasi masalah AC tidak dingin, mesin overheat, dan perawatan rutin lainnya.
+                            Didukung peralatan canggih dan teknisi bersertifikat.
+                        </motion.p>
+
+                        {/* CTA Buttons */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.6 }}
+                            className="flex flex-col sm:flex-row gap-4 justify-center"
+                        >
+                            <button
+                                onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
+                                className="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold rounded-2xl shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/30 transform hover:scale-105 transition-all duration-300"
+                            >
+                                <Phone className="w-5 h-5 mr-2 group-hover:animate-pulse" />
+                                Konsultasi Gratis
+                            </button>
+                            <a
+                                href="#layanan"
+                                className="inline-flex items-center justify-center px-8 py-4 bg-white/10 backdrop-blur-md text-white font-semibold rounded-2xl border border-white/20 hover:bg-white/20 transition-all duration-300"
+                            >
+                                Lihat Layanan
+                            </a>
+                        </motion.div>
+
+                        {/* Trust Badges */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.8 }}
+                            className="flex flex-wrap justify-center gap-6 mt-12"
+                        >
+                            <div className="flex items-center gap-2 text-white/70">
+                                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                                <span className="text-sm">Rating 4.9/5</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-white/70">
+                                <Shield className="w-5 h-5 text-green-400" />
+                                <span className="text-sm">Garansi Service</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-white/70">
+                                <Settings className="w-5 h-5 text-orange-400" />
+                                <span className="text-sm">Sparepart Original</span>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
 
-                <div className="flex items-start">
-                  <span className="text-blue-600 text-xl mr-3 flex-shrink-0">📱</span>
-                  <div>
-                    <h4 className="font-semibold text-gray-900">Kontak</h4>
-                    <p className="text-gray-700">WhatsApp: 0819-647-333</p>
-                  </div>
+                {/* Wave Separator */}
+                <div className="absolute bottom-0 left-0 right-0">
+                    <svg className="w-full h-24 fill-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,60 C300,120 600,0 900,60 C1050,90 1150,90 1200,60 L1200,120 L0,120 Z" />
+                    </svg>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <Footer />
-      <WhatsAppButton />
-    </>
-  )
+            </section>
+
+            {/* About Section */}
+            <section className="py-20 lg:py-28 bg-white">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        {/* Image */}
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative"
+                        >
+                            <div className="relative h-[400px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl">
+                                <Image
+                                    src="/images/service-ac-mobil-umum.jpeg"
+                                    alt="Teknisi Jakarta Intl Denso sedang memperbaiki AC mobil"
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                />
+                                {/* Floating Card - inside image container */}
+                                <div className="absolute bottom-4 right-4 bg-white rounded-2xl shadow-xl p-4 border border-gray-100">
+                                    <div className="text-2xl font-bold text-[#27398f]">100%</div>
+                                    <div className="text-gray-600 text-xs">Garansi Pengerjaan</div>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Content */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <span className="inline-block px-4 py-2 bg-blue-50 text-[#27398f] text-sm font-semibold rounded-full mb-6">
+                                Tentang Kami
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                                Solusi Masalah Mobil <span className="text-orange-600">Terpercaya</span>
+                            </h2>
+                            <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                                Jakarta Intl Denso Cirebon adalah bengkel spesialis AC dan mesin mobil dengan pengalaman lebih dari 20 tahun.
+                                Kami menangani segala jenis mobil, dari mobil Jepang hingga Eropa.
+                            </p>
+                            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                                Komitmen kami adalah memberikan hasil perbaikan yang tuntas, transparan, dan bergaransi.
+                                Tidak ada biaya tersembunyi, semua dikomunikasikan di awal.
+                            </p>
+
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                {["Diagnosa komputerisasi (Scanner)", "Peralatan standar dealer", "Mekanik tersertifikasi", "Ruang tunggu nyaman"].map((item, index) => (
+                                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                                        <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                                        <span className="text-gray-700 text-sm">{item}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Process Section */}
+            <section className="py-20 lg:py-28 bg-gray-50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <span className="inline-block px-4 py-2 bg-orange-50 text-orange-600 text-sm font-semibold rounded-full mb-6">
+                            Proses Kerja
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                            Standar Operasional <span className="text-orange-600">Profesional</span>
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Kami bekerja dengan SOP ketat untuk menjamin kualitas perbaikan
+                        </p>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        {serviceSteps.map((step, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className={`relative p-6 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 ${index === 6 ? "sm:col-span-2 lg:col-span-1 xl:col-span-1 bg-gradient-to-br from-[#27398f] to-[#ed3f36] text-white" : ""
+                                    }`}
+                            >
+                                <div className={`absolute -top-3 -left-3 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-lg ${index === 6 ? "bg-white text-[#27398f]" : "bg-[#27398f] text-white"
+                                    }`}>
+                                    {step.step}
+                                </div>
+                                <div className="text-4xl mb-4">{step.icon}</div>
+                                <h3 className={`text-lg font-bold mb-2 ${index === 6 ? "text-white" : "text-gray-900"}`}>
+                                    {step.title}
+                                </h3>
+                                <p className={`text-sm ${index === 6 ? "text-blue-100" : "text-gray-600"}`}>
+                                    {step.description}
+                                </p>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    <div className="text-center mt-12">
+                        <button
+                            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
+                            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#27398f] to-[#ed3f36] text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                        >
+                            Konsultasi Kerusakan Sekarang
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Services Section */}
+            <section id="layanan" className="py-20 lg:py-28 bg-white">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center mb-16">
+                        <span className="inline-block px-4 py-2 bg-blue-50 text-[#27398f] text-sm font-semibold rounded-full mb-6">
+                            Layanan Kami
+                        </span>
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                            Solusi <span className="text-[#27398f]">Menyeluruh</span>
+                        </h2>
+                        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                            Layanan perbaikan dan perawatan mobil terbaik di Cirebon
+                        </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {services.map((service, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                                className="group p-8 bg-white rounded-3xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                            >
+                                <div className="w-14 h-14 bg-gradient-to-br from-[#27398f] to-[#ed3f36] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <service.icon className="w-7 h-7 text-white" />
+                                </div>
+                                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                                <p className="text-gray-600 mb-6">{service.description}</p>
+                                <ul className="space-y-3">
+                                    {service.features.map((feature, idx) => (
+                                        <li key={idx} className="flex items-center gap-3 text-gray-600 text-sm">
+                                            <CheckCircle2 className="w-4 h-4 text-green-500 flex-shrink-0" />
+                                            {feature}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-20 lg:py-28 bg-gradient-to-br from-slate-900 via-[#27398f] to-slate-900 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-[#27398f]/30 rounded-full blur-3xl" />
+                <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#ed3f36]/20 rounded-full blur-3xl" />
+
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div className="text-center max-w-3xl mx-auto">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
+                            Mobil Bermasalah? <span className="text-[#ed3f36]">Kami Solusinya!</span>
+                        </h2>
+                        <p className="text-xl text-blue-100/80 mb-10">
+                            Jangan biarkan kerusakan kecil menjadi besar. Hubungi kami untuk diagnosa gratis!
+                        </p>
+                        <button
+                            onClick={() => (window.location.href = `https://wa.me/${whatsappNumber}`)}
+                            className="inline-flex items-center justify-center px-10 py-5 bg-white text-[#27398f] font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                        >
+                            <Phone className="w-5 h-5 mr-2" />
+                            Hubungi Kami via WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            {/* Location Section */}
+            <section className="py-20 lg:py-28 bg-white">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                        <motion.div
+                            initial={{ opacity: 0, x: -50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="relative h-[400px] rounded-3xl overflow-hidden shadow-2xl"
+                        >
+                            <Image
+                                src="/images/lokasi-kami.jpeg"
+                                alt="Lokasi Jakarta Intl Denso Cirebon"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                            />
+                        </motion.div>
+
+                        <motion.div
+                            initial={{ opacity: 0, x: 50 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <span className="inline-block px-4 py-2 bg-blue-50 text-[#27398f] text-sm font-semibold rounded-full mb-6">
+                                Lokasi
+                            </span>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+                                Lokasi <span className="text-[#27398f]">Strategis</span>
+                            </h2>
+                            <p className="text-lg text-gray-600 mb-8">
+                                Berlokasi di pusat kota Cirebon, mudah diakses dari seluruh penjuru kota.
+                            </p>
+
+                            <div className="space-y-6">
+                                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 bg-[#27398f]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <MapPin className="w-6 h-6 text-[#27398f]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 mb-1">Alamat</h4>
+                                        <p className="text-gray-600">Jl. Garuda Raya No. 2, Cirebon, Jawa Barat 45131</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 bg-[#27398f]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <Clock className="w-6 h-6 text-[#27398f]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 mb-1">Jam Operasional</h4>
+                                        <p className="text-gray-600">Senin - Minggu: 08.00 - 17.00 WIB</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-start gap-4 p-4 bg-gray-50 rounded-2xl">
+                                    <div className="w-12 h-12 bg-[#ed3f36]/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                        <Phone className="w-6 h-6 text-[#ed3f36]" />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-gray-900 mb-1">Kontak</h4>
+                                        <p className="text-gray-600">WhatsApp: 0819-647-333</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            <Footer />
+            <WhatsAppButton />
+        </>
+    )
 }
 
 export default ServiceACMesin
-

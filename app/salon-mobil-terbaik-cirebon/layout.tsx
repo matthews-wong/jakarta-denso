@@ -1,43 +1,32 @@
-// import "./globals.css"
-import { Inter } from "next/font/google"
 import type React from "react"
 import Script from "next/script"
 import type { Metadata, Viewport } from "next"
 
-const inter = Inter({ subsets: ["latin"] })
-
-// Define base metadata for SEO
+// Advanced SEO metadata for Salon Mobil
 export const metadata: Metadata = {
   metadataBase: new URL("https://jakartaintldenso.com"),
   title: {
-    default: "Salon Mobil terbaik di Cirebon",
-    template: "%s | Jakarta Int'l Denso Cirebon",
+    default: "Salon Mobil Terbaik Cirebon - Detailing & Coating Premium | Jakarta Int'l Denso",
+    template: "%s | Salon Mobil Cirebon - Jakarta Int'l Denso",
   },
   description:
-    "Jakarta Int'l Denso - Bengkel terpercaya di Cirebon dengan layanan lengkap: service AC mobil, cuci mobil, detailing & poles. Rating 4.9/5 dari 160+ pelanggan. Teknisi berpengalaman.",
+    "Salon mobil premium #1 di Cirebon sejak 2004. ✓ Nano Ceramic Coating ✓ Paint Correction ✓ Detailing Interior & Eksterior ✓ Garansi 2 Tahun ✓ Teknisi berpengalaman 20+ tahun. Booking sekarang!",
   keywords: [
-    "bengkel terbaik cirebon",
-    "bengkel ac cirebon",
-    "jakarta intl denso",
-    "bengkel mobil cirebon",
-    "service ac mobil cirebon",
-    "cuci mobil cirebon",
-    "detailing mobil cirebon",
-    "poles mobil cirebon",
-    "perbaikan ac mobil cirebon",
-    "bengkel ac mobil terbaik cirebon",
-    "cuci mobil profesional cirebon",
     "salon mobil cirebon",
-    "perawatan mobil cirebon",
-    "freon ac mobil cirebon",
-    "kompresor ac mobil cirebon",
-    "servis ac mobil pantura",
-    "bengkel resmi denso cirebon",
-    "teknisi ac mobil berpengalaman",
-    "ganti freon ac mobil cirebon",
-    "harga service ac mobil cirebon",
+    "salon mobil terbaik cirebon",
+    "detailing mobil cirebon",
+    "coating mobil cirebon",
+    "nano ceramic coating cirebon",
+    "paint correction cirebon",
+    "poles mobil cirebon",
+    "waxing mobil cirebon",
+    "interior detailing cirebon",
+    "eksterior detailing cirebon",
+    "salon mobil premium cirebon",
+    "perawatan cat mobil cirebon",
+    "jakarta intl denso salon mobil",
   ],
-  authors: [{ name: "Jakarta Int'l Denso" }],
+  authors: [{ name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" }],
   creator: "Jakarta Int'l Denso",
   publisher: "Jakarta Int'l Denso",
   formatDetection: {
@@ -46,20 +35,24 @@ export const metadata: Metadata = {
     telephone: true,
   },
   alternates: {
-    canonical: "/",
+    canonical: "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
+    languages: {
+      "id-ID": "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
+    },
   },
   openGraph: {
-    title: "Bengkel AC Mobil Terbaik Cirebon - Jakarta Int'l Denso",
+    title: "Salon Mobil Terbaik Cirebon - Detailing & Coating Premium Sejak 2004",
     description:
-      "Jakarta Int'l Denso - Bengkel terpercaya di Cirebon dengan layanan lengkap: service AC mobil, cuci mobil, detailing & poles. Rating 4.9/5 dari 160+ pelanggan.",
-    url: "https://jakartaintldenso.com",
+      "Salon mobil premium #1 di Cirebon. Nano ceramic coating, paint correction, detailing profesional. Garansi 2 tahun.",
+    url: "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
     siteName: "Jakarta Int'l Denso Cirebon",
     images: [
       {
-        url: "/android-chrome-512x512.png",
-        width: 512,
-        height: 512,
-        alt: "Jakarta Int'l Denso Logo",
+        url: "https://jakartaintldenso.com/images/Salon-mobil.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Salon Mobil Premium Jakarta Intl Denso Cirebon - Layanan Detailing Terbaik",
+        type: "image/jpeg",
       },
     ],
     locale: "id_ID",
@@ -68,10 +61,11 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-    nocache: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
@@ -79,279 +73,177 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bengkel AC Mobil Terbaik Cirebon - Jakarta Int'l Denso",
+    title: "Salon Mobil Terbaik Cirebon | Jakarta Int'l Denso",
     description:
-      "Jakarta Int'l Denso - Bengkel terpercaya di Cirebon dengan layanan lengkap: service AC mobil, cuci mobil, detailing & poles.",
-    images: ["/android-chrome-512x512.png"],
+      "Salon mobil premium #1 di Cirebon sejak 2004. Detailing profesional, coating bergaransi 2 tahun.",
+    images: ["https://jakartaintldenso.com/images/Salon-mobil.jpeg"],
     creator: "@jakartaintldenso",
     site: "@jakartaintldenso",
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
-    other: [
-      {
-        rel: "manifest",
-        url: "/site.webmanifest",
-      },
-    ],
+  verification: {
+    google: "G-FRX906FRWV",
   },
   category: "automotive",
+  classification: "Auto Detailing Service",
+  other: {
+    "geo.region": "ID-JB",
+    "geo.placename": "Cirebon",
+    "geo.position": "-6.732022;108.552316",
+    "ICBM": "-6.732022, 108.552316",
+    "revisit-after": "7 days",
+    "rating": "general",
+    "distribution": "global",
+  },
 }
 
-// Separate viewport configuration
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
 }
 
-// Structured data for the website
-const websiteSchema = {
+// Service Schema for Salon Mobil
+const salonMobilServiceSchema = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://jakartaintldenso.com/#website",
-  url: "https://jakartaintldenso.com",
-  name: "Jakarta Int'l Denso Cirebon",
-  description: metadata.description,
-  publisher: {
+  "@type": "Service",
+  "@id": "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon#service",
+  name: "Salon Mobil Premium Cirebon",
+  alternateName: ["Auto Detailing Cirebon", "Coating Mobil Cirebon", "Poles Mobil Cirebon"],
+  description: "Layanan salon mobil premium dengan detailing eksterior & interior, nano ceramic coating, dan paint correction. Garansi coating 2 tahun.",
+  provider: {
+    "@type": "LocalBusiness",
     "@id": "https://jakartaintldenso.com/#organization",
+    name: "Jakarta Int'l Denso Cirebon",
+    image: "https://jakartaintldenso.com/images/Salon-mobil.jpeg",
+    telephone: "+62819647333",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Jl. Garuda No 2",
+      addressLocality: "Cirebon",
+      addressRegion: "Jawa Barat",
+      postalCode: "45131",
+      addressCountry: "ID",
+    },
   },
-  inLanguage: "id-ID",
-}
-
-// Structured data for the business
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": ["AutoRepair", "CarWash"],
-  "@id": "https://jakartaintldenso.com/#organization",
-  name: "Jakarta Int'l Denso Cirebon",
-  alternateName: "Bengkel AC Mobil Terbaik Cirebon",
-  description: metadata.description,
-  url: "https://jakartaintldenso.com",
-  logo: "https://jakartaintldenso.com/android-chrome-512x512.png",
-  image: "https://jakartaintldenso.com/android-chrome-512x512.png",
-  telephone: "+62819647333",
-  priceRange: "$$",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Jl. Garuda No 2",
-    addressLocality: "Cirebon",
-    addressRegion: "Jawa Barat",
-    postalCode: "45131",
-    addressCountry: "ID",
+  serviceType: "Auto Detailing",
+  areaServed: [
+    { "@type": "City", name: "Cirebon" },
+    { "@type": "City", name: "Kuningan" },
+    { "@type": "City", name: "Indramayu" },
+    { "@type": "City", name: "Majalengka" },
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Paket Salon Mobil",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Detailing Eksterior",
+          description: "Paint correction, polishing, dan waxing eksterior mobil",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Nano Ceramic Coating",
+          description: "Perlindungan cat dengan coating nano ceramic bergaransi 2 tahun",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Detailing Interior",
+          description: "Deep cleaning, leather treatment, dan fabric protection",
+        },
+      },
+    ],
   },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: "-6.732022",
-    longitude: "108.552316",
-  },
-  openingHoursSpecification: [
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "08:00",
-      closes: "17:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Sunday",
-      opens: "08:00",
-      closes: "16:00",
-    },
-  ],
-  department: [
-    {
-      "@type": "AutoRepair",
-      name: "Service AC Mobil",
-      description: "Spesialis service dan perbaikan AC mobil semua merk",
-    },
-    {
-      "@type": "CarWash",
-      name: "Cuci & Salon Mobil",
-      description: "Layanan cuci mobil premium dan salon mobil profesional",
-    },
-  ],
-  review: [
-    {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "Bagas Anindito",
-      },
-      datePublished: "2022-01-15",
-      reviewBody:
-        "Tempat cuci mobil terbaik di Cirebon, pelayanannya sangat baik dan mobil bersih luar & dalam. Terdapat pelayanan yang lain seperti Service AC, Custom Jok, Ganti Oli dll. Berlokasi strategis di tengah kota Cirebon.",
-    },
-    {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "Aditya Rifki Satria",
-      },
-      datePublished: "2020-01-15",
-      reviewBody:
-        "Cuci mobil paling juara, dengan harga yg worth it, terjangkau. Bisa mendapat kebersihan maksimal luar dalam. Saya puas akan hasilnya. Tempatnya enak, bisa ngopi juga, juara pokoknya disini pelayananya.",
-    },
-    {
-      "@type": "Review",
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: "5",
-        bestRating: "5",
-      },
-      author: {
-        "@type": "Person",
-        name: "Matthews Wong",
-      },
-      datePublished: "2024-01-15",
-      reviewBody:
-        "Jakarta Intl Denso merupakan pilihan tepat bagi Anda yang sedang mencari jasa cuci mobil terbaik di Cirebon. Dengan pengalaman bertahun-tahun, mereka telah membuktikan diri sebagai penyedia layanan cuci mobil terpercaya.",
-    },
-  ],
   aggregateRating: {
     "@type": "AggregateRating",
     ratingValue: "4.9",
     reviewCount: "160",
     bestRating: "5",
-    worstRating: "3",
+    worstRating: "1",
   },
-  areaServed: [
-    {
-      "@type": "City",
-      name: "Cirebon",
-    },
-    {
-      "@type": "City",
-      name: "Kuningan",
-    },
-    {
-      "@type": "City",
-      name: "Indramayu",
-    },
-  ],
-  sameAs: ["https://www.instagram.com/jakarta_intl_denso", "https://www.tiktok.com/@jakartaintldensocirebon"],
 }
 
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "Beranda",
+      item: "https://jakartaintldenso.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Salon Mobil Terbaik Cirebon",
+      item: "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
+    },
+  ],
+}
+
+// FAQ Schema
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
+  mainEntity: [
     {
       "@type": "Question",
-      "name": "Apa saja layanan bengkel Jakarta Int'l Denso Cirebon?",
-      "acceptedAnswer": {
+      name: "Apa itu nano ceramic coating?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Kami menyediakan layanan lengkap meliputi service AC mobil, cuci mobil, salon mobil, poles mobil, dan detailing mobil dengan teknisi berpengalaman."
-      }
+        text: "Nano ceramic coating adalah lapisan pelindung berbasis keramik yang memberikan perlindungan jangka panjang pada cat mobil. Coating ini tahan gores ringan, tahan UV, anti air, dan memberikan kilau maksimal. Kami memberikan garansi 2 tahun untuk coating.",
+      },
     },
     {
       "@type": "Question",
-      "name": "Berapa lama waktu service AC mobil di Jakarta Int'l Denso?",
-      "acceptedAnswer": {
+      name: "Berapa lama proses salon mobil lengkap?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Waktu service AC mobil bervariasi tergantung kerusakan, mulai dari 1-3 jam untuk perawatan rutin hingga 1 hari untuk perbaikan kompresor."
-      }
+        text: "Proses salon mobil lengkap membutuhkan waktu 1-2 hari tergantung paket yang dipilih. Untuk detailing standar sekitar 4-6 jam, sedangkan paket coating memerlukan waktu 1-2 hari untuk hasil maksimal.",
+      },
     },
     {
       "@type": "Question",
-      "name": "Apakah Jakarta Int'l Denso buka hari Minggu?",
-      "acceptedAnswer": {
+      name: "Apa keunggulan salon mobil di Jakarta Int'l Denso?",
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": "Ya, kami buka setiap hari Minggu dari jam 08:00 sampai 16:00 WIB."
-      }
+        text: "Keunggulan kami meliputi: (1) Teknisi profesional berpengalaman 20+ tahun, (2) Produk coating premium berkualitas, (3) Garansi coating 2 tahun, (4) Hasil detailing memuaskan, (5) Ruang kerja bersih dan tertutup.",
+      },
     },
-    {
-      "@type": "Question",
-      "name": "Di mana lokasi Jakarta Int'l Denso Cirebon?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Kami berlokasi di Jl. Garuda No 2, Cirebon, Jawa Barat. Lokasi mudah dijangkau dan strategis."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Apakah perlu reservasi sebelum datang ke bengkel?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Tidak wajib, namun kami menyarankan untuk melakukan reservasi agar pelayanan lebih cepat dan nyaman. Hubungi kami melalui WhatsApp atau telepon."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Apakah tersedia ruang tunggu untuk pelanggan?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ya, kami menyediakan ruang tunggu yang nyaman dengan fasilitas WiFi dan minuman untuk pelanggan yang menunggu service selesai."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Jenis kendaraan apa saja yang dapat diservice?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Kami melayani berbagai jenis kendaraan mulai dari mobil kecil (city car), SUV, MPV, hingga mobil premium."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Apakah menggunakan suku cadang original?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Ya, kami selalu menggunakan suku cadang original atau OEM untuk menjaga kualitas dan ketahanan kendaraan Anda."
-      }
-    }
-  ]
+  ],
 }
 
-
-export default function RootLayout({
+export default function SalonMobilLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="id">
-      <body className={inter.className}>
-        {children}
-
-        {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-FRX906FRWV" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FRX906FRWV');
-          `}
-        </Script>
-
-        {/* Structured Data */}
-        <Script id="schema-website" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(websiteSchema)}
-        </Script>
-        <Script id="schema-business" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(localBusinessSchema)}
-        </Script>
-        <Script id="schema-faq" type="application/ld+json" strategy="afterInteractive">
-          {JSON.stringify(faqSchema)}
-        </Script>
-      </body>
-    </html>
+    <>
+      {children}
+      <Script id="schema-salon-service" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(salonMobilServiceSchema)}
+      </Script>
+      <Script id="schema-breadcrumb" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(breadcrumbSchema)}
+      </Script>
+      <Script id="schema-faq-salon" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(faqSchema)}
+      </Script>
+    </>
   )
 }
-

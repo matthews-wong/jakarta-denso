@@ -1,239 +1,217 @@
 "use client"
-import { useState, useEffect } from "react"
+
 import Image from "next/image"
-import { ArrowRight, Award, MapPin, Phone, Users, Clock, Shield, Star } from "lucide-react"
 import Link from "next/link"
-
-const ExperienceCounter = () => {
-  const [count, setCount] = useState(0)
-  const targetCount = 20
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      if (count < targetCount) {
-        setCount((prevCount) => prevCount + 1)
-      }
-    }, 80)
-
-    return () => clearInterval(timer)
-  }, [count])
-
-  return (
-    <div
-      className="inline-flex items-center gap-3 px-6 py-3 
-      bg-gradient-to-r from-[#ed3f36] to-[#ff4757] text-white rounded-full font-semibold text-sm
-      shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-    >
-      <Clock className="w-4 h-4" />
-      <span>{count}+ Tahun Melayani Cirebon</span>
-    </div>
-  )
-}
+import { useState, useEffect } from "react"
+import { Phone, Star, ChevronRight, Play } from "lucide-react"
 
 export default function Hero() {
+  const whatsappNumber = "62819647333"
+  const [isOpen, setIsOpen] = useState<boolean | null>(null)
+
+  useEffect(() => {
+    const checkOpenStatus = () => {
+      const now = new Date()
+      const jakartaTime = new Date(now.toLocaleString("en-US", { timeZone: "Asia/Jakarta" }))
+      const hour = jakartaTime.getHours()
+      setIsOpen(hour >= 8 && hour < 17)
+    }
+    checkOpenStatus()
+    const interval = setInterval(checkOpenStatus, 60000)
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <section className="min-h-screen relative overflow-hidden">
-      {/* Primary gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-100/50"></div>
+    <section className="relative min-h-screen bg-[#fafafa] pt-20 overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000008_1px,transparent_1px),linear-gradient(to_bottom,#00000008_1px,transparent_1px)] bg-[size:24px_24px]" />
 
-      {/* Animated gradient orbs */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#27398f]/20 via-blue-400/10 to-transparent rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[#ed3f36]/15 via-red-400/10 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-gradient-to-r from-purple-400/10 to-pink-400/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+      {/* Gradient accents */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-blue-100/50 to-transparent rounded-full blur-3xl" />
 
-      {/* Geometric gradient shapes */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-gradient-to-br from-[#27398f]/10 to-blue-500/5 rotate-45 rounded-lg"></div>
-      <div className="absolute bottom-32 left-16 w-24 h-24 bg-gradient-to-tr from-[#ed3f36]/10 to-red-500/5 rotate-12 rounded-lg"></div>
+      <div className="container mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col items-center text-center pt-8 pb-12 lg:pt-16 lg:pb-20">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 relative z-10">
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[80vh]">
-          {/* Left Content */}
-          <div className="space-y-8">
-            <div className="flex items-start gap-4 flex-wrap">
-              <div className="bg-gradient-to-r from-[#27398f] to-blue-600 text-white px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide shadow-lg">
-                <Shield className="w-3 h-3 inline mr-1" />
-                Bengkel Terpercaya #1
-              </div>
-              <ExperienceCounter />
+          {/* Status Pill */}
+          {isOpen !== null && (
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-6 ${
+              isOpen
+                ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
+                : "bg-red-50 text-red-700 ring-1 ring-red-200"
+            }`}>
+              <span className="relative flex h-2 w-2">
+                {isOpen && <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />}
+                <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? "bg-emerald-500" : "bg-red-500"}`} />
+              </span>
+              {isOpen ? "Buka Sekarang" : "Tutup"} · 08:00 - 17:00 WIB
             </div>
+          )}
 
-            <div className="space-y-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] text-balance">
-                <span className="bg-gradient-to-r from-[#27398f] via-blue-600 to-indigo-700 bg-clip-text text-transparent">
-                  Bengkel AC Mobil
-                </span>
-                <br />
-                <span className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 bg-clip-text text-transparent">
-                  Terpercaya di Cirebon
-                </span>
-              </h1>
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 tracking-tight mb-6 max-w-4xl">
+            Bengkel AC & Perawatan Mobil{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-500">
+              Terpercaya
+            </span>{" "}
+            di Cirebon
+          </h1>
 
-              <div className="flex items-center gap-3 bg-gradient-to-r from-[#ed3f36]/10 to-red-500/5 px-4 py-3 rounded-xl border border-red-200/50">
-                <div className="bg-gradient-to-r from-[#ed3f36] to-red-500 p-2 rounded-full">
-                  <MapPin className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <div className="font-bold text-[#ed3f36] text-lg">Melayani Seluruh Cirebon</div>
-                  <div className="text-sm text-gray-600">Kuningan, Indramayu & Sekitarnya</div>
-                </div>
-              </div>
-            </div>
+          {/* Subheadline */}
+          <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl leading-relaxed">
+            Service AC, cuci mobil premium, dan salon mobil profesional.
+            Lebih dari 20 tahun melayani dengan standar kualitas terbaik.
+          </p>
 
-            <div className="space-y-4">
-              <p className="text-xl text-gray-700 leading-relaxed">
-                <span className="font-bold text-[#27398f]">Spesialis AC mobil terpercaya</span> dengan pengalaman 20+
-                tahun melayani Cirebon. Dari AC tidak dingin hingga perawatan rutin, kami berkomitmen memberikan solusi
-                terbaik untuk kendaraan Anda.
-              </p>
-
-              <div className="flex items-center gap-4 text-sm">
-                <div className="flex items-center gap-1 text-yellow-600 font-medium">
-                  <Star className="w-4 h-4 fill-current" />
-                  <span>4.7/5 Rating Pelanggan</span>
-                </div>
-                <div className="flex items-center gap-1 text-green-600 font-medium">
-                  <Shield className="w-4 h-4" />
-                  <span>Garansi Resmi</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div className="group p-5 bg-gradient-to-br from-white to-blue-50/50 rounded-xl border border-blue-200/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="bg-gradient-to-r from-[#27398f] to-blue-600 p-2 rounded-lg">
-                    <Users className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="font-bold text-gray-800">Diagnosa Gratis</div>
-                </div>
-                <div className="text-sm text-gray-600">Pemeriksaan menyeluruh tanpa biaya untuk semua jenis mobil</div>
-              </div>
-
-              <div className="group p-5 bg-gradient-to-br from-white to-red-50/50 rounded-xl border border-red-200/30 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="bg-gradient-to-r from-[#ed3f36] to-red-500 p-2 rounded-lg">
-                    <Award className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="font-bold text-gray-800">Teknisi Berpengalaman</div>
-                </div>
-                <div className="text-sm text-gray-600">Tim ahli berpengalaman 10+ tahun dengan keahlian terpercaya</div>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              <Link
-                href="tel:+62819647333"
-                className="group inline-flex items-center justify-center px-8 py-4 
-                  bg-gradient-to-r from-[#ed3f36] via-red-500 to-[#ed3f36] text-white font-bold rounded-xl
-                  shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300
-                  bg-size-200 hover:bg-pos-100"
-              >
-                <Phone className="w-5 h-5 mr-2 group-hover:animate-pulse" />
-                Hubungi Sekarang - Gratis Konsultasi!
-              </Link>
-
-              <Link
-                href="#services"
-                className="inline-flex items-center justify-center px-8 py-4 
-                  bg-gradient-to-r from-white to-gray-50 border-2 border-gray-200 hover:border-[#27398f] 
-                  text-gray-700 hover:text-[#27398f] font-semibold rounded-xl 
-                  shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                Lihat Semua Layanan
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gradient-to-r from-transparent via-gray-200 to-transparent">
-              <div className="text-center group">
-                <div className="font-bold text-3xl bg-gradient-to-r from-[#27398f] to-blue-600 bg-clip-text text-transparent">
-                  2000+
-                </div>
-                <div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
-                  Mobil Diperbaiki
-                </div>
-              </div>
-              <div className="text-center group">
-                <div className="font-bold text-3xl bg-gradient-to-r from-[#ed3f36] to-red-500 bg-clip-text text-transparent">
-                  98%
-                </div>
-                <div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">
-                  Kepuasan Pelanggan
-                </div>
-              </div>
-              <div className="text-center group">
-                <div className="font-bold text-3xl bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
-                  24/7
-                </div>
-                <div className="text-sm text-gray-600 group-hover:text-gray-800 transition-colors">Siap Melayani</div>
-              </div>
-            </div>
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-3 mb-10">
+            <Link
+              href={`https://wa.me/${whatsappNumber}`}
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors shadow-lg shadow-blue-600/20"
+            >
+              <Phone className="w-4 h-4" />
+              Hubungi via WhatsApp
+            </Link>
+            <Link
+              href="#services"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-gray-50 text-gray-700 font-semibold rounded-full ring-1 ring-gray-200 transition-colors"
+            >
+              <Play className="w-4 h-4" />
+              Lihat Layanan
+            </Link>
           </div>
 
-          {/* Right Side - Enhanced Image */}
-          <div className="relative lg:h-[600px] mt-8 lg:mt-0">
-            <div className="relative h-80 sm:h-96 lg:h-full rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 group">
-              <Image
-                src="/images/jakartaintldenso-cover.jpg"
-                alt="Bengkel AC mobil terpercaya di Cirebon - Teknisi profesional sedang memperbaiki sistem AC kendaraan"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
-                quality={95}
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-
-              {/* Enhanced overlay gradients */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-[#27398f]/10 to-transparent"></div>
-
-              <div className="absolute bottom-4 left-4 right-4 bg-gradient-to-r from-white/95 to-white/90 backdrop-blur-md rounded-xl p-4 shadow-2xl border border-white/20">
-                <h3 className="font-bold text-gray-800 mb-1 text-base sm:text-lg">Bengkel Terpercaya Cirebon</h3>
-                <p className="text-xs sm:text-sm text-gray-600 mb-3 line-clamp-2">
-                  Fasilitas modern dengan peralatan canggih
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-2 text-green-600 font-bold text-xs sm:text-sm">
-                    <div className="w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-green-400 to-green-500 rounded-full animate-pulse"></div>
-                    Buka Hari Ini
-                  </span>
-                  <span className="text-gray-500 font-medium text-xs sm:text-sm">08:00 - 17:00</span>
-                </div>
+          {/* Social Proof Row */}
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-sm text-gray-600">
+            {/* Rating */}
+            <div className="flex items-center gap-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                ))}
               </div>
+              <span className="font-semibold text-gray-900">4.9</span>
+              <span className="text-gray-400">·</span>
+              <span>160+ ulasan</span>
             </div>
 
-            <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 bg-gradient-to-br from-yellow-400 to-orange-500 text-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl animate-bounce">
-              <Award className="w-5 h-5 sm:w-7 sm:h-7" />
-            </div>
+            <div className="hidden sm:block w-px h-4 bg-gray-300" />
 
-            <div className="hidden sm:block absolute top-1/3 -left-6 lg:-left-8 bg-gradient-to-br from-white to-blue-50 p-4 lg:p-5 rounded-xl lg:rounded-2xl shadow-xl border border-blue-200/50 hover:scale-110 transition-transform duration-300">
-              <div className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-[#27398f] to-blue-600 bg-clip-text text-transparent">
-                4.7★
-              </div>
-              <div className="text-xs text-gray-600 font-medium">Rating Google</div>
-              <div className="text-xs text-gray-500">170+ Review</div>
-            </div>
-
-            <div className="hidden sm:block absolute bottom-1/3 -right-6 lg:-right-8 bg-gradient-to-br from-[#27398f] to-blue-700 text-white p-4 lg:p-5 rounded-xl lg:rounded-2xl shadow-xl hover:scale-110 transition-transform duration-300">
-              <div className="text-xl lg:text-2xl font-bold">20+</div>
-              <div className="text-xs opacity-90">Tahun</div>
-              <div className="text-xs opacity-90">Pengalaman</div>
+            {/* Stats */}
+            <div className="flex items-center gap-4">
+              <span><strong className="text-gray-900">20+</strong> tahun</span>
+              <span className="text-gray-300">·</span>
+              <span><strong className="text-gray-900">10,000+</strong> pelanggan</span>
             </div>
           </div>
         </div>
+
+        {/* Hero Image Section */}
+        <div className="relative max-w-5xl mx-auto">
+          {/* Main Image Container */}
+          <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl shadow-gray-900/10 ring-1 ring-gray-900/5">
+            <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-[21/9]">
+              <Image
+                src="/images/jakartaintldenso-cover.jpg"
+                alt="Bengkel Jakarta Int'l Denso Cirebon - Service AC dan Cuci Mobil Terbaik"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 1024px"
+              />
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/20 to-transparent" />
+
+              {/* Content on image */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8">
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                  {/* Location & Services */}
+                  <div>
+                    <div className="flex items-center gap-2 text-white/80 text-sm mb-2">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      Jl. Garuda No. 2, Cirebon
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {["Service AC", "Cuci Mobil", "Salon Mobil", "Tune Up"].map((service, i) => (
+                        <span key={i} className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-sm rounded-full">
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA on image - Desktop only */}
+                  <Link
+                    href={`https://wa.me/${whatsappNumber}`}
+                    className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full transition-colors"
+                  >
+                    Booking Sekarang
+                    <ChevronRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Floating Cards */}
+          {/* Testimonial Card - Left */}
+          <div className="hidden lg:block absolute -left-8 bottom-24 bg-white rounded-2xl p-4 shadow-xl shadow-gray-900/10 max-w-[220px] ring-1 ring-gray-100">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm">
+                BA
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">Bagas Anindito</p>
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-3 h-3 text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+              </div>
+            </div>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              "Cuci mobil terbaik di Cirebon! Pelayanan ramah, hasil bersih maksimal."
+            </p>
+          </div>
+
+          {/* Stats Card - Right */}
+          <div className="hidden lg:block absolute -right-6 top-12 bg-white rounded-2xl p-4 shadow-xl shadow-gray-900/10 ring-1 ring-gray-100">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-xl bg-emerald-50 flex items-center justify-center">
+                <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-gray-900">100%</p>
+                <p className="text-sm text-gray-500">Garansi Layanan</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Badges - Mobile */}
+        <div className="lg:hidden mt-8 grid grid-cols-2 gap-3">
+          {[
+            { label: "20+ Tahun", sublabel: "Pengalaman" },
+            { label: "100%", sublabel: "Garansi" },
+            { label: "10,000+", sublabel: "Pelanggan" },
+            { label: "4.9/5", sublabel: "Rating" },
+          ].map((item, i) => (
+            <div key={i} className="bg-white rounded-xl p-4 text-center ring-1 ring-gray-100">
+              <p className="text-xl font-bold text-gray-900">{item.label}</p>
+              <p className="text-sm text-gray-500">{item.sublabel}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
+      {/* Bottom curve transition */}
       <div className="absolute bottom-0 left-0 right-0">
-        <svg className="w-full h-16 fill-white opacity-90" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="white" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="white" stopOpacity="1" />
-              <stop offset="100%" stopColor="white" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
-          <path fill="url(#waveGradient)" d="M0,120 C150,100 350,0 600,20 C850,40 1050,100 1200,80 L1200,120 Z"></path>
+        <svg className="w-full h-12 sm:h-16 text-white" preserveAspectRatio="none" viewBox="0 0 1440 54">
+          <path fill="currentColor" d="M0 22L60 16.7C120 11 240 1.00001 360 0.700012C480 1.00001 600 11 720 16.7C840 22 960 22 1080 19.2C1200 16 1320 11 1380 8.50001L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z"/>
         </svg>
       </div>
     </section>
