@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Star, Shield, Award, Phone, ChevronRight, MapPin, Clock, CheckCircle, Camera, Eye, X, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
+import { Star, Shield, Award, Phone, ChevronRight, MapPin, CheckCircle, Camera, Eye, X, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
@@ -100,7 +100,7 @@ const jsonLd = {
       "addressCountry": "Indonesia"
     }
   },
-  "mainEntity": galleryImages.map((image, index) => ({
+  "mainEntity": galleryImages.map((image) => ({
     "@type": "ImageObject",
     "name": image.title,
     "description": image.alt,
@@ -115,7 +115,7 @@ const FullscreenModal = ({ image, isOpen, onClose, currentIndex, onNext, onPrev 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
-      
+
       switch (e.key) {
         case 'Escape':
           onClose();
@@ -135,7 +135,7 @@ const FullscreenModal = ({ image, isOpen, onClose, currentIndex, onNext, onPrev 
       document.addEventListener('keydown', handleKeyDown);
       // Prevent body scroll
       document.body.style.overflow = 'hidden';
-      
+
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
         document.body.style.overflow = 'unset';
@@ -171,7 +171,7 @@ const FullscreenModal = ({ image, isOpen, onClose, currentIndex, onNext, onPrev 
                 {image.category}
               </div>
             </div>
-            
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
@@ -234,7 +234,7 @@ const FullscreenModal = ({ image, isOpen, onClose, currentIndex, onNext, onPrev 
                 className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg shadow-2xl"
                 priority
               />
-              
+
               {/* Loading indicator */}
               <div className="absolute inset-0 bg-gray-900/20 rounded-lg animate-pulse opacity-0" />
             </div>
@@ -262,11 +262,11 @@ const FullscreenModal = ({ image, isOpen, onClose, currentIndex, onNext, onPrev 
                   </span>
                 )}
               </div>
-              
+
               <h3 className="text-xl md:text-2xl font-bold mb-2 text-balance">
                 {image.title}
               </h3>
-              
+
               <p className="text-white/80 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
                 {image.description}
               </p>

@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
 import { motion } from "framer-motion"
 import { Star, Shield, Award, Phone, ChevronRight, MapPin, Clock, CheckCircle } from "lucide-react"
 import Link from "next/link"
@@ -173,10 +172,10 @@ const priceCategories: PriceCategory[] = [
 ]
 
 // Service Card Component
-const ServiceCard: React.FC<{ item: ServiceItem; category: PriceCategory; index: number }> = ({ 
-  item, 
-  category, 
-  index 
+const ServiceCard: React.FC<{ item: ServiceItem; category: PriceCategory; index: number }> = ({
+  item,
+  category,
+  index
 }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -196,7 +195,7 @@ const ServiceCard: React.FC<{ item: ServiceItem; category: PriceCategory; index:
 
     {/* Card Header */}
     <div className={`h-2 bg-gradient-to-r ${category.color}`}></div>
-    
+
     <div className="p-6">
       {/* Service Name and Price */}
       <div className="mb-4">
@@ -259,14 +258,14 @@ const CategorySection: React.FC<{ category: PriceCategory; index: number }> = ({
           <span className="text-white text-3xl">{category.icon}</span>
         </div>
       </div>
-      
+
       <h2 className="text-4xl font-bold mb-4">
         <span className={`bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
           {category.name}
         </span>
         <span className="text-gray-800"> Cirebon</span>
       </h2>
-      
+
       <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
         {category.description}
       </p>
@@ -328,7 +327,7 @@ const PriceList: React.FC = () => {
           </h1>
 
           <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
-            <span className="font-bold text-[#27398f]">Layanan automotive terlengkap di Cirebon</span> dengan harga transparan, 
+            <span className="font-bold text-[#27398f]">Layanan automotive terlengkap di Cirebon</span> dengan harga transparan,
             kualitas terjamin, dan teknisi berpengalaman 20+ tahun. Dari cuci mobil, salon, service AC hingga perbaikan mesin.
           </p>
 
@@ -379,7 +378,7 @@ const PriceList: React.FC = () => {
               Siap Melayani Kendaraan Anda?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Dapatkan layanan terbaik untuk kendaraan Anda dengan harga transparan dan kualitas terjamin. 
+              Dapatkan layanan terbaik untuk kendaraan Anda dengan harga transparan dan kualitas terjamin.
               Konsultasi gratis sebelum service!
             </p>
 

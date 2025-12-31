@@ -54,46 +54,13 @@ const navItems: NavItem[] = [
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [scrolled, setScrolled] = useState<boolean>(false);
+
   const [isServiceOpen, setIsServiceOpen] = useState<boolean>(false);
   const [activeServiceDropdown, setActiveServiceDropdown] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
-
-  // Determine if navbar should have background, combining all conditions.
-  const isBlogPage = pathname?.startsWith("/blogs");
-  const isHomePage = pathname === "/";
-  const isServicePage =
-    pathname?.includes("/cuci-mobil") ||
-    pathname?.includes("/salon-mobil") ||
-    pathname?.includes("/service-ac-dan-mesin");
-
-  const useScrolledStyle = scrolled || isBlogPage || !isHomePage || isServicePage;
-
-  // Use throttled scroll handler for better performance
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          setScrolled(window.scrollY > 10);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    // Check initial scroll position
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   // Handle outside clicks for desktop dropdown
   useEffect(() => {
@@ -234,9 +201,8 @@ const Navbar: React.FC = () => {
                     >
                       {item.name}
                       <ChevronDown
-                        className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                          isServiceOpen ? "rotate-180" : ""
-                        }`}
+                        className={`ml-1 h-4 w-4 transition-transform duration-200 ${isServiceOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
                   ) : (
@@ -374,9 +340,8 @@ const Navbar: React.FC = () => {
                         >
                           {item.name}
                           <ChevronDown
-                            className={`ml-1 h-5 w-5 text-blue-600 transition-transform duration-300 ${
-                              activeServiceDropdown ? "rotate-180" : ""
-                            }`}
+                            className={`ml-1 h-5 w-5 text-blue-600 transition-transform duration-300 ${activeServiceDropdown ? "rotate-180" : ""
+                              }`}
                           />
                         </button>
 

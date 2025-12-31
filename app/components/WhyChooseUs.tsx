@@ -2,6 +2,7 @@
 
 import type React from "react"
 import { useEffect, useRef, useState, useCallback } from "react"
+import Image from "next/image"
 import { Award, ThumbsUp, Droplet, MapPin, Play } from "lucide-react"
 import { motion } from "framer-motion"
 import FAQSection from "./FAQ" // Import the FAQ component
@@ -170,6 +171,19 @@ const VideoThumbnail = ({ video }: { video: VideoData }) => {
     }
   }, [isPlaying, safePlay, safePause])
 
+  // Apply fixed position fallback for devices without fullscreen support
+  const applyFixedPositionFallback = useCallback((videoElement: HTMLVideoElement) => {
+    videoElement.style.position = "fixed"
+    videoElement.style.top = "0"
+    videoElement.style.left = "0"
+    videoElement.style.width = "100%"
+    videoElement.style.height = "100%"
+    videoElement.style.zIndex = "9999"
+    videoElement.style.backgroundColor = "black"
+    videoElement.style.objectFit = "contain"
+    setIsFullscreen(true)
+  }, [])
+
   // Direct fullscreen playback - simplified for performance
   const playFullscreen = useCallback(() => {
     if (!fullscreenVideoRef.current) return
@@ -212,20 +226,7 @@ const VideoThumbnail = ({ video }: { video: VideoData }) => {
         }
       }
     })
-  }, [video.url, video.title, isPlaying, safePlay])
-
-  // Apply fixed position fallback for devices without fullscreen support
-  const applyFixedPositionFallback = useCallback((videoElement: HTMLVideoElement) => {
-    videoElement.style.position = "fixed"
-    videoElement.style.top = "0"
-    videoElement.style.left = "0"
-    videoElement.style.width = "100%"
-    videoElement.style.height = "100%"
-    videoElement.style.zIndex = "9999"
-    videoElement.style.backgroundColor = "black"
-    videoElement.style.objectFit = "contain"
-    setIsFullscreen(true)
-  }, [])
+  }, [video.url, video.title, isPlaying, safePlay, safePause, applyFixedPositionFallback])
 
   // Reset video position and state
   const resetVideo = useCallback(
@@ -361,11 +362,12 @@ const VideoThumbnail = ({ video }: { video: VideoData }) => {
       {/* Loading placeholder with thumbnail */}
       {!isLoaded && (
         <div className="absolute inset-0 bg-gray-100 animate-pulse">
-          <img
+          <Image
             src={video.thumbnail || `/placeholder.svg?height=600&width=400`}
             alt={video.title}
-            className="w-full h-full object-cover"
-            loading="lazy"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       )}

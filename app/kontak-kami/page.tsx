@@ -24,72 +24,7 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import WhatsAppButton from "../components/WhatsAppButton"
 
-interface SocialButtonProps {
-  href: string
-  className?: string
-  children: ReactNode
-  ariaLabel: string
-}
 
-const SocialButton: FC<SocialButtonProps> = ({ href, className = "", children, ariaLabel }) => {
-  return (
-    <Link
-      href={href}
-      className={`group flex items-center justify-between gap-3 px-6 py-4 rounded-xl text-white font-medium transition-all duration-500 hover:shadow-xl transform hover:-translate-y-1 hover:scale-105 ${className}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={ariaLabel}
-    >
-      <div className="flex items-center gap-3">{children}</div>
-      <ArrowRight
-        className="h-5 w-5 transform group-hover:translate-x-2 transition-transform duration-500"
-        aria-hidden="true"
-      />
-    </Link>
-  )
-}
-
-interface ContactCardProps {
-  icon: ReactNode
-  title: string
-  content: string
-  subContent?: string
-  className?: string
-  onClick?: () => void
-}
-
-const ContactCard: FC<ContactCardProps> = ({ icon, title, content, subContent, className = "", onClick }) => {
-  const [isHovered, setIsHovered] = useState(false)
-
-  return (
-    <motion.div
-      whileHover={{ y: -5, scale: 1.02 }}
-      className={`relative group cursor-pointer ${className}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
-    >
-      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-blue-400 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-500" />
-      <div className="relative p-6 bg-white rounded-xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/20 border border-gray-100 group-hover:border-blue-200">
-        <div className="flex items-start gap-4">
-          <div
-            className={`text-blue-600 transform transition-all duration-500 ${isHovered ? "scale-125 rotate-12" : ""}`}
-            aria-hidden="true"
-          >
-            {icon}
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold mb-1 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
-              {title}
-            </h3>
-            <p className="text-gray-600 font-medium">{content}</p>
-            {subContent && <p className="text-gray-500 text-sm mt-1">{subContent}</p>}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  )
-}
 
 const Contact: FC = () => {
   const [isMounted, setIsMounted] = useState(false)

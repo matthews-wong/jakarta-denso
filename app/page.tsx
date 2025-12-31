@@ -1,22 +1,14 @@
 "use client"
 
-import { Suspense, useState, useEffect, useCallback, useMemo } from "react"
+import { Suspense, useState, useEffect, useMemo } from "react"
 import { Analytics } from "@vercel/analytics/react"
 import dynamic from "next/dynamic"
 import { useInView } from "react-intersection-observer"
-import { usePathname } from "next/navigation"
 
 import Navbar from "./components/Navbar"
 import Hero from "./components/Hero"
 import About from "./components/About"
 import Loading from "./loading"
-
-// Hash to section ID mapping
-const HASH_TO_ID_MAP: Record<string, string> = {
-  services: "services",
-  "kelebihan-kami": "kelebihan-kami",
-  beranda: "",
-}
 
 const Services = dynamic(() => import("./components/Services"), {
   loading: () => <Loading />,
@@ -44,12 +36,8 @@ const WhatsAppButton = dynamic(() => import("./components/WhatsAppButton"), {
 })
 
 export default function Home() {
-  const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
-  const [allComponentsVisible, setAllComponentsVisible] = useState(false)
-  const [initialHashProcessed, setInitialHashProcessed] = useState(false)
-  const [isNavigating, setIsNavigating] = useState(false)
-  const [isProgrammaticNavigation, setIsProgrammaticNavigation] = useState(false)
+  const [shouldLoadWhatsApp, setShouldLoadWhatsApp] = useState(false)
 
   const observerOptions = useMemo(
     () => ({
@@ -63,7 +51,6 @@ export default function Home() {
   const [servicesRef, servicesInView] = useInView(observerOptions)
   const [midSectionRef, midSectionInView] = useInView(observerOptions)
   const [bottomSectionRef, bottomSectionInView] = useInView(observerOptions)
-  const [shouldLoadWhatsApp, setShouldLoadWhatsApp] = useState(false)
 
   useEffect(() => {
     if (document.documentElement.hasAttribute("data-css-vars-set")) {
@@ -85,7 +72,7 @@ export default function Home() {
     const loadWhatsApp = () => setShouldLoadWhatsApp(true)
 
     if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      ;(window as any).requestIdleCallback(loadWhatsApp, { timeout: 3000 })
+      ; (window as any).requestIdleCallback(loadWhatsApp, { timeout: 3000 })
     } else {
       setTimeout(loadWhatsApp, 3000)
     }
@@ -93,15 +80,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      {isNavigating && <Loading />}
-
       <Navbar />
       <Hero />
       <About />
 
       {/* Services Section */}
       <div ref={servicesRef} id="services">
-        {mounted && (servicesInView || allComponentsVisible) && (
+        {mounted && servicesInView && (
           <Suspense fallback={<Loading />}>
             <section
               className="content-visibility-auto"
@@ -115,7 +100,7 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <div ref={midSectionRef}>
-        {mounted && (midSectionInView || allComponentsVisible) && (
+        {mounted && midSectionInView && (
           <Suspense fallback={<Loading />}>
             <section
               className="content-visibility-auto"
@@ -131,7 +116,7 @@ export default function Home() {
 
       {/* Blog + Footer */}
       <div ref={bottomSectionRef}>
-        {mounted && (bottomSectionInView || allComponentsVisible) && (
+        {mounted && bottomSectionInView && (
           <Suspense fallback={<Loading />}>
             <section
               className="content-visibility-auto"

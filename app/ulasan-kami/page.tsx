@@ -5,20 +5,19 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Star, 
-  Shield, 
-  Award, 
-  Phone, 
-  ChevronRight, 
-  MapPin, 
-  CheckCircle, 
-  Quote, 
-  Eye, 
-  X, 
-  ChevronLeft, 
+import {
+  Star,
+  Award,
+  Phone,
+  ChevronRight,
+  MapPin,
+  CheckCircle,
+  Quote,
+  Eye,
+  X,
+  ChevronLeft,
   ChevronRight as ChevronRightIcon,
   MessageSquare,
   ThumbsUp,
@@ -103,7 +102,7 @@ const reviews: Review[] = [
     service: "Cuci Mobil",
     verified: true,
   },
-{
+  {
     id: 7,
     name: "Cindy Putri Amelia",
     rating: 5,
@@ -122,8 +121,8 @@ const reviews: Review[] = [
     date: "2 bulan lalu",
     service: "Cuci Mobil",
     verified: true,
-  },    
-    {
+  },
+  {
     id: 9,
     name: "Sandry Juliandry",
     rating: 5,
@@ -199,7 +198,7 @@ const ReviewImagesModal: React.FC<{
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!isOpen) return;
-      
+
       switch (e.key) {
         case 'Escape':
           onClose();
@@ -218,7 +217,7 @@ const ReviewImagesModal: React.FC<{
     if (isOpen) {
       document.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
-      
+
       return () => {
         document.removeEventListener('keydown', handleKeyDown);
         document.body.style.overflow = 'unset';
@@ -317,8 +316,8 @@ const ReviewImages: React.FC<{
     <>
       <div className="mt-4 grid grid-cols-2 gap-2">
         {images.slice(0, 4).map((image, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="relative aspect-square rounded-lg overflow-hidden cursor-pointer group"
             onClick={() => setIsModalOpen(true)}
           >
@@ -328,7 +327,7 @@ const ReviewImages: React.FC<{
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-110"
             />
-            
+
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
               <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -362,8 +361,8 @@ const ReviewCard: React.FC<{
   const [isExpanded, setIsExpanded] = useState(false);
   const contentLength = review.content.length;
   const shouldTruncate = contentLength > 150;
-  const displayContent = isExpanded || !shouldTruncate 
-    ? review.content 
+  const displayContent = isExpanded || !shouldTruncate
+    ? review.content
     : review.content.substring(0, 150) + '...';
 
   return (
@@ -393,7 +392,7 @@ const ReviewCard: React.FC<{
             <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
               {review.name.charAt(0).toUpperCase()}
             </div>
-            
+
             <div>
               <h3 className="font-bold text-gray-900 text-lg">{review.name}</h3>
               {review.role && (
@@ -431,7 +430,7 @@ const ReviewCard: React.FC<{
           <p className="text-gray-700 leading-relaxed whitespace-pre-line text-base">
             {displayContent}
           </p>
-          
+
           {shouldTruncate && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
@@ -443,8 +442,8 @@ const ReviewCard: React.FC<{
         </div>
 
         {/* Review Images */}
-        <ReviewImages 
-          images={review.images} 
+        <ReviewImages
+          images={review.images}
           alt={`Review by ${review.name}`}
           reviewerName={review.name}
         />
@@ -468,8 +467,6 @@ const ReviewCard: React.FC<{
 
 export default function TestimonialPage() {
   const [isMounted, setIsMounted] = useState(false);
-  const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length;
-  const totalReviews = reviews.length;
 
   useEffect(() => {
     setIsMounted(true);

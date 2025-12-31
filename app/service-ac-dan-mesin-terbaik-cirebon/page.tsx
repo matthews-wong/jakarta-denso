@@ -3,7 +3,7 @@
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import { Wrench, Shield, Clock, Users, Star, MapPin, Phone, Settings, CheckCircle2, ThermometerSun } from "lucide-react"
+import { Wrench, Shield, Clock, Star, MapPin, Phone, Settings, CheckCircle2, ThermometerSun } from "lucide-react"
 
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false })
 const Footer = dynamic(() => import("../components/Footer"), { ssr: false })

@@ -34,11 +34,10 @@ export default function Hero() {
 
           {/* Status Pill */}
           {isOpen !== null && (
-            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-6 ${
-              isOpen
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium mb-6 ${isOpen
                 ? "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200"
                 : "bg-red-50 text-red-700 ring-1 ring-red-200"
-            }`}>
+              }`}>
               <span className="relative flex h-2 w-2">
                 {isOpen && <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />}
                 <span className={`relative inline-flex rounded-full h-2 w-2 ${isOpen ? "bg-emerald-500" : "bg-red-500"}`} />
@@ -172,7 +171,7 @@ export default function Hero() {
               </div>
             </div>
             <p className="text-gray-600 text-sm leading-relaxed">
-              "Cuci mobil terbaik di Cirebon! Pelayanan ramah, hasil bersih maksimal."
+              &quot;Cuci mobil terbaik di Cirebon! Pelayanan ramah, hasil bersih maksimal.&quot;
             </p>
           </div>
 
@@ -211,7 +210,7 @@ export default function Hero() {
       {/* Bottom curve transition */}
       <div className="absolute bottom-0 left-0 right-0">
         <svg className="w-full h-12 sm:h-16 text-white" preserveAspectRatio="none" viewBox="0 0 1440 54">
-          <path fill="currentColor" d="M0 22L60 16.7C120 11 240 1.00001 360 0.700012C480 1.00001 600 11 720 16.7C840 22 960 22 1080 19.2C1200 16 1320 11 1380 8.50001L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z"/>
+          <path fill="currentColor" d="M0 22L60 16.7C120 11 240 1.00001 360 0.700012C480 1.00001 600 11 720 16.7C840 22 960 22 1080 19.2C1200 16 1320 11 1380 8.50001L1440 6V54H1380C1320 54 1200 54 1080 54C960 54 840 54 720 54C600 54 480 54 360 54C240 54 120 54 60 54H0V22Z" />
         </svg>
       </div>
     </section>
