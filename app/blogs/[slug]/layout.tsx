@@ -38,19 +38,22 @@ async function getBlogPost(slug: string): Promise<BlogFrontmatter | null> {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
 
   if (!post) {
     return {
-      title: "Blog Not Found | Jakarta Intl Denso Cirebon",
+      title: {
+        absolute: "Blog Not Found | Jakarta Intl Denso",
+      },
       description: "Blog post tidak ditemukan",
     }
   }
 
   const baseUrl = "https://jakartaintldenso.com"
-  const blogUrl = `${baseUrl}/blogs/${params.slug}`
+  const blogUrl = `${baseUrl}/blogs/${slug}`
 
   // Ensure coverImage is absolute URL
   const ogImage = post.coverImage.startsWith("http")
@@ -58,7 +61,9 @@ export async function generateMetadata({
     : `${baseUrl}${post.coverImage}`
 
   return {
-    title: `${post.title} | Jakarta Intl Denso Cirebon`,
+    title: {
+      absolute: `${post.title} | Jakarta Intl Denso`,
+    },
     description: post.excerpt,
     keywords: post.tags?.join(", ") || "bengkel ac mobil, cirebon, service ac",
     authors: [{ name: post.author || "Tim Jakarta Intl Denso" }],

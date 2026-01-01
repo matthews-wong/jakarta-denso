@@ -6,8 +6,7 @@ import type { Metadata, Viewport } from "next"
 export const metadata: Metadata = {
   metadataBase: new URL("https://jakartaintldenso.com"),
   title: {
-    default: "Service AC & Mesin Mobil Terbaik Cirebon - Bengkel Spesialis | Jakarta Int'l Denso",
-    template: "%s | Service AC Mesin Cirebon - Jakarta Int'l Denso",
+    absolute: "Service AC & Mesin Cirebon | Jakarta Int'l Denso",
   },
   description:
     "Bengkel service AC & mesin mobil #1 di Cirebon sejak 2004. ✓ Isi Freon ✓ Ganti Kompresor ✓ Tune Up Mesin ✓ Scanner ECU ✓ Garansi Service ✓ Teknisi bersertifikat. Konsultasi gratis!",
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Service AC & Mesin Mobil Terbaik Cirebon - Bengkel Spesialis Sejak 2004",
+    title: "Service AC & Mesin Mobil Cirebon | Bengkel Spesialis",
     description:
       "Bengkel service AC & mesin mobil #1 di Cirebon. Spesialis AC, tune up mesin, scanner ECU. Garansi service.",
     url: "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
@@ -73,7 +72,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Service AC & Mesin Mobil Terbaik Cirebon | Jakarta Int'l Denso",
+    title: "Service AC & Mesin Mobil Cirebon",
     description:
       "Bengkel service AC & mesin mobil #1 di Cirebon sejak 2004. Teknisi bersertifikat, peralatan modern.",
     images: ["https://jakartaintldenso.com/images/service-ac.jpeg"],

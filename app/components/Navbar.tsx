@@ -170,7 +170,7 @@ const Navbar: React.FC = () => {
     <nav className="fixed w-full z-50 py-2 bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <div className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-4">
             <div className="relative h-12 w-12 sm:h-16 sm:w-16">
               <Image
                 src="/images/logo.avif"
@@ -184,7 +184,7 @@ const Navbar: React.FC = () => {
             <span className="text-lg sm:text-2xl font-extrabold tracking-tight text-blue-900">
               Jakarta Intl Denso
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
@@ -302,7 +302,7 @@ const Navbar: React.FC = () => {
 
             {/* Logo and branding in mobile menu */}
             <div className="pt-14 pb-3 px-6">
-              <div className="flex items-center gap-4 mb-3">
+              <Link href="/" onClick={handleNavClick} className="flex items-center gap-4 mb-3">
                 <div className="relative h-12 w-12">
                   <Image
                     src="/images/logo.avif"
@@ -316,7 +316,7 @@ const Navbar: React.FC = () => {
                   <h2 className="text-xl font-extrabold text-blue-900">Jakarta Intl Denso</h2>
                   <p className="text-xs text-gray-600">Layanan Otomotif Terbaik Cirebon</p>
                 </div>
-              </div>
+              </Link>
               <div className="h-0.5 bg-gradient-to-r from-blue-500 to-blue-200 w-full rounded-full"></div>
             </div>
 

@@ -6,8 +6,7 @@ import type { Metadata, Viewport } from "next"
 export const metadata: Metadata = {
   metadataBase: new URL("https://jakartaintldenso.com"),
   title: {
-    default: "Salon Mobil Terbaik Cirebon - Detailing & Coating Premium | Jakarta Int'l Denso",
-    template: "%s | Salon Mobil Cirebon - Jakarta Int'l Denso",
+    absolute: "Salon Mobil Terbaik Cirebon | Jakarta Int'l Denso",
   },
   description:
     "Salon mobil premium #1 di Cirebon sejak 2004. ✓ Nano Ceramic Coating ✓ Paint Correction ✓ Detailing Interior & Eksterior ✓ Garansi 2 Tahun ✓ Teknisi berpengalaman 20+ tahun. Booking sekarang!",
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Salon Mobil Terbaik Cirebon - Detailing & Coating Premium Sejak 2004",
+    title: "Salon Mobil Premium Cirebon | Detailing & Coating",
     description:
       "Salon mobil premium #1 di Cirebon. Nano ceramic coating, paint correction, detailing profesional. Garansi 2 tahun.",
     url: "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
@@ -73,7 +72,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Salon Mobil Terbaik Cirebon | Jakarta Int'l Denso",
+    title: "Salon Mobil Terbaik Cirebon",
     description:
       "Salon mobil premium #1 di Cirebon sejak 2004. Detailing profesional, coating bergaransi 2 tahun.",
     images: ["https://jakartaintldenso.com/images/Salon-mobil.jpeg"],

@@ -6,8 +6,7 @@ import type { Metadata, Viewport } from "next"
 export const metadata: Metadata = {
   metadataBase: new URL("https://jakartaintldenso.com"),
   title: {
-    default: "Cuci Mobil Terbaik Cirebon - Premium Car Wash | Jakarta Int'l Denso",
-    template: "%s | Cuci Mobil Cirebon - Jakarta Int'l Denso",
+    absolute: "Cuci Mobil Terbaik Cirebon | Jakarta Int'l Denso",
   },
   description:
     "Cuci mobil premium #1 di Cirebon sejak 2004. ✓ Hidrolik modern ✓ Air PDAM berkualitas ✓ Teknisi berpengalaman 20+ tahun ✓ Cuci luar dalam ✓ Rating 4.9/5 dari 160+ pelanggan. Booking sekarang!",
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Cuci Mobil Terbaik Cirebon - Premium Car Wash Sejak 2004",
+    title: "Cuci Mobil Premium Cirebon | Sejak 2004",
     description:
       "Cuci mobil premium #1 di Cirebon. Hidrolik modern, teknisi berpengalaman, hasil memuaskan. Rating 4.9/5.",
     url: "https://jakartaintldenso.com/cuci-mobil-terbaik-cirebon",
@@ -76,7 +75,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Cuci Mobil Terbaik Cirebon | Jakarta Int'l Denso",
+    title: "Cuci Mobil Terbaik Cirebon",
     description:
       "Cuci mobil premium #1 di Cirebon sejak 2004. Teknisi berpengalaman, hidrolik modern, hasil memuaskan.",
     images: ["https://jakartaintldenso.com/images/blog-cuci-mobil.jpeg"],

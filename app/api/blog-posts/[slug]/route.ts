@@ -148,10 +148,10 @@ async function getPostFromFile(slug: string, baseUrl: string): Promise<BlogPost>
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<NextResponse> {
   try {
-    const slug = params.slug;
+    const { slug } = await params;
     const baseUrl = 'https://jakartaintldenso.com';
 
     if (!slug) {
