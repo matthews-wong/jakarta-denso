@@ -72,6 +72,12 @@ const nextConfig: NextConfig = {
     optimizeCss: true,
   },
 
+  // Include content files in serverless function bundles for dynamic routes
+  outputFileTracingIncludes: {
+    "/blogs/[slug]": ["./content/**/*"],
+    "/api/blog-posts/[slug]": ["./content/**/*"],
+  },
+
   // Custom headers optimized for SEO but more lenient for Instagram browser
   async headers() {
     return [
