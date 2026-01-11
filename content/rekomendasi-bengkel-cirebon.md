@@ -42,10 +42,6 @@ Kombinasi layanan teknis mesin dan estetika salon mobil menjadikan Jakarta Intl 
 
 Salah satu hal yang paling disukai pelanggan kami adalah transparansi. Kami sangat menjunjung tinggi kejujuran dalam setiap transaksi.
 
-![Rincian Harga Jakarta Intl Denso Cirebon](/harga-layanan.jpeg)
-
-*Di atas adalah contoh rincian harga dan estimasi biaya yang kami berikan kepada setiap pelanggan. Anda akan mendapatkan dokumen tertulis mengenai apa saja yang perlu diperbaiki beserta biayanya sebelum teknisi kami mulai bekerja.*
-
 **Keuntungan bagi pelanggan:**
 1. **Tidak Ada Biaya Tersembunyi:** Semua biaya sudah disepakati di awal.
 2. **Prioritas Perbaikan:** Anda bisa memilih pengerjaan mana yang ingin didahulukan sesuai budget.
