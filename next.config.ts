@@ -1,4 +1,4 @@
-import type { NextConfig } from "next"
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // Enable React Strict Mode for highlighting potential issues
@@ -8,23 +8,12 @@ const nextConfig: NextConfig = {
   trailingSlash: false, // Changed to false for better social media compatibility
 
   // Improve SEO with proper page handling
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
+  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
 
-  // TypeScript and ESLint configuration
+  // TypeScript configuration
   typescript: {
     // Allow production builds to complete even with type errors
-    ignoreBuildErrors: false, // Keep false for type safety, but see eslint config below
-  },
-
-  eslint: {
-    // Allow production builds to complete even with ESLint errors
-    ignoreDuringBuilds: true, // This will ignore unused variable warnings
-  },
-
-  // Internationalization settings
-  i18n: {
-    locales: ["id"], // Bahasa Indonesia
-    defaultLocale: "id",
+    ignoreBuildErrors: false, // Keep false for type safety
   },
 
   // Image optimization settings - enhanced for SEO
@@ -43,7 +32,7 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "images.unsplash.com",
-      }
+      },
     ],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 86400, // 24 hours
@@ -53,7 +42,7 @@ const nextConfig: NextConfig = {
     // Removed contentSecurityPolicy for better compatibility
   },
 
-  // Experimental features - updated for Next.js 15
+  // Experimental features
   experimental: {
     optimizePackageImports: [
       "lucide-react",
@@ -66,8 +55,6 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: "2mb", // Increase limit for form submissions
     },
-    // Enable modern bundling for better performance
-    webpackBuildWorker: true,
     // Optimize for SEO
     optimizeCss: true,
   },
@@ -92,21 +79,7 @@ const nextConfig: NextConfig = {
           // Removed Content-Security-Policy for better compatibility with Instagram
         ],
       },
-      {
-        source: "/sitemap.xml",
-        headers: [
-          { key: "Content-Type", value: "application/xml" }, // Proper content type for sitemaps
-          { key: "Cache-Control", value: "public, max-age=3600" }, // Cache for 1 hour, better for crawlers
-        ],
-      },
-      {
-        source: "/robots.txt",
-        headers: [
-          { key: "Content-Type", value: "text/plain" },
-          { key: "Cache-Control", value: "public, max-age=3600" },
-        ],
-      },
-    ]
+    ];
   },
 
   // Redirects with proper status codes for SEO
@@ -147,16 +120,12 @@ const nextConfig: NextConfig = {
         destination: "/#BlogPreview",
         permanent: true,
       },
-    ]
+    ];
   },
 
   // Enhanced rewrites for better SEO and 404 handling
   async rewrites() {
     return [
-      {
-        source: "/sitemap.xml",
-        destination: "/api/sitemap",
-      },
       // Handle Instagram UTM parameters without redirecting
       {
         source: "/:path*",
@@ -173,28 +142,15 @@ const nextConfig: NextConfig = {
         source: "/l/:path*",
         destination: "/:path*",
       },
-    ]
+    ];
   },
 
   // Environment variables
   env: {
     NEXT_PUBLIC_APP_URL: "https://jakartaintldenso.com",
     NEXT_PUBLIC_SITE_NAME: "Jakarta Intl Denso Cirebon - AC Mobil",
-    NEXT_PUBLIC_SITE_DESCRIPTION: "Layanan profesional Jakarta Intl Denso di Cirebon",
-  },
-
-  // Add Webpack configuration for better performance
-  webpack: (config, { dev, isServer }) => {
-    // Only run in production and on client-side
-    if (!dev && !isServer) {
-      // Enable tree-shaking and code splitting
-      config.optimization.splitChunks.chunks = "all"
-
-      // Use Terser for better minification
-      config.optimization.minimize = true
-    }
-
-    return config
+    NEXT_PUBLIC_SITE_DESCRIPTION:
+      "Layanan profesional Jakarta Intl Denso di Cirebon",
   },
 
   // Properly handle 404 and other error pages
@@ -204,6 +160,6 @@ const nextConfig: NextConfig = {
     // Number of pages that should be kept simultaneously without being disposed
     pagesBufferLength: 5,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

@@ -2,7 +2,6 @@
 
 "use client";
 
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -22,7 +21,7 @@ import {
   MessageSquare,
   ThumbsUp,
   Users,
-  Trophy
+  Trophy,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -46,7 +45,8 @@ const reviews: Review[] = [
     name: "Dante Istanto",
     role: "Local Guide",
     rating: 5,
-    content: "Kolong Bersih, cepat, interior di vacuum, semua mobil sy cuci disini",
+    content:
+      "Kolong Bersih, cepat, interior di vacuum, semua mobil sy cuci disini",
     images: ["/images/review1.png", "/images/review2.png"],
     date: "2 minggu lalu",
     service: "Cuci Mobil Premium",
@@ -56,7 +56,8 @@ const reviews: Review[] = [
     id: 2,
     name: "Bagas Anindito",
     rating: 5,
-    content: "Tempat cuci mobil terbaik di Cirebon, pelayanannya sangat baik dan mobil bersih luar & dalam.\nHarga cuci mobil menurut saya standar, yaitu 45k.\nTerdapat pelayanan yang lain seperti Service AC, Custom Jok, Ganti Oli, dll.\nBerlokasi strategis di tengah kota tepatnya di Jalan Ampera di pertigaan.\nYang paling saya suka di sini terdapat 2 jenis hidrolik, yang standar alias yang hanya menyangga bagian tengah mobil, dan ada yang menyangga ban mobilnya juga sehingga kaki-kaki mobil tidak cepat rusak.\nTerdapat tempat untuk menunggu.\nWaktu yang dihabiskan sekitar 30 menit - 1 jam untuk 1 mobil tergantung jenis mobilnya.",
+    content:
+      "Tempat cuci mobil terbaik di Cirebon, pelayanannya sangat baik dan mobil bersih luar & dalam.\nHarga cuci mobil menurut saya standar, yaitu 45k.\nTerdapat pelayanan yang lain seperti Service AC, Custom Jok, Ganti Oli, dll.\nBerlokasi strategis di tengah kota tepatnya di Jalan Ampera di pertigaan.\nYang paling saya suka di sini terdapat 2 jenis hidrolik, yang standar alias yang hanya menyangga bagian tengah mobil, dan ada yang menyangga ban mobilnya juga sehingga kaki-kaki mobil tidak cepat rusak.\nTerdapat tempat untuk menunggu.\nWaktu yang dihabiskan sekitar 30 menit - 1 jam untuk 1 mobil tergantung jenis mobilnya.",
     images: [],
     date: "3 minggu lalu",
     service: "Cuci Mobil & Service AC",
@@ -66,7 +67,8 @@ const reviews: Review[] = [
     id: 3,
     name: "Aditya Rifki Satria",
     rating: 5,
-    content: "Cuci mobil paling juara, dengan harga yg worth it, terjangkau. Bisa mendapat kebersihan maksimal luar dalam, ya meski tempatnya selalu penuh dan saya nunggu dari jam set9 pagi baru selesai jam 11 siang. Tapi saya puas akan hasilnya.. oiya saya betah nunggu karena tempatnya enak, bisa ngopi juga, juara pokoknya disini pelayananya 🙏",
+    content:
+      "Cuci mobil paling juara, dengan harga yg worth it, terjangkau. Bisa mendapat kebersihan maksimal luar dalam, ya meski tempatnya selalu penuh dan saya nunggu dari jam set9 pagi baru selesai jam 11 siang. Tapi saya puas akan hasilnya.. oiya saya betah nunggu karena tempatnya enak, bisa ngopi juga, juara pokoknya disini pelayananya 🙏",
     images: ["/images/review3.png"],
     date: "1 bulan lalu",
     service: "Cuci Mobil",
@@ -76,7 +78,8 @@ const reviews: Review[] = [
     id: 4,
     name: "Ferry Hendryk",
     rating: 5,
-    content: "om Ownernya baek, waktu mau beli air mineral dingin keabisan eh di kasih nya minuman manis tp bayarnya seharga air mineral 😂😂 ...mantap pelayanan nya.. tetap pertahankan kualitas dan pelayanan nya",
+    content:
+      "om Ownernya baek, waktu mau beli air mineral dingin keabisan eh di kasih nya minuman manis tp bayarnya seharga air mineral 😂😂 ...mantap pelayanan nya.. tetap pertahankan kualitas dan pelayanan nya",
     images: [],
     date: "1 bulan lalu",
     service: "Cuci Mobil",
@@ -96,7 +99,8 @@ const reviews: Review[] = [
     id: 6,
     name: "Hariadi Sugandi",
     rating: 5,
-    content: "Mantap, kerja bersih drpd cuci mobil yg lain ada di crb, pertahankan terus utk lbh baik",
+    content:
+      "Mantap, kerja bersih drpd cuci mobil yg lain ada di crb, pertahankan terus utk lbh baik",
     images: [],
     date: "2 bulan lalu",
     service: "Cuci Mobil",
@@ -106,8 +110,13 @@ const reviews: Review[] = [
     id: 7,
     name: "Cindy Putri Amelia",
     rating: 5,
-    content: "Biasanya cuma cuci mobil aja disini. Karena selalu cepet prosesnya. Hari ini salon interior mobil karena jok mobil kotor banget. Dan hasilnya bersih banget semobil dibersihin sampe ke dalem2. Wangi banget udahnya. Kinclong. Udah ga ada noda setitik pun. Best",
-    images: ["/images/ulasan-salon.png", "/images/ulasan-salon1.png", "/images/ulasan-salon2.png"],
+    content:
+      "Biasanya cuma cuci mobil aja disini. Karena selalu cepet prosesnya. Hari ini salon interior mobil karena jok mobil kotor banget. Dan hasilnya bersih banget semobil dibersihin sampe ke dalem2. Wangi banget udahnya. Kinclong. Udah ga ada noda setitik pun. Best",
+    images: [
+      "/images/ulasan-salon.png",
+      "/images/ulasan-salon1.png",
+      "/images/ulasan-salon2.png",
+    ],
     date: "5 bulan lalu",
     service: "Salon Mobil",
     verified: true,
@@ -116,7 +125,8 @@ const reviews: Review[] = [
     id: 8,
     name: "Novi Andini",
     rating: 5,
-    content: "Pelayanannya ramah,bersih bangett hasilnyaa ga asal asalan,ada ruang tunggu ac-nya tempat favorit nyaman buat tunggu selesai cuci mobil,harga terjangkau,tempat cuci mobil favorit dicirebon..🤩",
+    content:
+      "Pelayanannya ramah,bersih bangett hasilnyaa ga asal asalan,ada ruang tunggu ac-nya tempat favorit nyaman buat tunggu selesai cuci mobil,harga terjangkau,tempat cuci mobil favorit dicirebon..🤩",
     images: ["/images/ulasan-cuci.png"],
     date: "2 bulan lalu",
     service: "Cuci Mobil",
@@ -126,7 +136,8 @@ const reviews: Review[] = [
     id: 9,
     name: "Sandry Juliandry",
     rating: 5,
-    content: "Nyuci nya bersih, sudah langganan puluhan taun, pelayanan nya sangat memuaskan",
+    content:
+      "Nyuci nya bersih, sudah langganan puluhan taun, pelayanan nya sangat memuaskan",
     images: ["/images/ulasan-cuci1.png"],
     date: "2 bulan lalu",
     service: "Cuci Mobil",
@@ -138,35 +149,35 @@ const reviews: Review[] = [
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Jakarta Intl Denso Cirebon - Spesialis AC Mobil dan Cuci Mobil",
-  "url": "https://jakartaintldenso.com",
-  "address": {
+  name: "Jakarta Intl Denso Cirebon - Spesialis AC Mobil dan Cuci Mobil",
+  url: "https://jakartaintldenso.com",
+  address: {
     "@type": "PostalAddress",
-    "addressLocality": "Cirebon",
-    "addressRegion": "Jawa Barat",
-    "addressCountry": "Indonesia"
+    addressLocality: "Cirebon",
+    addressRegion: "Jawa Barat",
+    addressCountry: "Indonesia",
   },
-  "aggregateRating": {
+  aggregateRating: {
     "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "reviewCount": reviews.length.toString(),
-    "bestRating": "5",
-    "worstRating": "5"
+    ratingValue: "4.8",
+    reviewCount: reviews.length.toString(),
+    bestRating: "5",
+    worstRating: "5",
   },
-  "review": reviews.map((review) => ({
+  review: reviews.map((review) => ({
     "@type": "Review",
-    "author": {
+    author: {
       "@type": "Person",
-      "name": review.name,
+      name: review.name,
     },
-    "reviewRating": {
+    reviewRating: {
       "@type": "Rating",
-      "ratingValue": review.rating.toString(),
-      "bestRating": "5",
-      "worstRating": "1"
+      ratingValue: review.rating.toString(),
+      bestRating: "5",
+      worstRating: "1",
     },
-    "reviewBody": review.content,
-    "datePublished": "2024"
+    reviewBody: review.content,
+    datePublished: "2024",
   })),
 };
 
@@ -178,7 +189,9 @@ const ReviewStars: React.FC<{ rating: number }> = ({ rating }) => {
         <Star
           key={index}
           size={18}
-          className={index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}
+          className={
+            index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+          }
           aria-hidden="true"
         />
       ))}
@@ -200,27 +213,29 @@ const ReviewImagesModal: React.FC<{
       if (!isOpen) return;
 
       switch (e.key) {
-        case 'Escape':
+        case "Escape":
           onClose();
           break;
-        case 'ArrowLeft':
+        case "ArrowLeft":
           e.preventDefault();
-          setCurrentIndex(prev => prev === 0 ? images.length - 1 : prev - 1);
+          setCurrentIndex((prev) =>
+            prev === 0 ? images.length - 1 : prev - 1,
+          );
           break;
-        case 'ArrowRight':
+        case "ArrowRight":
           e.preventDefault();
-          setCurrentIndex(prev => (prev + 1) % images.length);
+          setCurrentIndex((prev) => (prev + 1) % images.length);
           break;
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
 
       return () => {
-        document.removeEventListener('keydown', handleKeyDown);
-        document.body.style.overflow = 'unset';
+        document.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "unset";
       };
     }
   }, [isOpen, images.length, onClose]);
@@ -254,7 +269,9 @@ const ReviewImagesModal: React.FC<{
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentIndex(prev => prev === 0 ? images.length - 1 : prev - 1);
+                setCurrentIndex((prev) =>
+                  prev === 0 ? images.length - 1 : prev - 1,
+                );
               }}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-60 flex items-center justify-center w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full transition-all duration-200"
             >
@@ -264,7 +281,7 @@ const ReviewImagesModal: React.FC<{
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentIndex(prev => (prev + 1) % images.length);
+                setCurrentIndex((prev) => (prev + 1) % images.length);
               }}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-60 flex items-center justify-center w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full transition-all duration-200"
             >
@@ -361,9 +378,10 @@ const ReviewCard: React.FC<{
   const [isExpanded, setIsExpanded] = useState(false);
   const contentLength = review.content.length;
   const shouldTruncate = contentLength > 150;
-  const displayContent = isExpanded || !shouldTruncate
-    ? review.content
-    : review.content.substring(0, 150) + '...';
+  const displayContent =
+    isExpanded || !shouldTruncate
+      ? review.content
+      : review.content.substring(0, 150) + "...";
 
   return (
     <motion.article
@@ -396,7 +414,9 @@ const ReviewCard: React.FC<{
             <div>
               <h3 className="font-bold text-gray-900 text-lg">{review.name}</h3>
               {review.role && (
-                <p className="text-sm text-blue-600 font-medium">{review.role}</p>
+                <p className="text-sm text-blue-600 font-medium">
+                  {review.role}
+                </p>
               )}
               {review.date && (
                 <p className="text-xs text-gray-500">{review.date}</p>
@@ -436,7 +456,7 @@ const ReviewCard: React.FC<{
               onClick={() => setIsExpanded(!isExpanded)}
               className="mt-2 text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
             >
-              {isExpanded ? 'Tutup' : 'Baca Selengkapnya'}
+              {isExpanded ? "Tutup" : "Baca Selengkapnya"}
             </button>
           )}
         </div>
@@ -463,8 +483,6 @@ const ReviewCard: React.FC<{
   );
 };
 
-
-
 export default function TestimonialPage() {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -478,34 +496,6 @@ export default function TestimonialPage() {
 
   return (
     <>
-      {/* SEO Head */}
-      <Head>
-        <title>Testimoni Pelanggan - Bengkel AC Mobil Terpercaya | Jakarta Intl Denso Cirebon</title>
-        <meta
-          name="description"
-          content="Baca testimoni dan ulasan pelanggan Jakarta Intl Denso - bengkel AC mobil terpercaya di Cirebon. Rating 4.8/5 dari pelanggan yang puas dengan layanan cuci mobil premium, service AC mobil, dan salon mobil berkualitas."
-        />
-        <meta
-          name="keywords"
-          content="testimoni bengkel AC mobil Cirebon, ulasan Jakarta Intl Denso, review cuci mobil Cirebon, testimonial service AC mobil, bengkel mobil terpercaya Cirebon, pelanggan puas Jakarta Intl Denso"
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="author" content="Jakarta Intl Denso" />
-        <link rel="canonical" href="https://jakartaintldenso.com/testimonial" />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://jakartaintldenso.com/testimonial" />
-        <meta property="og:title" content="Testimoni Pelanggan - Bengkel AC Mobil Terpercaya | Jakarta Intl Denso Cirebon" />
-        <meta property="og:description" content="Baca testimoni dan ulasan pelanggan Jakarta Intl Denso dengan rating 4.8/5. Layanan cuci mobil premium dan service AC mobil terbaik di Cirebon." />
-        <meta property="og:image" content="https://jakartaintldenso.com/images/review1.png" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Testimoni Pelanggan Jakarta Intl Denso Cirebon" />
-        <meta name="twitter:description" content="Rating 4.8/5 dari pelanggan yang puas dengan layanan bengkel AC mobil terbaik di Cirebon." />
-      </Head>
-
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -573,18 +563,15 @@ export default function TestimonialPage() {
               </h2>
 
               <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                Kepuasan pelanggan adalah prioritas utama kami. Lihat apa yang mereka katakan tentang layanan kami.
+                Kepuasan pelanggan adalah prioritas utama kami. Lihat apa yang
+                mereka katakan tentang layanan kami.
               </p>
             </div>
 
             {/* Reviews Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {reviews.map((review, index) => (
-                <ReviewCard
-                  key={review.id}
-                  review={review}
-                  index={index}
-                />
+                <ReviewCard key={review.id} review={review} index={index} />
               ))}
             </div>
           </motion.section>
@@ -601,7 +588,8 @@ export default function TestimonialPage() {
                 Lihat Lebih Banyak Ulasan di Google
               </h3>
               <p className="text-blue-100 mb-6 text-lg">
-                Ribuan pelanggan puas telah memberikan testimoni positif tentang layanan kami
+                Ribuan pelanggan puas telah memberikan testimoni positif tentang
+                layanan kami
               </p>
               <Link
                 href="https://maps.app.goo.gl/JZNqYpwmLeQSpXpHA"
@@ -627,13 +615,18 @@ export default function TestimonialPage() {
                 Siap Merasakan Pelayanan Terbaik Seperti Mereka?
               </h2>
               <p className="text-xl text-gray-300 mb-4 leading-relaxed">
-                <strong>Jakarta Intl Denso</strong> siap memberikan pengalaman terbaik untuk kendaraan Anda!
+                <strong>Jakarta Intl Denso</strong> siap memberikan pengalaman
+                terbaik untuk kendaraan Anda!
               </p>
               <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                ⭐ <strong>Service AC Mobil Profesional</strong> - Teknisi berpengalaman 20+ tahun dengan spare part original<br />
-                ⭐ <strong>Cuci Mobil Premium</strong> - Hasil bersih maksimal luar dalam dengan teknik snow wash<br />
-                ⭐ <strong>Salon Mobil Lengkap</strong> - Poles, wax, coating untuk hasil mengkilap seperti mobil baru<br />
-                ⭐ <strong>Aksesoris Berkualitas</strong> - Cover jok, parfum mobil, velg racing, dan aksesoris lainnya
+                ⭐ <strong>Service AC Mobil Profesional</strong> - Teknisi
+                berpengalaman 20+ tahun dengan spare part original
+                <br />⭐ <strong>Cuci Mobil Premium</strong> - Hasil bersih
+                maksimal luar dalam dengan teknik snow wash
+                <br />⭐ <strong>Salon Mobil Lengkap</strong> - Poles, wax,
+                coating untuk hasil mengkilap seperti mobil baru
+                <br />⭐ <strong>Aksesoris Berkualitas</strong> - Cover jok,
+                parfum mobil, velg racing, dan aksesoris lainnya
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -666,42 +659,62 @@ export default function TestimonialPage() {
                 <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <CheckCircle className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">100% Verified</h3>
-                <p className="text-gray-600 text-sm">Semua testimoni terverifikasi dari pelanggan asli</p>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">
+                  100% Verified
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Semua testimoni terverifikasi dari pelanggan asli
+                </p>
               </div>
 
               <div className="flex flex-col items-center text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg">
                 <div className="w-16 h-16 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Star className="w-8 h-8 text-white fill-current" />
                 </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">Rating 4.8/5</h3>
-                <p className="text-gray-600 text-sm">Kepuasan pelanggan tinggi dengan layanan berkualitas</p>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">
+                  Rating 4.8/5
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Kepuasan pelanggan tinggi dengan layanan berkualitas
+                </p>
               </div>
 
               <div className="flex flex-col items-center text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg">
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Users className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">1000+ Pelanggan</h3>
-                <p className="text-gray-600 text-sm">Dipercaya ribuan pelanggan di Cirebon dan sekitarnya</p>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">
+                  1000+ Pelanggan
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Dipercaya ribuan pelanggan di Cirebon dan sekitarnya
+                </p>
               </div>
 
               <div className="flex flex-col items-center text-center p-6 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg">
                 <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-4 shadow-lg">
                   <Award className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="font-bold text-lg text-gray-900 mb-2">20+ Tahun</h3>
-                <p className="text-gray-600 text-sm">Pengalaman mendalam dalam perawatan kendaraan</p>
+                <h3 className="font-bold text-lg text-gray-900 mb-2">
+                  20+ Tahun
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Pengalaman mendalam dalam perawatan kendaraan
+                </p>
               </div>
             </div>
 
             {/* Location and Contact Info */}
             <div className="text-center text-gray-600 space-y-2 pt-8">
               <p className="text-sm">
-                <strong className="text-[#27398f]">Bengkel AC Mobil Terpercaya #1 Cirebon</strong> - Melayani seluruh wilayah Cirebon Raya
+                <strong className="text-[#27398f]">
+                  Bengkel AC Mobil Terpercaya #1 Cirebon
+                </strong>{" "}
+                - Melayani seluruh wilayah Cirebon Raya
               </p>
               <p className="text-sm">
-                📍 Jl. Ampera, Pusat Kota Cirebon | ⏰ Buka Setiap Hari: 08:00 - 17:00 WIB
+                📍 Jl. Ampera, Pusat Kota Cirebon | ⏰ Buka Setiap Hari: 08:00 -
+                17:00 WIB
               </p>
               <p className="text-sm text-blue-600 font-medium">
                 📞 Hubungi: 0819-647-333 | 💬 Konsultasi Gratis Sebelum Service
@@ -712,15 +725,28 @@ export default function TestimonialPage() {
 
         {/* Wave Footer */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg className="w-full h-16 fill-white opacity-90" viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <svg
+            className="w-full h-16 fill-white opacity-90"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
             <defs>
-              <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <linearGradient
+                id="waveGradient"
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
                 <stop offset="0%" stopColor="white" stopOpacity="0.8" />
                 <stop offset="50%" stopColor="white" stopOpacity="1" />
                 <stop offset="100%" stopColor="white" stopOpacity="0.8" />
               </linearGradient>
             </defs>
-            <path fill="url(#waveGradient)" d="M0,120 C150,100 350,0 600,20 C850,40 1050,100 1200,80 L1200,120 Z"></path>
+            <path
+              fill="url(#waveGradient)"
+              d="M0,120 C150,100 350,0 600,20 C850,40 1050,100 1200,80 L1200,120 Z"
+            ></path>
           </svg>
         </div>
       </main>

@@ -1,5 +1,6 @@
-import type { Metadata, Viewport } from "next"
-import BlogPageClient from "./BlogPageClient"
+import type { Metadata, Viewport } from "next";
+import BlogPageClient from "./BlogPageClient";
+import { getAllPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog Otomotif",
@@ -64,15 +65,27 @@ export const metadata: Metadata = {
     description:
       "Temukan tips dan informasi terbaru seputar perawatan mobil, cuci mobil, dan layanan otomotif di Cirebon.",
   },
-}
+};
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
-}
+};
 
-export default function BlogPage() {
-  return <BlogPageClient />
-}
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
+  const viewPosts = posts.map(({ slug, frontmatter }) => ({
+    slug,
+    frontmatter: {
+      title: frontmatter.title,
+      date: frontmatter.date,
+      excerpt: frontmatter.excerpt,
+      coverImage: frontmatter.coverImage,
+      category: frontmatter.category,
+    },
+  }));
+
+  return <BlogPageClient posts={viewPosts} />;
+}

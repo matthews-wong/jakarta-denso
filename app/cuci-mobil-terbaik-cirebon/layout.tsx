@@ -1,6 +1,5 @@
-import type React from "react"
-import Script from "next/script"
-import type { Metadata, Viewport } from "next"
+import type React from "react";
+import type { Metadata, Viewport } from "next";
 
 // Advanced SEO metadata for Cuci Mobil - optimized for Google Search
 export const metadata: Metadata = {
@@ -28,7 +27,9 @@ export const metadata: Metadata = {
     "jakarta intl denso cuci mobil",
     "car wash cirebon",
   ],
-  authors: [{ name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" }],
+  authors: [
+    { name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" },
+  ],
   creator: "Jakarta Int'l Denso",
   publisher: "Jakarta Int'l Denso",
   formatDetection: {
@@ -91,12 +92,12 @@ export const metadata: Metadata = {
     "geo.region": "ID-JB",
     "geo.placename": "Cirebon",
     "geo.position": "-6.732022;108.552316",
-    "ICBM": "-6.732022, 108.552316",
+    ICBM: "-6.732022, 108.552316",
     "revisit-after": "7 days",
-    "rating": "general",
-    "distribution": "global",
+    rating: "general",
+    distribution: "global",
   },
-}
+};
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -106,7 +107,7 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
-}
+};
 
 // Enhanced Structured Data - Service Schema
 const carWashServiceSchema = {
@@ -115,7 +116,8 @@ const carWashServiceSchema = {
   "@id": "https://jakartaintldenso.com/cuci-mobil-terbaik-cirebon#service",
   name: "Cuci Mobil Premium Cirebon",
   alternateName: ["Car Wash Cirebon", "Premium Car Wash", "Cuci Mobil Terbaik"],
-  description: "Layanan cuci mobil premium dengan teknisi berpengalaman 20+ tahun, hidrolik modern, dan air PDAM berkualitas. Melayani cuci luar, cuci dalam, dan paket lengkap.",
+  description:
+    "Layanan cuci mobil premium dengan teknisi berpengalaman 20+ tahun, hidrolik modern, dan air PDAM berkualitas. Melayani cuci luar, cuci dalam, dan paket lengkap.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://jakartaintldenso.com/#organization",
@@ -177,7 +179,7 @@ const carWashServiceSchema = {
     bestRating: "5",
     worstRating: "1",
   },
-}
+};
 
 // Breadcrumb Schema
 const breadcrumbSchema = {
@@ -197,7 +199,7 @@ const breadcrumbSchema = {
       item: "https://jakartaintldenso.com/cuci-mobil-terbaik-cirebon",
     },
   ],
-}
+};
 
 // FAQ Schema - Car Wash specific
 const faqSchema = {
@@ -245,7 +247,7 @@ const faqSchema = {
       },
     },
   ],
-}
+};
 
 // HowTo Schema for process
 const howToSchema = {
@@ -255,36 +257,81 @@ const howToSchema = {
   description: "7 langkah cuci mobil premium untuk hasil maksimal",
   totalTime: "PT45M",
   step: [
-    { "@type": "HowToStep", position: 1, name: "Mobil Masuk", text: "Pemeriksaan kondisi awal kendaraan" },
-    { "@type": "HowToStep", position: 2, name: "Naik Hidrolik", text: "Akses menyeluruh ke seluruh bagian mobil" },
-    { "@type": "HowToStep", position: 3, name: "Snow Foam", text: "Penyemprotan snow foam untuk mengangkat kotoran" },
-    { "@type": "HowToStep", position: 4, name: "Hand Wash", text: "Pembersihan manual dengan microfiber" },
-    { "@type": "HowToStep", position: 5, name: "Pembilasan", text: "Pembilasan dengan air PDAM berkualitas" },
-    { "@type": "HowToStep", position: 6, name: "Interior Clean", text: "Vakum dan pembersihan interior" },
-    { "@type": "HowToStep", position: 7, name: "Pengeringan", text: "Pengeringan dengan kanebo premium" },
+    {
+      "@type": "HowToStep",
+      position: 1,
+      name: "Mobil Masuk",
+      text: "Pemeriksaan kondisi awal kendaraan",
+    },
+    {
+      "@type": "HowToStep",
+      position: 2,
+      name: "Naik Hidrolik",
+      text: "Akses menyeluruh ke seluruh bagian mobil",
+    },
+    {
+      "@type": "HowToStep",
+      position: 3,
+      name: "Snow Foam",
+      text: "Penyemprotan snow foam untuk mengangkat kotoran",
+    },
+    {
+      "@type": "HowToStep",
+      position: 4,
+      name: "Hand Wash",
+      text: "Pembersihan manual dengan microfiber",
+    },
+    {
+      "@type": "HowToStep",
+      position: 5,
+      name: "Pembilasan",
+      text: "Pembilasan dengan air PDAM berkualitas",
+    },
+    {
+      "@type": "HowToStep",
+      position: 6,
+      name: "Interior Clean",
+      text: "Vakum dan pembersihan interior",
+    },
+    {
+      "@type": "HowToStep",
+      position: 7,
+      name: "Pengeringan",
+      text: "Pengeringan dengan kanebo premium",
+    },
   ],
-}
+};
 
 export default function CuciMobilLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <>
       {children}
-      <Script id="schema-carwash-service" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(carWashServiceSchema)}
-      </Script>
-      <Script id="schema-breadcrumb" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
-      <Script id="schema-faq-carwash" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(faqSchema)}
-      </Script>
-      <Script id="schema-howto" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(howToSchema)}
-      </Script>
+      <script
+        id="schema-carwash-service"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(carWashServiceSchema),
+        }}
+      />
+      <script
+        id="schema-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        id="schema-faq-carwash"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        id="schema-howto"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
     </>
-  )
+  );
 }

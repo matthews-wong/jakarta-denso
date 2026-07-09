@@ -1,6 +1,5 @@
-import type React from "react"
-import Script from "next/script"
-import type { Metadata, Viewport } from "next"
+import type React from "react";
+import type { Metadata, Viewport } from "next";
 
 // Advanced SEO metadata for Service AC & Mesin
 export const metadata: Metadata = {
@@ -25,7 +24,9 @@ export const metadata: Metadata = {
     "carbon clean cirebon",
     "jakarta intl denso service",
   ],
-  authors: [{ name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" }],
+  authors: [
+    { name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" },
+  ],
   creator: "Jakarta Int'l Denso",
   publisher: "Jakarta Int'l Denso",
   formatDetection: {
@@ -34,9 +35,11 @@ export const metadata: Metadata = {
     telephone: true,
   },
   alternates: {
-    canonical: "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
+    canonical:
+      "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
     languages: {
-      "id-ID": "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
+      "id-ID":
+        "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
     },
   },
   openGraph: {
@@ -88,12 +91,12 @@ export const metadata: Metadata = {
     "geo.region": "ID-JB",
     "geo.placename": "Cirebon",
     "geo.position": "-6.732022;108.552316",
-    "ICBM": "-6.732022, 108.552316",
+    ICBM: "-6.732022, 108.552316",
     "revisit-after": "7 days",
-    "rating": "general",
-    "distribution": "global",
+    rating: "general",
+    distribution: "global",
   },
-}
+};
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -103,16 +106,22 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
-}
+};
 
 // Service Schema for AC & Mesin
 const serviceACMesinSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon#service",
+  "@id":
+    "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon#service",
   name: "Service AC & Mesin Mobil Cirebon",
-  alternateName: ["Bengkel AC Mobil Cirebon", "Service Mesin Mobil Cirebon", "Tune Up Mobil Cirebon"],
-  description: "Layanan service AC dan mesin mobil profesional dengan teknisi bersertifikat, peralatan canggih, dan garansi service. Melayani semua merk mobil.",
+  alternateName: [
+    "Bengkel AC Mobil Cirebon",
+    "Service Mesin Mobil Cirebon",
+    "Tune Up Mobil Cirebon",
+  ],
+  description:
+    "Layanan service AC dan mesin mobil profesional dengan teknisi bersertifikat, peralatan canggih, dan garansi service. Melayani semua merk mobil.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://jakartaintldenso.com/#organization",
@@ -144,7 +153,8 @@ const serviceACMesinSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Service AC Mobil",
-          description: "Isi freon, ganti kompresor, cuci evaporator, flushing sistem AC",
+          description:
+            "Isi freon, ganti kompresor, cuci evaporator, flushing sistem AC",
         },
       },
       {
@@ -152,7 +162,8 @@ const serviceACMesinSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Tune Up Mesin",
-          description: "Carbon clean, ganti oli, ganti busi, pembersihan injektor",
+          description:
+            "Carbon clean, ganti oli, ganti busi, pembersihan injektor",
         },
       },
       {
@@ -160,7 +171,8 @@ const serviceACMesinSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Perbaikan Kelistrikan",
-          description: "Scan ECU, perbaikan kabel, ganti aki, perbaikan alternator",
+          description:
+            "Scan ECU, perbaikan kabel, ganti aki, perbaikan alternator",
         },
       },
     ],
@@ -172,7 +184,7 @@ const serviceACMesinSchema = {
     bestRating: "5",
     worstRating: "1",
   },
-}
+};
 
 // Breadcrumb Schema
 const breadcrumbSchema = {
@@ -192,7 +204,7 @@ const breadcrumbSchema = {
       item: "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
     },
   ],
-}
+};
 
 // FAQ Schema
 const faqSchema = {
@@ -232,25 +244,33 @@ const faqSchema = {
       },
     },
   ],
-}
+};
 
 export default function ServiceACMesinLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <>
       {children}
-      <Script id="schema-service-ac" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(serviceACMesinSchema)}
-      </Script>
-      <Script id="schema-breadcrumb" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
-      <Script id="schema-faq-service" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(faqSchema)}
-      </Script>
+      <script
+        id="schema-service-ac"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceACMesinSchema),
+        }}
+      />
+      <script
+        id="schema-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        id="schema-faq-service"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     </>
-  )
+  );
 }

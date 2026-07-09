@@ -1,19 +1,30 @@
-"use client"
+"use client";
 
-import { Phone, MapPin, Instagram, Mail, Clock, ArrowRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState, type FC, type ReactNode } from "react"
-import Head from "next/head"
+import {
+  Phone,
+  MapPin,
+  Instagram,
+  Mail,
+  Clock,
+  ArrowRight,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, type FC, type ReactNode } from "react";
 
 interface SocialButtonProps {
-  href: string
-  className?: string
-  children: ReactNode
-  ariaLabel: string
+  href: string;
+  className?: string;
+  children: ReactNode;
+  ariaLabel: string;
 }
 
-const SocialButton: FC<SocialButtonProps> = ({ href, className = "", children, ariaLabel }) => {
+const SocialButton: FC<SocialButtonProps> = ({
+  href,
+  className = "",
+  children,
+  ariaLabel,
+}) => {
   return (
     <Link
       href={href}
@@ -28,19 +39,25 @@ const SocialButton: FC<SocialButtonProps> = ({ href, className = "", children, a
         aria-hidden="true"
       />
     </Link>
-  )
-}
+  );
+};
 
 interface ContactCardProps {
-  icon: ReactNode
-  title: string
-  content: string
-  subContent?: string
-  className?: string
+  icon: ReactNode;
+  title: string;
+  content: string;
+  subContent?: string;
+  className?: string;
 }
 
-const ContactCard: FC<ContactCardProps> = ({ icon, title, content, subContent, className = "" }) => {
-  const [isHovered, setIsHovered] = useState(false)
+const ContactCard: FC<ContactCardProps> = ({
+  icon,
+  title,
+  content,
+  subContent,
+  className = "",
+}) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
@@ -62,49 +79,23 @@ const ContactCard: FC<ContactCardProps> = ({ icon, title, content, subContent, c
               {title}
             </h3>
             <p className="text-gray-600 font-medium">{content}</p>
-            {subContent && <p className="text-gray-500 text-sm mt-1">{subContent}</p>}
+            {subContent && (
+              <p className="text-gray-500 text-sm mt-1">{subContent}</p>
+            )}
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Contact: FC = () => {
-  const businessName = "Jakarta Int'l Denso Cirebon"
-  const businessDescription = "Layanan cuci mobil, service AC mobil, dan perawatan mobil terbaik di Cirebon"
-  const phoneNumber = "0819-647-333"
-  const address = "Jl. Garuda Raya No 2-4, Cirebon, Jawa Barat"
-
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "AutoRepair",
-    name: businessName,
-    description: businessDescription,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Jl. Garuda Raya No 2-4",
-      addressLocality: "Cirebon",
-      addressRegion: "Jawa Barat",
-      addressCountry: "ID",
-    },
-    telephone: phoneNumber,
-    openingHours: "Mo-Su 08:00-17:00",
-    image: "https://www.jakartaintldenso.com/images/owner.jpeg",
-    url: "https://www.jakartaintldenso.com",
-    sameAs: ["https://www.instagram.com/jakarta_intl_denso", "https://www.tiktok.com/@jakartaintldensocirebon"],
-  }
+  const businessName = "Jakarta Int'l Denso Cirebon";
+  const phoneNumber = "0819-647-333";
+  const address = "Jl. Garuda Raya No 2-4, Cirebon, Jawa Barat";
 
   return (
     <>
-      <Head>
-        <title>Hubungi {businessName} - Layanan Cuci Mobil & Service AC di Cirebon</title>
-        <meta
-          name="description"
-          content={`Hubungi ${businessName} untuk layanan cuci mobil dan service AC mobil terbaik di Cirebon. Buka setiap hari dari 08:00 - 17:00 WIB.`}
-        />
-        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-      </Head>
       <section
         id="contact"
         className="py-24 lg:py-32 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden"
@@ -116,13 +107,16 @@ const Contact: FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16 lg:mb-24">
-            <span className="text-blue-600 font-semibold mb-4 block uppercase tracking-wider">Kontak Kami</span>
+            <span className="text-blue-600 font-semibold mb-4 block uppercase tracking-wider">
+              Kontak Kami
+            </span>
             <h1 className="text-4xl lg:text-6xl font-black text-gray-900 mb-6 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-400 leading-normal">
               Hubungi {businessName}
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto mb-8 text-lg">
-              Kami siap melayani kebutuhan cuci mobil dan service AC mobil Anda di Cirebon. Jangan ragu untuk
-              menghubungi kami melalui berbagai channel yang tersedia.
+              Kami siap melayani kebutuhan cuci mobil dan service AC mobil Anda
+              di Cirebon. Jangan ragu untuk menghubungi kami melalui berbagai
+              channel yang tersedia.
             </p>
             <div className="h-1 w-24 bg-gradient-to-r from-blue-600 to-blue-400 mx-auto rounded-full" />
           </div>
@@ -225,8 +219,7 @@ const Contact: FC = () => {
         </div>
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Contact
-
+export default Contact;

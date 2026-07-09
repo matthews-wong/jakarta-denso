@@ -1,44 +1,32 @@
-"use client"
+"use client";
 
-import React, { useEffect, useState, Suspense } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Calendar } from "lucide-react"
-import { motion } from "framer-motion"
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
-import { Analytics } from "@vercel/analytics/react"
+import React, { Suspense } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Calendar } from "lucide-react";
+import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
-const WhatsAppButton = React.lazy(() => import("../components/WhatsAppButton"))
+const WhatsAppButton = React.lazy(() => import("../components/WhatsAppButton"));
 
-interface BlogPost {
-  slug: string
+interface BlogListItemView {
+  slug: string;
   frontmatter: {
-    title: string
-    date: string
-    excerpt: string
-    coverImage: string
-    category: string
-  }
+    title: string;
+    date: string;
+    excerpt: string;
+    coverImage: string;
+    category: string;
+  };
 }
 
-export default function BlogPageClient() {
-  const [posts, setPosts] = useState<BlogPost[]>([])
+interface BlogPageClientProps {
+  posts: BlogListItemView[];
+}
 
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const res = await fetch("/api/blog-posts")
-        if (!res.ok) throw new Error("Failed to fetch posts")
-        const data = await res.json()
-        setPosts(data)
-      } catch (error) {
-        console.error("Error fetching posts:", error)
-      }
-    }
-    fetchPosts()
-  }, [])
-
+export default function BlogPageClient({ posts }: BlogPageClientProps) {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
@@ -67,7 +55,9 @@ export default function BlogPageClient() {
                     <div className="relative bg-white rounded-3xl overflow-hidden">
                       <div className="aspect-[4/3] relative">
                         <Image
-                          src={post.frontmatter.coverImage || "/placeholder.svg"}
+                          src={
+                            post.frontmatter.coverImage || "/placeholder.svg"
+                          }
                           alt={post.frontmatter.title}
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -84,7 +74,9 @@ export default function BlogPageClient() {
                             <div className="flex items-center text-sm text-gray-300 mt-2">
                               <Calendar className="h-4 w-4 mr-2" />
                               <time dateTime={post.frontmatter.date}>
-                                {new Date(post.frontmatter.date).toLocaleDateString("id-ID", {
+                                {new Date(
+                                  post.frontmatter.date,
+                                ).toLocaleDateString("id-ID", {
                                   day: "numeric",
                                   month: "long",
                                   year: "numeric",
@@ -108,6 +100,5 @@ export default function BlogPageClient() {
       </Suspense>
       <Analytics />
     </div>
-  )
+  );
 }
-

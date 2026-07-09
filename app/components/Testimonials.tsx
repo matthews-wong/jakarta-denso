@@ -1,27 +1,26 @@
-"use client"
+"use client";
 
-import { Star } from "lucide-react"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Head from "next/head"
-import type React from "react"
+import { Star } from "lucide-react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import type React from "react";
 
 interface Review {
-  id: number
-  name: string
-  role?: string
-  rating: number
-  content: string
-  images: string[]
+  id: number;
+  name: string;
+  role?: string;
+  rating: number;
+  content: string;
+  images: string[];
 }
 
 interface ReviewStarsProps {
-  rating: number
+  rating: number;
 }
 
 interface ReviewImagesProps {
-  images: string[]
-  alt: string
+  images: string[];
+  alt: string;
 }
 
 const reviews: Review[] = [
@@ -82,21 +81,26 @@ const ReviewStars: React.FC<ReviewStarsProps> = ({ rating }) => {
         <Star
           key={index}
           size={16}
-          className={index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}
+          className={
+            index < rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+          }
           aria-hidden="true"
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 const ReviewImages: React.FC<ReviewImagesProps> = ({ images, alt }) => {
-  if (!images || images.length === 0) return null
+  if (!images || images.length === 0) return null;
 
   return (
     <div className="mt-4 grid grid-cols-3 gap-2">
       {images.map((image, index) => (
-        <div key={index} className="relative aspect-square rounded-lg overflow-hidden">
+        <div
+          key={index}
+          className="relative aspect-square rounded-lg overflow-hidden"
+        >
           <Image
             src={image || "/placeholder.svg"}
             alt={`${alt} - Image ${index + 1}`}
@@ -106,46 +110,12 @@ const ReviewImages: React.FC<ReviewImagesProps> = ({ images, alt }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default function Reviews() {
-  const businessName = "Jakarta Intl Denso Cirebon - Spesialis AC Mobil dan Cuci Mobil" 
-  const businessUrl = "https://www.jakartaintldenso.com"
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: businessName,
-    url: businessUrl,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.4",
-      reviewCount: reviews.length.toString(),
-    },
-    review: reviews.map((review) => ({
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: review.name,
-      },
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: review.rating.toString(),
-      },
-      reviewBody: review.content,
-    })),
-  }
-
   return (
     <>
-      <Head>
-        <title>Ulasan Pelanggan {businessName}</title>
-        <meta
-          name="description"
-          content={`Lihat ${reviews.length} ulasan pelanggan kami untuk layanan cuci mobil dan service AC mobil di Cirebon. Rating rata-rata 4.4/5 bintang.`}
-        />
-        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
-      </Head>
       <section id="ulasan" className="py-24 bg-white relative">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:32px_32px] opacity-30"></div>
 
@@ -177,15 +147,22 @@ export default function Reviews() {
                   <div className="flex justify-between items-start mb-4">
                     <div>
                       <h2 className="font-bold text-gray-900">{review.name}</h2>
-                      {review.role && <p className="text-sm text-gray-600">{review.role}</p>}
+                      {review.role && (
+                        <p className="text-sm text-gray-600">{review.role}</p>
+                      )}
                     </div>
                   </div>
 
                   <ReviewStars rating={review.rating} />
 
-                  <p className="mt-4 text-gray-700 leading-relaxed">{review.content}</p>
+                  <p className="mt-4 text-gray-700 leading-relaxed">
+                    {review.content}
+                  </p>
 
-                  <ReviewImages images={review.images} alt={`Review by ${review.name}`} />
+                  <ReviewImages
+                    images={review.images}
+                    alt={`Review by ${review.name}`}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -193,6 +170,5 @@ export default function Reviews() {
         </div>
       </section>
     </>
-  )
+  );
 }
-

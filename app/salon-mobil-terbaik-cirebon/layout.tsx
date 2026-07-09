@@ -1,6 +1,5 @@
-import type React from "react"
-import Script from "next/script"
-import type { Metadata, Viewport } from "next"
+import type React from "react";
+import type { Metadata, Viewport } from "next";
 
 // Advanced SEO metadata for Salon Mobil
 export const metadata: Metadata = {
@@ -25,7 +24,9 @@ export const metadata: Metadata = {
     "perawatan cat mobil cirebon",
     "jakarta intl denso salon mobil",
   ],
-  authors: [{ name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" }],
+  authors: [
+    { name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" },
+  ],
   creator: "Jakarta Int'l Denso",
   publisher: "Jakarta Int'l Denso",
   formatDetection: {
@@ -88,12 +89,12 @@ export const metadata: Metadata = {
     "geo.region": "ID-JB",
     "geo.placename": "Cirebon",
     "geo.position": "-6.732022;108.552316",
-    "ICBM": "-6.732022, 108.552316",
+    ICBM: "-6.732022, 108.552316",
     "revisit-after": "7 days",
-    "rating": "general",
-    "distribution": "global",
+    rating: "general",
+    distribution: "global",
   },
-}
+};
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -103,7 +104,7 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
   ],
-}
+};
 
 // Service Schema for Salon Mobil
 const salonMobilServiceSchema = {
@@ -111,8 +112,13 @@ const salonMobilServiceSchema = {
   "@type": "Service",
   "@id": "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon#service",
   name: "Salon Mobil Premium Cirebon",
-  alternateName: ["Auto Detailing Cirebon", "Coating Mobil Cirebon", "Poles Mobil Cirebon"],
-  description: "Layanan salon mobil premium dengan detailing eksterior & interior, nano ceramic coating, dan paint correction. Garansi coating 2 tahun.",
+  alternateName: [
+    "Auto Detailing Cirebon",
+    "Coating Mobil Cirebon",
+    "Poles Mobil Cirebon",
+  ],
+  description:
+    "Layanan salon mobil premium dengan detailing eksterior & interior, nano ceramic coating, dan paint correction. Garansi coating 2 tahun.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://jakartaintldenso.com/#organization",
@@ -144,7 +150,8 @@ const salonMobilServiceSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Detailing Eksterior",
-          description: "Paint correction, polishing, dan waxing eksterior mobil",
+          description:
+            "Paint correction, polishing, dan waxing eksterior mobil",
         },
       },
       {
@@ -152,7 +159,8 @@ const salonMobilServiceSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Nano Ceramic Coating",
-          description: "Perlindungan cat dengan coating nano ceramic bergaransi 2 tahun",
+          description:
+            "Perlindungan cat dengan coating nano ceramic bergaransi 2 tahun",
         },
       },
       {
@@ -160,7 +168,8 @@ const salonMobilServiceSchema = {
         itemOffered: {
           "@type": "Service",
           name: "Detailing Interior",
-          description: "Deep cleaning, leather treatment, dan fabric protection",
+          description:
+            "Deep cleaning, leather treatment, dan fabric protection",
         },
       },
     ],
@@ -172,7 +181,7 @@ const salonMobilServiceSchema = {
     bestRating: "5",
     worstRating: "1",
   },
-}
+};
 
 // Breadcrumb Schema
 const breadcrumbSchema = {
@@ -192,7 +201,7 @@ const breadcrumbSchema = {
       item: "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
     },
   ],
-}
+};
 
 // FAQ Schema
 const faqSchema = {
@@ -224,25 +233,33 @@ const faqSchema = {
       },
     },
   ],
-}
+};
 
 export default function SalonMobilLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <>
       {children}
-      <Script id="schema-salon-service" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(salonMobilServiceSchema)}
-      </Script>
-      <Script id="schema-breadcrumb" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(breadcrumbSchema)}
-      </Script>
-      <Script id="schema-faq-salon" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(faqSchema)}
-      </Script>
+      <script
+        id="schema-salon-service"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(salonMobilServiceSchema),
+        }}
+      />
+      <script
+        id="schema-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        id="schema-faq-salon"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     </>
-  )
+  );
 }
