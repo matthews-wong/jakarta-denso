@@ -8,13 +8,11 @@ export const metadata: Metadata = {
     absolute: "Salon Mobil Terbaik Cirebon | Jakarta Int'l Denso",
   },
   description:
-    "Salon mobil premium #1 di Cirebon sejak 2004. ✓ Nano Ceramic Coating ✓ Paint Correction ✓ Detailing Interior & Eksterior ✓ Garansi 2 Tahun ✓ Teknisi berpengalaman 20+ tahun. Booking sekarang!",
+    "Salon mobil premium #1 di Cirebon sejak 2004. ✓ Paint Correction ✓ Detailing Interior & Eksterior ✓ Poles & Waxing ✓ Teknisi berpengalaman 20+ tahun. Booking sekarang!",
   keywords: [
     "salon mobil cirebon",
     "salon mobil terbaik cirebon",
     "detailing mobil cirebon",
-    "coating mobil cirebon",
-    "nano ceramic coating cirebon",
     "paint correction cirebon",
     "poles mobil cirebon",
     "waxing mobil cirebon",
@@ -41,9 +39,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Salon Mobil Premium Cirebon | Detailing & Coating",
+    title: "Salon Mobil Premium Cirebon | Detailing Profesional",
     description:
-      "Salon mobil premium #1 di Cirebon. Nano ceramic coating, paint correction, detailing profesional. Garansi 2 tahun.",
+      "Salon mobil premium #1 di Cirebon. Paint correction, poles, waxing, detailing profesional.",
     url: "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon",
     siteName: "Jakarta Int'l Denso Cirebon",
     images: [
@@ -75,7 +73,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Salon Mobil Terbaik Cirebon",
     description:
-      "Salon mobil premium #1 di Cirebon sejak 2004. Detailing profesional, coating bergaransi 2 tahun.",
+      "Salon mobil premium #1 di Cirebon sejak 2004. Detailing profesional eksterior & interior.",
     images: ["https://jakartaintldenso.com/images/Salon-mobil.jpeg"],
     creator: "@jakartaintldenso",
     site: "@jakartaintldenso",
@@ -112,13 +110,9 @@ const salonMobilServiceSchema = {
   "@type": "Service",
   "@id": "https://jakartaintldenso.com/salon-mobil-terbaik-cirebon#service",
   name: "Salon Mobil Premium Cirebon",
-  alternateName: [
-    "Auto Detailing Cirebon",
-    "Coating Mobil Cirebon",
-    "Poles Mobil Cirebon",
-  ],
+  alternateName: ["Auto Detailing Cirebon", "Poles Mobil Cirebon"],
   description:
-    "Layanan salon mobil premium dengan detailing eksterior & interior, nano ceramic coating, dan paint correction. Garansi coating 2 tahun.",
+    "Layanan salon mobil premium dengan detailing eksterior & interior dan paint correction.",
   provider: {
     "@type": "LocalBusiness",
     "@id": "https://jakartaintldenso.com/#organization",
@@ -152,15 +146,6 @@ const salonMobilServiceSchema = {
           name: "Detailing Eksterior",
           description:
             "Paint correction, polishing, dan waxing eksterior mobil",
-        },
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Nano Ceramic Coating",
-          description:
-            "Perlindungan cat dengan coating nano ceramic bergaransi 2 tahun",
         },
       },
       {
@@ -210,10 +195,10 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Apa itu nano ceramic coating?",
+      name: "Apa saja layanan salon mobil yang tersedia?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Nano ceramic coating adalah lapisan pelindung berbasis keramik yang memberikan perlindungan jangka panjang pada cat mobil. Coating ini tahan gores ringan, tahan UV, anti air, dan memberikan kilau maksimal. Kami memberikan garansi 2 tahun untuk coating.",
+        text: "Layanan salon mobil kami meliputi detailing eksterior (paint correction, polishing, waxing, perawatan kaca) dan detailing interior (deep cleaning, leather treatment, odor removal, fabric protection) untuk hasil yang maksimal.",
       },
     },
     {
@@ -221,7 +206,7 @@ const faqSchema = {
       name: "Berapa lama proses salon mobil lengkap?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Proses salon mobil lengkap membutuhkan waktu 1-2 hari tergantung paket yang dipilih. Untuk detailing standar sekitar 4-6 jam, sedangkan paket coating memerlukan waktu 1-2 hari untuk hasil maksimal.",
+        text: "Proses salon mobil lengkap membutuhkan waktu 4-6 jam tergantung paket yang dipilih, mulai dari detailing standar hingga paket lengkap eksterior & interior.",
       },
     },
     {
@@ -229,7 +214,7 @@ const faqSchema = {
       name: "Apa keunggulan salon mobil di Jakarta Int'l Denso?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Keunggulan kami meliputi: (1) Teknisi profesional berpengalaman 20+ tahun, (2) Produk coating premium berkualitas, (3) Garansi coating 2 tahun, (4) Hasil detailing memuaskan, (5) Ruang kerja bersih dan tertutup.",
+        text: "Keunggulan kami meliputi: (1) Teknisi profesional berpengalaman 20+ tahun, (2) Produk detailing premium berkualitas, (3) Hasil detailing memuaskan, (4) Ruang kerja bersih dan tertutup.",
       },
     },
   ],

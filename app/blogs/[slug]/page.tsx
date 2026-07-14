@@ -64,6 +64,24 @@ const mdxComponents: MDXComponents = {
       {children}
     </blockquote>
   ),
+  table: ({ children }) => (
+    <div className="overflow-x-auto mb-6 rounded-xl border border-gray-200 shadow-sm">
+      <table className="w-full text-left border-collapse">{children}</table>
+    </div>
+  ),
+  thead: ({ children }) => (
+    <thead className="bg-blue-50 text-gray-900">{children}</thead>
+  ),
+  tbody: ({ children }) => (
+    <tbody className="divide-y divide-gray-100">{children}</tbody>
+  ),
+  tr: ({ children }) => <tr>{children}</tr>,
+  th: ({ children }) => (
+    <th className="px-4 py-3 font-semibold text-sm">{children}</th>
+  ),
+  td: ({ children }) => (
+    <td className="px-4 py-3 text-gray-600 text-base">{children}</td>
+  ),
   img: ({ src, alt }) => (
     <figure className="my-8">
       <Image

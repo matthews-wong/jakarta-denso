@@ -208,6 +208,14 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
+      name: "Dimana tempat cuci mobil terbaik di Cirebon?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Jakarta Int'l Denso Cirebon adalah tempat cuci mobil terpercaya di Jl. Garuda No 2, Cirebon, Jawa Barat, beroperasi sejak 2004 dengan fasilitas hidrolik modern, air PDAM berkualitas, dan rating 4.9/5 dari 160+ pelanggan. Buka setiap hari 08.00-17.00 WIB.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Berapa harga cuci mobil di Jakarta Int'l Denso Cirebon?",
       acceptedAnswer: {
         "@type": "Answer",

@@ -5,24 +5,28 @@ import type { Metadata, Viewport } from "next";
 export const metadata: Metadata = {
   metadataBase: new URL("https://jakartaintldenso.com"),
   title: {
-    absolute: "Service AC & Mesin Cirebon | Jakarta Int'l Denso",
+    absolute: "AC Mobil Cirebon | Service AC & Mesin | Jakarta Int'l Denso",
   },
   description:
-    "Bengkel service AC & mesin mobil #1 di Cirebon sejak 2004. ✓ Isi Freon ✓ Ganti Kompresor ✓ Tune Up Mesin ✓ Scanner ECU ✓ Garansi Service ✓ Teknisi bersertifikat. Konsultasi gratis!",
+    "Bengkel AC mobil Cirebon #1 sejak 2004. ✓ Isi Freon ✓ Ganti Kompresor ✓ Tune Up Mesin ✓ Scanner ECU ✓ Garansi Service ✓ Teknisi bersertifikat. Konsultasi gratis!",
   keywords: [
+    "ac mobil cirebon",
     "service ac mobil cirebon",
+    "servis ac mobil cirebon",
     "bengkel ac mobil cirebon",
+    "bengkel ac mobil terbaik cirebon",
+    "ac mobil tidak dingin cirebon",
     "service mesin mobil cirebon",
     "tune up mobil cirebon",
     "isi freon ac mobil cirebon",
     "ganti kompresor ac cirebon",
     "bengkel terbaik cirebon",
     "perbaikan ac mobil cirebon",
-    "ac mobil tidak dingin cirebon",
     "cuci evaporator cirebon",
     "scanner ecu mobil cirebon",
     "carbon clean cirebon",
     "jakarta intl denso service",
+    "jakarta intl denso ac mobil",
   ],
   authors: [
     { name: "Jakarta Int'l Denso", url: "https://jakartaintldenso.com" },
@@ -43,9 +47,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Service AC & Mesin Mobil Cirebon | Bengkel Spesialis",
+    title: "AC Mobil Cirebon | Bengkel Spesialis AC & Mesin",
     description:
-      "Bengkel service AC & mesin mobil #1 di Cirebon. Spesialis AC, tune up mesin, scanner ECU. Garansi service.",
+      "Bengkel AC mobil Cirebon #1. Spesialis service AC, tune up mesin, scanner ECU. Garansi service.",
     url: "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon",
     siteName: "Jakarta Int'l Denso Cirebon",
     images: [
@@ -75,9 +79,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Service AC & Mesin Mobil Cirebon",
+    title: "AC Mobil Cirebon | Jakarta Int'l Denso",
     description:
-      "Bengkel service AC & mesin mobil #1 di Cirebon sejak 2004. Teknisi bersertifikat, peralatan modern.",
+      "Bengkel AC mobil & mesin Cirebon #1 sejak 2004. Teknisi bersertifikat, peralatan modern.",
     images: ["https://jakartaintldenso.com/images/service-ac.jpeg"],
     creator: "@jakartaintldenso",
     site: "@jakartaintldenso",
@@ -116,6 +120,7 @@ const serviceACMesinSchema = {
     "https://jakartaintldenso.com/service-ac-dan-mesin-terbaik-cirebon#service",
   name: "Service AC & Mesin Mobil Cirebon",
   alternateName: [
+    "AC Mobil Cirebon",
     "Bengkel AC Mobil Cirebon",
     "Service Mesin Mobil Cirebon",
     "Tune Up Mobil Cirebon",
@@ -211,6 +216,14 @@ const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   mainEntity: [
+    {
+      "@type": "Question",
+      name: "Dimana bengkel AC mobil terbaik di Cirebon?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Jakarta Int'l Denso Cirebon adalah bengkel AC mobil terpercaya di Jl. Garuda No 2, Cirebon, Jawa Barat, beroperasi sejak 2004 dengan teknisi bersertifikat, peralatan diagnosa modern, dan rating 4.9/5 dari 160+ pelanggan. Buka setiap hari 08.00-17.00 WIB.",
+      },
+    },
     {
       "@type": "Question",
       name: "Berapa biaya service AC mobil?",
