@@ -186,7 +186,7 @@ const HomePage = async (): Promise<React.JSX.Element> => {
                     src="/images/AC-Mobil.jpeg"
                     alt="Teknisi memeriksa AC mobil pelanggan"
                     fill
-                    sizes="(min-width: 1024px) 700px, 100vw"
+                    sizes="(min-width: 1440px) 720px, (min-width: 1024px) 52vw, calc(100vw - 40px)"
                     className="object-cover"
                   />
                 </div>
@@ -247,7 +247,7 @@ const HomePage = async (): Promise<React.JSX.Element> => {
                       src={tile.image}
                       alt={tile.alt}
                       fill
-                      sizes="(min-width: 1024px) 260px, 100vw"
+                      sizes="(min-width: 1024px) 260px, (min-width: 640px) 44vw, calc(100vw - 40px)"
                       className="object-cover"
                     />
                   </div>
@@ -287,7 +287,7 @@ const HomePage = async (): Promise<React.JSX.Element> => {
                 src="/consulting.jpeg"
                 alt="Pelanggan berkonsultasi dengan teknisi Jakarta Int'l Denso"
                 fill
-                sizes="(min-width: 1024px) 600px, 100vw"
+                sizes="(min-width: 1440px) 640px, (min-width: 1024px) 45vw, calc(100vw - 40px)"
                 className="object-cover"
               />
             </div>

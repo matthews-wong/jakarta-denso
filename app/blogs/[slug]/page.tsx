@@ -14,6 +14,7 @@ import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import {
   BLOG_PATH,
   categoryById,
+  categoryPath,
   formatDateId,
   getAllSlugs,
   getPostBySlug,
@@ -107,6 +108,7 @@ const BlogPostPage = async ({
   const crumbs = [
     HOME_CRUMB,
     { name: `Blog`, path: BLOG_PATH },
+    { name: category.name, path: categoryPath(category.id) },
     { name: post.title, path: post.path },
   ];
   const weekdayHours = OPENING_HOURS[0];
@@ -131,6 +133,8 @@ const BlogPostPage = async ({
             dateModified: post.dateModified,
             section: post.categoryName,
             keywords: post.keywords,
+            wordCount: post.wordCount,
+            readingMinutes: post.readingMinutes,
           }),
         )}
       />
@@ -139,9 +143,12 @@ const BlogPostPage = async ({
         <div className="container-site grid gap-10 pb-[72px] pt-7 lg:grid-cols-[minmax(0,720px)_280px] lg:justify-center lg:gap-[88px] lg:pb-28 lg:pt-[52px]">
           <article>
             <Breadcrumbs crumbs={crumbs} />
-            <p className="mb-3.5 text-[15px] font-semibold text-brand">
+            <Link
+              href={post.categoryPath}
+              className="mb-3.5 inline-block text-[15px] font-semibold text-brand hover:underline"
+            >
               {post.categoryName}
-            </p>
+            </Link>
             <h1 className="text-[36px] font-semibold leading-[1.04] tracking-[-0.035em] lg:text-[54px]">
               {post.title}
             </h1>
@@ -166,8 +173,9 @@ const BlogPostPage = async ({
                 src={post.coverImage}
                 alt={post.title}
                 fill
-                priority
-                sizes="(min-width: 1024px) 720px, 100vw"
+                loading="eager"
+                fetchPriority="high"
+                sizes="(min-width: 1024px) 720px, calc(100vw - 40px)"
                 className="object-cover"
               />
             </figure>
@@ -213,6 +221,10 @@ const BlogPostPage = async ({
               Lihat juga{` `}
               <Link href={category.servicePath} className="text-link">
                 layanan {category.name.toLowerCase()}
+              </Link>
+              ,{` `}
+              <Link href={post.categoryPath} className="text-link">
+                artikel {category.name.toLowerCase()} lainnya
               </Link>
               {` `}dan{` `}
               <Link href="/harga" className="text-link">

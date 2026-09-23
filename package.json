@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint .",
     "seo:check": "node scripts/seo-check.mjs",
+    "seo:check:live": "node scripts/seo-check.mjs --live",
+    "indexnow": "node scripts/indexnow.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -21,31 +21,68 @@ export const FALLBACK_COVER = `/og/blog.jpg`;
 export const DEFAULT_AUTHOR = `Tim Jakarta Int'l Denso`;
 export const BLOG_PATH = `/blogs`;
 
+export const BLOG_CATEGORY_BASE = `${BLOG_PATH}/kategori`;
+
+/**
+ * The five topic hubs. Each one is also a crawlable page at
+ * `/blogs/kategori/{id}` with its own title, description and intro, so the
+ * copy here must stay unique per hub and true to what the workshop does.
+ */
 export const BLOG_CATEGORIES = [
   {
     id: `service-ac`,
     name: `Service AC`,
+    heading: `Artikel service AC mobil`,
+    metaTitle: `Tips Service AC Mobil Cirebon | Blog Jakarta Int'l Denso`,
+    metaDescription: `Artikel service AC mobil dari bengkel kami di Cirebon: penyebab AC tidak dingin, kapan isi freon, bau AC apek dan jadwal servis rutin.`,
+    intro: `Ditulis dari keluhan yang paling sering datang ke bengkel: AC tidak dingin, bau apek, freon cepat habis dan AC yang berisik.`,
     servicePath: `/service-ac-dan-mesin-terbaik-cirebon`,
+    serviceLabel: `Lihat layanan service AC`,
   },
   {
     id: `cuci-mobil`,
     name: `Cuci mobil`,
+    heading: `Artikel cuci mobil`,
+    metaTitle: `Tips & Harga Cuci Mobil Cirebon | Blog Jakarta Int'l Denso`,
+    metaDescription: `Artikel cuci mobil dari Jakarta Int'l Denso Cirebon: harga paket cuci terbaru, ciri tempat cuci yang baik dan apa saja yang dikerjakan saat cuci hidrolik.`,
+    intro: `Harga paket cuci, cara memilih tempat cuci dan apa yang dikerjakan di area cuci kami, dari hidrolik sampai bilas air PDAM.`,
     servicePath: `/cuci-mobil-terbaik-cirebon`,
+    serviceLabel: `Lihat layanan cuci mobil`,
   },
   {
     id: `salon-mobil`,
     name: `Salon mobil`,
+    heading: `Artikel salon mobil`,
+    metaTitle: `Tips & Biaya Salon Mobil Cirebon | Blog Jakarta Int'l Denso`,
+    metaDescription: `Artikel salon mobil dari Jakarta Int'l Denso Cirebon: rincian biaya salon, perawatan interior, poles body dan jamur kaca, serta kapan mobil perlu disalon.`,
+    intro: `Rincian biaya salon, perawatan interior dan poles body, serta tanda mobil sudah perlu disalon setelah terkena debu Pantura.`,
     servicePath: `/salon-mobil-terbaik-cirebon`,
+    serviceLabel: `Lihat layanan salon mobil`,
   },
   {
     id: `mesin-oli`,
     name: `Mesin dan oli`,
+    heading: `Artikel mesin dan oli`,
+    metaTitle: `Tips Mesin, Oli & Radiator Mobil | Blog Jakarta Int'l Denso`,
+    metaDescription: `Artikel perawatan mesin dari Jakarta Int'l Denso Cirebon: memilih oli mobil yang tepat, bahaya radiator kurang air dan kapan mesin diesel perlu purging.`,
+    intro: `Memilih oli yang tepat, menjaga radiator tetap terisi dan kapan mesin diesel perlu purging.`,
     servicePath: `/service-ac-dan-mesin-terbaik-cirebon`,
+    serviceLabel: `Lihat layanan service mesin`,
   },
-  { id: `tips-info`, name: `Tips dan info`, servicePath: `/harga` },
+  {
+    id: `tips-info`,
+    name: `Tips dan info`,
+    heading: `Tips perawatan dan info bengkel`,
+    metaTitle: `Tips Rawat Mobil & Info Bengkel | Blog Jakarta Int'l Denso`,
+    metaDescription: `Tips merawat mobil untuk jalanan Cirebon dan Pantura, plus info bengkel kami: alamat, jam buka dan rute dari Kuningan, Indramayu dan Majalengka.`,
+    intro: `Merawat mobil untuk musim hujan, kemarau dan mudik lewat Pantura, plus alamat, jam buka dan rute ke bengkel kami.`,
+    servicePath: `/harga`,
+    serviceLabel: `Lihat daftar harga`,
+  },
 ] as const;
 
-export type BlogCategoryId = (typeof BLOG_CATEGORIES)[number][`id`];
+export type BlogCategory = (typeof BLOG_CATEGORIES)[number];
+export type BlogCategoryId = BlogCategory[`id`];
 
 const CATEGORY_RULES: ReadonlyArray<{ pattern: RegExp; id: BlogCategoryId }> = [
   { pattern: /\bAC\b/, id: `service-ac` },
@@ -54,6 +91,7 @@ const CATEGORY_RULES: ReadonlyArray<{ pattern: RegExp; id: BlogCategoryId }> = [
   { pattern: /mesin|oli|diesel|radiator/i, id: `mesin-oli` },
 ];
 const LOCAL_GUIDE_PATTERN = /lokasi|automotif/i;
+const PROMOTION_PATTERN = /promo/i;
 const LOOSE_DATE_PATTERN = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
 
 /** Pads "2025-02-6" to "2025-02-06" and rejects anything that is not a real date. */
@@ -99,9 +137,13 @@ export interface BlogPostSummary {
   coverImage: string;
   categoryId: BlogCategoryId;
   categoryName: string;
+  categoryPath: string;
   datePublished: string;
   dateModified: string;
   readingMinutes: number;
+  wordCount: number;
+  /** Time-limited offer; its prices may differ from the current price list. */
+  isPromotion: boolean;
   author: string;
   keywords: readonly string[];
 }
@@ -112,13 +154,17 @@ export interface BlogPost extends BlogPostSummary {
   headings: readonly Heading[];
 }
 
-export const categoryById = (
-  id: BlogCategoryId,
-): (typeof BLOG_CATEGORIES)[number] => {
+export const categoryById = (id: BlogCategoryId): BlogCategory => {
   const category = BLOG_CATEGORIES.find((entry) => entry.id === id);
   if (!category) throw new Error(`Unknown blog category: ${id}`);
   return category;
 };
+
+export const categoryPath = (id: BlogCategoryId): string =>
+  `${BLOG_CATEGORY_BASE}/${id}`;
+
+export const isBlogCategoryId = (value: string): value is BlogCategoryId =>
+  BLOG_CATEGORIES.some((category) => category.id === value);
 
 /** Maps a post's free-text category (and title) onto one of the five hubs. */
 export const classifyCategory = (
@@ -158,8 +204,11 @@ export const extractHeadings = (content: string): Heading[] =>
       return { id: slugify(text), text };
     });
 
-const countReadingMinutes = (content: string): number =>
-  Math.max(1, Math.ceil(content.trim().split(/\s+/).length / WORDS_PER_MINUTE));
+const countWords = (content: string): number =>
+  content.trim().split(/\s+/).length;
+
+const countReadingMinutes = (wordCount: number): number =>
+  Math.max(1, Math.ceil(wordCount / WORDS_PER_MINUTE));
 
 const sanitizeSlug = (slug: string): string =>
   slug.replace(/[^a-zA-Z0-9-]/g, ``);
@@ -179,6 +228,7 @@ const readPost = async (slug: string): Promise<BlogPost | null> => {
       frontmatter.title,
     );
     const body = stripLeadingH1(content);
+    const wordCount = countWords(body);
     return {
       slug: safeSlug,
       path: `${BLOG_PATH}/${safeSlug}`,
@@ -189,10 +239,13 @@ const readPost = async (slug: string): Promise<BlogPost | null> => {
       coverImage: frontmatter.coverImage,
       categoryId,
       categoryName: categoryById(categoryId).name,
+      categoryPath: categoryPath(categoryId),
       datePublished: frontmatter.date,
       dateModified:
         frontmatter.updated ?? frontmatter.lastModified ?? frontmatter.date,
-      readingMinutes: countReadingMinutes(body),
+      readingMinutes: countReadingMinutes(wordCount),
+      wordCount,
+      isPromotion: PROMOTION_PATTERN.test(frontmatter.category),
       author: frontmatter.author,
       keywords: frontmatter.keywords,
       source: body,
@@ -245,6 +298,43 @@ export const getPostBySlug = async (slug: string): Promise<BlogPost | null> => {
   const posts = await loadAllPosts();
   return posts.find((post) => post.slug === sanitizeSlug(slug)) ?? null;
 };
+
+/** Posts in one hub, newest first. */
+export const getPostsByCategory = async (
+  id: BlogCategoryId,
+): Promise<BlogPostSummary[]> =>
+  (await getAllPosts()).filter((post) => post.categoryId === id);
+
+/** Hubs that have at least one post (empty hubs get no page). */
+export const getPopulatedCategories = async (): Promise<BlogCategory[]> => {
+  const posts = await getAllPosts();
+  return BLOG_CATEGORIES.filter((category) =>
+    posts.some((post) => post.categoryId === category.id),
+  );
+};
+
+export interface CategoryLink {
+  id: BlogCategoryId;
+  name: string;
+  path: string;
+}
+
+/** Tabs for the blog index and hub pages: one link per populated hub. */
+export const getCategoryLinks = async (): Promise<CategoryLink[]> =>
+  (await getPopulatedCategories()).map(({ id, name }) => ({
+    id,
+    name,
+    path: categoryPath(id),
+  }));
+
+/** Most recent `dateModified` among the given posts (for sitemap lastmod). */
+export const latestModified = (
+  posts: readonly BlogPostSummary[],
+): string | undefined =>
+  posts
+    .map((post) => post.dateModified)
+    .sort()
+    .at(-1);
 
 /** Same-category posts first, then the newest others. */
 export const getRelatedPosts = async (

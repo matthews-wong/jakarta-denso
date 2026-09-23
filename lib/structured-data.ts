@@ -7,8 +7,11 @@ import {
   LANGUAGE,
   OPENING_HOURS,
   PAYMENT_METHODS,
+  PHONE_LANDLINE,
   PHONE_WHATSAPP,
+  SERVICE_TOPICS,
   SITE_NAME,
+  SITE_SHORT_NAME,
   SITE_URL,
   SOCIAL_PROFILES,
   absoluteUrl,
@@ -72,10 +75,17 @@ export const businessNode = (): JsonLdNode => ({
   "@type": [`AutoRepair`, `CarWash`],
   "@id": BUSINESS_ID,
   name: SITE_NAME,
+  alternateName: SITE_SHORT_NAME,
   url: SITE_URL,
   logo: { "@type": `ImageObject`, url: absoluteUrl(LOGO_PATH) },
   image: absoluteUrl(DEFAULT_IMAGE_PATH),
   telephone: PHONE_WHATSAPP,
+  contactPoint: [PHONE_WHATSAPP, PHONE_LANDLINE].map((telephone) => ({
+    "@type": `ContactPoint`,
+    telephone,
+    contactType: `customer service`,
+    availableLanguage: [`id`],
+  })),
   priceRange: PRICE_RANGE,
   currenciesAccepted: `IDR`,
   paymentAccepted: PAYMENT_METHODS,
@@ -101,6 +111,7 @@ export const businessNode = (): JsonLdNode => ({
     closes: hours.closes,
   })),
   areaServed: cityNodes(),
+  knowsAbout: [...SERVICE_TOPICS],
   sameAs: [...SOCIAL_PROFILES],
 });
 
@@ -246,6 +257,8 @@ export interface BlogPostingNodeInput {
   dateModified: string;
   section: string;
   keywords: readonly string[];
+  wordCount: number;
+  readingMinutes: number;
 }
 
 export const blogPostingNode = (input: BlogPostingNodeInput): JsonLdNode => ({
@@ -259,6 +272,8 @@ export const blogPostingNode = (input: BlogPostingNodeInput): JsonLdNode => ({
   inLanguage: LANGUAGE,
   articleSection: input.section,
   keywords: input.keywords.join(`, `),
+  wordCount: input.wordCount,
+  timeRequired: `PT${input.readingMinutes}M`,
   author: ref(BUSINESS_ID),
   publisher: ref(BUSINESS_ID),
   mainEntityOfPage: ref(pageId(input.path)),

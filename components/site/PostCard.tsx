@@ -24,7 +24,7 @@ export const PostCard = ({
             src={post.coverImage}
             alt=""
             fill
-            sizes="(min-width: 1024px) 400px, 100vw"
+            sizes="(min-width: 1024px) 400px, calc(100vw - 40px)"
             className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </div>

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Breadcrumbs } from "@/components/site/Breadcrumbs";
 import { FaqList } from "@/components/site/FaqList";
 import { JsonLd } from "@/components/site/JsonLd";
@@ -10,7 +12,7 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { VisitSection } from "@/components/site/VisitSection";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
-import { getPostsBySlugs } from "@/lib/blog";
+import { categoryById, categoryPath, getPostsBySlugs } from "@/lib/blog";
 import { HOME_CRUMB } from "@/lib/navigation";
 import { getPriceCategory, PRICES_UPDATED } from "@/lib/prices";
 import type { ServiceConfig } from "@/lib/services";
@@ -166,7 +168,16 @@ export const ServicePage = async ({
         <section aria-labelledby="related-heading" className="section">
           <div className="container-site">
             <SectionHeading id="related-heading" title="Baca juga">
-              <p>Panduan dan tips dari bengkel kami di Cirebon.</p>
+              <p>
+                Panduan dan tips dari bengkel kami di Cirebon.{` `}
+                <Link
+                  href={categoryPath(service.blogCategoryId)}
+                  className="text-link"
+                >
+                  Semua artikel{` `}
+                  {categoryById(service.blogCategoryId).name.toLowerCase()}
+                </Link>
+              </p>
             </SectionHeading>
             <div className="grid gap-8 lg:grid-cols-3">
               {related.map((post) => (

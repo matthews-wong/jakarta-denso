@@ -45,7 +45,7 @@ export const SiteHeader = ({
           width={40}
           height={40}
           className="h-9 w-9 lg:h-10 lg:w-10"
-          priority
+          loading="eager"
         />
         {SITE_SHORT_NAME}
       </Link>

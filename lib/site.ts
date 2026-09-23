@@ -18,6 +18,8 @@ export const SITE_URL = (
 
 export const SITE_NAME = `Jakarta Int'l Denso Cirebon`;
 export const SITE_SHORT_NAME = `Jakarta Int'l Denso`;
+/** Navy from the logo; browser UI colour (viewport + web manifest). */
+export const THEME_COLOR = `#081733`;
 export const SITE_TAGLINE = `Bengkel AC, cuci dan salon mobil di Cirebon sejak 2004`;
 export const FOUNDING_YEAR = 2004;
 export const LOCALE = `id_ID`;
@@ -59,6 +61,17 @@ export const AREA_SERVED = [
   `Kuningan`,
   `Indramayu`,
   `Majalengka`,
+] as const;
+
+/** What the workshop actually does, as plain topics (schema.org `knowsAbout`). */
+export const SERVICE_TOPICS = [
+  `Service AC mobil`,
+  `Ganti freon AC mobil`,
+  `Cuci mobil`,
+  `Salon mobil`,
+  `Salon interior mobil`,
+  `Poles body mobil`,
+  `Purging mesin diesel`,
 ] as const;
 
 /**

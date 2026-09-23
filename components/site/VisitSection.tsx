@@ -41,7 +41,7 @@ export const VisitSection = (): React.JSX.Element => (
           src="/images/lokasi-kami.jpeg"
           alt="Tampak depan Jakarta Int'l Denso di Jl. Garuda No. 2 Cirebon"
           fill
-          sizes="(min-width: 1024px) 600px, 100vw"
+          sizes="(min-width: 1024px) 600px, calc(100vw - 40px)"
           className="object-cover"
         />
       </div>

@@ -2,15 +2,23 @@
 /**
  * SEO regression check for the production build.
  *
- * Run after `next build` (npm run seo:check). Parses every prerendered page in
- * .next/server/app and fails (exit 1) on the problems the 2026-09 audit found,
- * so they cannot creep back in:
+ * Two sources, same checks:
+ *   npm run seo:check        after `next build`: every prerendered page in
+ *                            .next/server/app
+ *   npm run seo:check:live   the deployed site: every URL in its sitemap,
+ *                            fetched over HTTP (base: SEO_CHECK_BASE_URL or
+ *                            SITE_URL), plus host/redirect checks
+ *
+ * Fails (exit 1) on the problems the 2026-09 audit found, so they cannot
+ * creep back in:
  *   - canonical / og:url not equal to the page's own URL on SITE_URL
  *   - not exactly one <h1>, or content hidden behind a streaming loader
  *   - meta keywords, bogus verification tags, self-serving review markup
  *   - more than one business entity or FAQPage per page
  *   - FAQPage questions/answers that are not visible on the page
- *   - duplicate titles, sitemap/robots URLs on the wrong host
+ *   - duplicate titles, sitemap/robots/llms.txt URLs on the wrong host
+ *   - (live) pages that are not a direct 200, noindex headers, apex host
+ *     not redirecting to SITE_URL
  * Warnings (titles > 60, descriptions outside 110–160, thin pages) don't fail.
  */
 import { readdir, readFile } from "node:fs/promises";
@@ -20,6 +28,12 @@ const SITE_URL = (
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.jakartaintldenso.com"
 ).replace(/\/$/, "");
 const APP_DIR = path.join(process.cwd(), ".next", "server", "app");
+const IS_LIVE = process.argv.includes("--live");
+const LIVE_BASE_URL = (process.env.SEO_CHECK_BASE_URL ?? SITE_URL).replace(
+  /\/$/,
+  "",
+);
+const LIVE_CONCURRENCY = 6;
 const SKIP_FILES = new Set(["_global-error.html", "_not-found.html"]);
 const TITLE_MAX = 60;
 const DESCRIPTION_MIN = 110;
@@ -190,9 +204,7 @@ const checkStructuredData = ({ nodes, text, fail, warn }) => {
   }
 };
 
-const checkPage = async (file) => {
-  const route = routeOf(file);
-  const html = await readFile(file, "utf8");
+const checkPage = ({ route, html }) => {
   const head = html.split("</head>")[0];
   const body = html.slice(html.indexOf("<body"));
   const expectedUrl = `${SITE_URL}${route === "/" ? "" : route}`;
@@ -205,48 +217,63 @@ const checkPage = async (file) => {
   return { route, title };
 };
 
-const checkSitemapAndRobots = async (routes) => {
-  const sitemap = await readFile(
-    path.join(APP_DIR, "sitemap.xml.body"),
-    "utf8",
-  );
-  const locs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(
-    (match) => match[1],
-  );
+const sitemapLocs = (sitemap) =>
+  [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+
+const routeOfUrl = (url) => withoutSlash(url.slice(SITE_URL.length)) || "/";
+
+const checkSitemap = ({ sitemap, routes, requireBuiltPages }) => {
+  const locs = sitemapLocs(sitemap);
   for (const loc of locs) {
     if (!loc.startsWith(SITE_URL))
       errors.push(`sitemap: ${loc} is not on ${SITE_URL}`);
-    const route = withoutSlash(loc.slice(SITE_URL.length)) || "/";
-    if (!routes.has(route)) errors.push(`sitemap: ${loc} has no built page`);
+    if (requireBuiltPages && !routes.has(routeOfUrl(loc)))
+      errors.push(`sitemap: ${loc} has no built page`);
   }
+  const listed = new Set(locs.map(routeOfUrl));
   for (const route of routes) {
-    if (
-      !locs.includes(`${SITE_URL}${route === "/" ? "/" : route}`) &&
-      !locs.includes(`${SITE_URL}${route}`)
-    ) {
-      warnings.push(`sitemap: ${route} is not listed`);
-    }
+    if (!listed.has(route)) warnings.push(`sitemap: ${route} is not listed`);
   }
   if (/<changefreq>|<priority>/.test(sitemap))
     warnings.push("sitemap: changefreq/priority present (ignored by Google)");
+  return locs.length;
+};
 
-  const robots = await readFile(path.join(APP_DIR, "robots.txt.body"), "utf8");
+const checkRobots = (robots) => {
   if (!robots.includes(`Sitemap: ${SITE_URL}/sitemap.xml`))
     errors.push(`robots.txt: sitemap is not ${SITE_URL}/sitemap.xml`);
   if (/Disallow:\s*\/\s*$/m.test(robots))
     errors.push("robots.txt blocks the whole site");
-  return locs.length;
 };
 
-const main = async () => {
-  const files = (await walk(APP_DIR)).filter(
-    (file) => !SKIP_FILES.has(path.basename(file)),
+/** llms.txt must exist and only point at canonical, indexable pages. */
+const checkLlmsTxt = ({ llms, routes }) => {
+  if (!llms?.startsWith("# ")) {
+    errors.push("llms.txt: missing or does not start with an H1");
+    return;
+  }
+  const urls = [...llms.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map(
+    (match) => match[1],
   );
-  const pages = await Promise.all(files.map(checkPage));
-  const sitemapCount = await checkSitemapAndRobots(
-    new Set(pages.map((page) => page.route)),
-  );
+  for (const url of urls) {
+    if (!url.startsWith(SITE_URL))
+      errors.push(`llms.txt: ${url} is not on ${SITE_URL}`);
+    else if (!routes.has(routeOfUrl(url)))
+      errors.push(`llms.txt: ${url} is not a page in the sitemap`);
+  }
+};
 
+const checkManifest = (manifest) => {
+  try {
+    const data = JSON.parse(manifest ?? "");
+    if (!data.name || !data.icons?.length)
+      errors.push("manifest: missing name or icons");
+  } catch {
+    errors.push("manifest.webmanifest missing or not valid JSON");
+  }
+};
+
+const checkTitles = (pages) => {
   const titles = new Map();
   for (const page of pages)
     titles.set(page.title, [...(titles.get(page.title) ?? []), page.route]);
@@ -254,9 +281,115 @@ const main = async () => {
     if (owners.length > 1)
       errors.push(`duplicate title "${title}" on ${owners.join(", ")}`);
   }
+};
+
+/* ---------- sources ---------- */
+
+const readBody = (name) =>
+  readFile(path.join(APP_DIR, `${name}.body`), "utf8").catch(() => undefined);
+
+const loadBuild = async () => {
+  const files = (await walk(APP_DIR)).filter(
+    (file) => !SKIP_FILES.has(path.basename(file)),
+  );
+  const pages = await Promise.all(
+    files.map(async (file) => ({
+      route: routeOf(file),
+      html: await readFile(file, "utf8"),
+    })),
+  );
+  const [sitemap, robots, llms, manifest] = await Promise.all(
+    ["sitemap.xml", "robots.txt", "llms.txt", "manifest.webmanifest"].map(
+      readBody,
+    ),
+  );
+  return { pages, sitemap, robots, llms, manifest };
+};
+
+const fetchText = async (url) => {
+  const response = await fetch(url, { redirect: "manual" });
+  return { response, text: await response.text() };
+};
+
+/** Runs `task` over `items` with at most `limit` in flight. */
+const mapLimited = async (items, limit, task) => {
+  const results = new Array(items.length);
+  let next = 0;
+  const worker = async () => {
+    while (next < items.length) {
+      const index = next;
+      next += 1;
+      results[index] = await task(items[index]);
+    }
+  };
+  await Promise.all(Array.from({ length: limit }, worker));
+  return results;
+};
+
+const liveUrl = (route) => `${LIVE_BASE_URL}${route === "/" ? "/" : route}`;
+
+/** The apex (and any non-canonical host) must redirect to SITE_URL. */
+const checkCanonicalHost = async () => {
+  const canonical = new URL(SITE_URL);
+  if (!canonical.hostname.startsWith("www.")) return;
+  const apex = `${canonical.protocol}//${canonical.hostname.slice(4)}/`;
+  try {
+    const { response } = await fetchText(apex);
+    const location = response.headers.get("location") ?? "";
+    if (![301, 308].includes(response.status) || !location.startsWith(SITE_URL))
+      errors.push(
+        `host: ${apex} answers ${response.status} ${location} (expected a permanent redirect to ${SITE_URL})`,
+      );
+  } catch (error) {
+    warnings.push(`host: could not reach ${apex} (${error.message})`);
+  }
+};
+
+const loadLive = async () => {
+  const { text: sitemap } = await fetchText(`${LIVE_BASE_URL}/sitemap.xml`);
+  const routes = sitemapLocs(sitemap).map(routeOfUrl);
+  const fetched = await mapLimited(routes, LIVE_CONCURRENCY, async (route) => {
+    const { response, text } = await fetchText(liveUrl(route));
+    if (response.status !== 200)
+      errors.push(`${route}: HTTP ${response.status} (expected 200)`);
+    if (/noindex/i.test(response.headers.get("x-robots-tag") ?? ""))
+      errors.push(`${route}: X-Robots-Tag noindex`);
+    return response.status === 200 ? { route, html: text } : null;
+  });
+  const [robots, llms, manifest] = await Promise.all(
+    ["/robots.txt", "/llms.txt", "/manifest.webmanifest"].map(
+      async (file) => (await fetchText(`${LIVE_BASE_URL}${file}`)).text,
+    ),
+  );
+  await checkCanonicalHost();
+  return {
+    pages: fetched.filter(Boolean),
+    sitemap,
+    robots,
+    llms,
+    manifest,
+  };
+};
+
+const main = async () => {
+  const source = IS_LIVE ? await loadLive() : await loadBuild();
+  const pages = source.pages.map(checkPage);
+  const routes = new Set(pages.map((page) => page.route));
+
+  const sitemapCount = checkSitemap({
+    sitemap: source.sitemap ?? "",
+    routes,
+    requireBuiltPages: !IS_LIVE,
+  });
+  checkRobots(source.robots ?? "");
+  checkLlmsTxt({ llms: source.llms, routes });
+  checkManifest(source.manifest);
+  checkTitles(pages);
 
   console.log(
-    `Checked ${pages.length} pages and ${sitemapCount} sitemap URLs on ${SITE_URL}.`,
+    `Checked ${pages.length} pages and ${sitemapCount} sitemap URLs on ${
+      IS_LIVE ? LIVE_BASE_URL : "the build"
+    } (canonical ${SITE_URL}).`,
   );
   if (warnings.length > 0)
     console.log(`\n${warnings.length} warning(s):\n  ${warnings.join("\n  ")}`);

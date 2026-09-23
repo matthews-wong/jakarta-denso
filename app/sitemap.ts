@@ -1,6 +1,13 @@
 import type { MetadataRoute } from "next";
 
-import { getAllPosts } from "@/lib/blog";
+import {
+  BLOG_PATH,
+  categoryPath,
+  getAllPosts,
+  getPopulatedCategories,
+  latestModified,
+  type BlogPostSummary,
+} from "@/lib/blog";
 import { GALLERY_IMAGES } from "@/lib/gallery";
 import { NAV_ITEMS } from "@/lib/navigation";
 import { PRICES_UPDATED } from "@/lib/prices";
@@ -26,13 +33,25 @@ const PAGE_IMAGES: Record<string, readonly string[]> = {
   "/kontak-kami": [`/images/lokasi-kami.jpeg`],
 };
 
+/** Listing pages change when a post in them changes, not when templates do. */
+const listingLastModified = (posts: readonly BlogPostSummary[]): string =>
+  latestModified(posts) ?? PAGES_UPDATED;
+
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const posts = await getAllPosts();
+  const [posts, categories] = await Promise.all([
+    getAllPosts(),
+    getPopulatedCategories(),
+  ]);
   const staticPaths = [`/`, ...NAV_ITEMS.map((item) => item.href)];
+  const lastModifiedFor = (path: string): string => {
+    if (path === `/harga`) return PRICES_UPDATED;
+    if (path === BLOG_PATH) return listingLastModified(posts);
+    return PAGES_UPDATED;
+  };
 
   const staticEntries: MetadataRoute.Sitemap = staticPaths.map((path) => ({
     url: absoluteUrl(path),
-    lastModified: path === `/harga` ? PRICES_UPDATED : PAGES_UPDATED,
+    lastModified: lastModifiedFor(path),
     ...(PAGE_IMAGES[path]
       ? { images: PAGE_IMAGES[path].map((src) => absoluteUrl(src)) }
       : {}),
@@ -44,7 +63,16 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     images: [absoluteUrl(post.coverImage)],
   }));
 
-  return [...staticEntries, ...postEntries];
+  const categoryEntries: MetadataRoute.Sitemap = categories.map(
+    (category) => ({
+      url: absoluteUrl(categoryPath(category.id)),
+      lastModified: listingLastModified(
+        posts.filter((post) => post.categoryId === category.id),
+      ),
+    }),
+  );
+
+  return [...staticEntries, ...categoryEntries, ...postEntries];
 };
 
 export default sitemap;

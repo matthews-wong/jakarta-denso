@@ -19,9 +19,12 @@ export default {
           DEFAULT: "#2449B8",
           soft: "#E7EDFB",
           red: "#D6392F",
+          // Text-strength red for small labels on red-soft (WCAG AA 5.4:1).
+          "red-ink": "#B42D26",
           "red-soft": "#FCEAE8",
         },
-        wa: { DEFAULT: "#0E8F47", dark: "#0B7A3C", soft: "#E2F5E9" },
+        // WhatsApp green darkened until white text passes WCAG AA (5.0:1).
+        wa: { DEFAULT: "#0A803F", dark: "#086B34", soft: "#E2F5E9" },
       },
       fontFamily: {
         sans: [

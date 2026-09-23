@@ -94,6 +94,6 @@
   }
 
   .tag-popular {
-    @apply ml-2 inline-block rounded-md bg-brand-red-soft px-2 align-[1px] text-[12.5px] font-semibold text-brand-red;
+    @apply ml-2 inline-block rounded-md bg-brand-red-soft px-2 align-[1px] text-[12.5px] font-semibold text-brand-red-ink;
   }
 }

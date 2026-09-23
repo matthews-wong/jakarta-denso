@@ -1,3 +1,4 @@
+import type { BlogCategoryId } from "@/lib/blog";
 import type { NavKey } from "@/lib/navigation";
 import {
   PRICE_ON_ASSESSMENT,
@@ -46,6 +47,8 @@ export interface ServiceConfig {
   steps: readonly ServiceStep[];
   faqs: readonly FaqEntry[];
   relatedSlugs: readonly string[];
+  /** Blog hub linked from the "Baca juga" section. */
+  blogCategoryId: BlogCategoryId;
 }
 
 const price = (id: PriceCategoryId, name: string): string =>
@@ -60,6 +63,7 @@ export const OPENING_HOURS_ANSWER = `Ya. ${hoursSentence()}. Hari libur nasional
 
 export const CUCI_SERVICE: ServiceConfig = {
   navKey: `cuci`,
+  blogCategoryId: `cuci-mobil`,
   path: `/cuci-mobil-terbaik-cirebon`,
   name: `Cuci mobil`,
   serviceType: `Car wash`,
@@ -111,6 +115,7 @@ export const CUCI_SERVICE: ServiceConfig = {
 
 export const SALON_SERVICE: ServiceConfig = {
   navKey: `salon`,
+  blogCategoryId: `salon-mobil`,
   path: `/salon-mobil-terbaik-cirebon`,
   name: `Salon mobil`,
   serviceType: `Car detailing`,
@@ -165,6 +170,7 @@ export const SALON_SERVICE: ServiceConfig = {
 
 export const AC_SERVICE: ServiceConfig = {
   navKey: `ac`,
+  blogCategoryId: `service-ac`,
   path: `/service-ac-dan-mesin-terbaik-cirebon`,
   name: `Service AC dan mesin`,
   serviceType: `Car air conditioning repair`,

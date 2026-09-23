@@ -1,15 +1,10 @@
 import type { Metadata } from "next";
 
-import { BlogIndex, type BlogIndexPost } from "@/components/site/BlogIndex";
+import { BlogIndex } from "@/components/site/BlogIndex";
 import { JsonLd } from "@/components/site/JsonLd";
 import { PageHeader } from "@/components/site/PageHeader";
 import { SiteHeader } from "@/components/site/SiteHeader";
-import {
-  BLOG_CATEGORIES,
-  formatDateId,
-  getAllPosts,
-  readingLabel,
-} from "@/lib/blog";
+import { getAllPosts, getCategoryLinks } from "@/lib/blog";
 import { HOME_CRUMB } from "@/lib/navigation";
 import { BLOG_META } from "@/lib/page-meta";
 import { pageMetadata } from "@/lib/seo";
@@ -31,22 +26,10 @@ export const metadata: Metadata = pageMetadata({
 const CRUMBS = [HOME_CRUMB, { name: `Blog`, path: BLOG_META.path }];
 
 const BlogPage = async (): Promise<React.JSX.Element> => {
-  const posts = await getAllPosts();
-  const indexPosts: BlogIndexPost[] = posts.map((post) => ({
-    slug: post.slug,
-    path: post.path,
-    title: post.title,
-    excerpt: post.excerpt,
-    coverImage: post.coverImage,
-    categoryId: post.categoryId,
-    categoryName: post.categoryName,
-    datePublished: post.datePublished,
-    dateLabel: formatDateId(post.datePublished),
-    readingLabel: readingLabel(post.readingMinutes),
-  }));
-  const categories = BLOG_CATEGORIES.filter((category) =>
-    posts.some((post) => post.categoryId === category.id),
-  );
+  const [posts, categories] = await Promise.all([
+    getAllPosts(),
+    getCategoryLinks(),
+  ]);
 
   return (
     <>
@@ -73,10 +56,7 @@ const BlogPage = async (): Promise<React.JSX.Element> => {
           title="Blog perawatan mobil"
           lead="Dari bengkel kami: kapan AC perlu dicek, berapa harga cuci dan salon di Cirebon, dan rute dari kota sekitar."
         />
-        <BlogIndex
-          posts={indexPosts}
-          categories={categories.map(({ id, name }) => ({ id, name }))}
-        />
+        <BlogIndex posts={posts} categories={categories} />
       </main>
     </>
   );

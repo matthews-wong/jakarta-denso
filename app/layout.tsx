@@ -2,18 +2,22 @@ import "./globals.css";
 
 import type { Metadata, Viewport } from "next";
 import { Instrument_Sans } from "next/font/google";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 
+import { GoogleAnalytics } from "@/components/site/GoogleAnalytics";
 import { JsonLd } from "@/components/site/JsonLd";
 import { MobileActionBar } from "@/components/site/MobileActionBar";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { LOCALE, SITE_NAME, SITE_SHORT_NAME, SITE_URL } from "@/lib/site";
+import {
+  LOCALE,
+  SITE_NAME,
+  SITE_SHORT_NAME,
+  SITE_URL,
+  THEME_COLOR,
+} from "@/lib/site";
 import { DEFAULT_OG_IMAGE, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "@/lib/seo";
 import { businessNode, graph, websiteNode } from "@/lib/structured-data";
 
-const GA_MEASUREMENT_ID = `G-FRX906FRWV`;
-const THEME_COLOR = `#081733`;
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -60,7 +64,6 @@ export const metadata: Metadata = {
       { url: `/apple-touch-icon.png`, sizes: `180x180`, type: `image/png` },
     ],
   },
-  manifest: `/site.webmanifest`,
 };
 
 export const viewport: Viewport = {
@@ -88,13 +91,7 @@ const RootLayout = ({ children }: RootLayoutProps): React.JSX.Element => (
 
       <JsonLd data={graph(websiteNode(), businessNode())} />
 
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_MEASUREMENT_ID}');`}
-      </Script>
+      <GoogleAnalytics />
       <Analytics />
     </body>
   </html>

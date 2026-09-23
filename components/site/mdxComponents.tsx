@@ -97,7 +97,7 @@ export const mdxComponents: MDXComponents = {
           alt={alt ?? ``}
           width={ARTICLE_IMAGE_WIDTH}
           height={ARTICLE_IMAGE_HEIGHT}
-          sizes="(min-width: 1024px) 720px, 100vw"
+          sizes="(min-width: 1024px) 720px, calc(100vw - 40px)"
           className="h-auto w-full rounded-2xl object-cover"
         />
         {alt && (

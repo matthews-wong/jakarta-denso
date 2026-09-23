@@ -14,7 +14,7 @@ interface PhotoHeroProps {
 /**
  * Full-bleed photo of the actual workshop under a navy overlay, with the
  * transparent SiteHeader (rendered by the page, outside <main>) on top. The photo is the LCP element, so it is
- * preloaded (`priority`) and nothing above the fold starts invisible.
+ * preloaded (`preload`) and nothing above the fold starts invisible.
  */
 export const PhotoHero = ({
   image,
@@ -27,7 +27,7 @@ export const PhotoHero = ({
       src={image.src}
       alt={image.alt}
       fill
-      priority
+      preload
       sizes="100vw"
       className="z-0 object-cover"
       style={{ objectPosition: image.position ?? `62% 60%` }}
