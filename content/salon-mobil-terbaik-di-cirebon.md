@@ -1,5 +1,6 @@
 ---
 title: "Salon Interior Mobil di Jakarta Int'l Denso Cirebon: Perawatan Kendaraan Terbaik 2025"
+metaTitle: "Salon Interior Mobil di Jakarta Int'l Denso Cirebon"
 date: "2025-02-11"
 excerpt: "Temukan layanan perawatan kendaraan terbaik di Jakarta Int'l Denso Cirebon dengan pilihan salon interior, salon eksterior, dan paket komplit."
 coverImage: "/images/proses-cuci.jpeg"
@@ -86,7 +87,7 @@ Hubungi kami sekarang di **0819-647-333** untuk mendapatkan layanan salon mobil 
 
 ### **Salon Eksterior**
 - Cuci premium dan poles bodi
-- Coating perlindungan cat
+- Wax pelindung cat
 - Pembersihan kaca dan velg
 
 ### **Salon Komplit**

@@ -1,5 +1,6 @@
 ---
 title: "Jok Mobil Custom: Panduan Lengkap Memilih Jok Paten & Semi Paten 2025"
+metaTitle: "Jok Mobil Custom: Memilih Jok Paten atau Semi Paten"
 date: "2025-02-11"
 excerpt: "Pelajari perbedaan dan keunggulan jok mobil paten dan semi paten untuk meningkatkan kenyamanan dan nilai jual kendaraan Anda."
 coverImage: "/images/Jok-mobil.jpeg"

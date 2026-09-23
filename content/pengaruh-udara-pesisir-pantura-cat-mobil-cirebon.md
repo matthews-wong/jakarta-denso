@@ -1,5 +1,6 @@
 ---
 title: "Kenapa Mobil di Cirebon Cepat Kusam? Pengaruh Udara Pesisir dan Debu Pantura"
+metaTitle: "Kenapa Mobil di Cirebon Cepat Kusam? Ini Penyebabnya"
 date: "2026-07-16"
 excerpt: "Cirebon punya karakter geografis pesisir dan dilalui jalur Pantura yang padat truk. Ini pengaruhnya terhadap cat mobil dan kenapa salon mobil rutin jadi penting."
 coverImage: "https://images.unsplash.com/photo-1768559898234-f829fc08ff61?w=1600&q=80&auto=format&fit=crop"

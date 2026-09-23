@@ -1,5 +1,6 @@
 ---
 title: "Panduan Lengkap Servis AC Mobil: Kapan Sebenarnya Diperlukan?"
+metaTitle: "Servis AC Mobil: Kapan Sebenarnya Diperlukan?"
 date: "2025-06-05"
 excerpt: "Ketahui kapan waktu yang tepat untuk melakukan servis AC mobil dan apa saja yang biasanya dilakukan. Jaga performa AC mobil Anda agar tetap optimal."
 coverImage: "/images/service-ac-mobil-umum.jpeg"

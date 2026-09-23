@@ -1,5 +1,6 @@
 ---
 title: "5 Alasan Warga Kuningan, Indramayu, dan Majalengka Pilih Bengkel di Cirebon Ini"
+metaTitle: "5 Alasan Warga Kuningan & Indramayu Pilih Bengkel Ini"
 date: "2026-07-18"
 excerpt: "Tidak sedikit pelanggan dari Kuningan, Indramayu, dan Majalengka yang rela menempuh perjalanan ke Cirebon demi layanan cuci, salon, dan service AC mobil. Ini alasannya."
 coverImage: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?w=1600&q=80&auto=format&fit=crop"

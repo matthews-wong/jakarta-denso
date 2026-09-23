@@ -1,5 +1,6 @@
 ---
 title: "Udara Kabin Bau Apek? Ini Penyebab dan Cara Ampuh Mengatasi Bau AC Mobil"
+metaTitle: "Bau Apek AC Mobil: Penyebab dan Cara Mengatasinya"
 date: "2025-06-05"
 excerpt: "Jangan biarkan bau tidak sedap dari AC mengganggu kenyamanan Anda. Kenali penyebab umum bau AC mobil dan temukan cara efektif untuk menghilangkannya."
 coverImage: "/images/bau-apek-ac-mobil.jpg"

@@ -1,5 +1,6 @@
 ---
 title: "5 Ciri Tempat Cuci Mobil Cirebon Berkualitas, Jangan Sampai Salah Pilih"
+metaTitle: "5 Ciri Tempat Cuci Mobil Cirebon yang Berkualitas"
 date: "2026-06-08"
 excerpt: "Sebelum memutuskan tempat cuci mobil langganan di Cirebon, kenali dulu 5 ciri tempat cuci mobil berkualitas yang menjamin hasil maksimal dan aman untuk cat mobil."
 coverImage: "https://images.unsplash.com/photo-1762933855598-273a51b47649?w=1600&q=80&auto=format&fit=crop"

@@ -1,5 +1,6 @@
 ---
 title: "Musim Hujan di Cirebon: Kenapa Cuci Mobil dan Servis AC Mobil Jadi Prioritas"
+metaTitle: "Musim Hujan di Cirebon: Cuci Mobil dan Servis AC Dulu"
 date: "2026-07-12"
 excerpt: "Musim hujan membawa risiko tersendiri untuk mobil, dari kotoran yang menempel di kolong hingga AC yang berembun. Ini alasan cuci mobil dan servis AC harus jadi prioritas."
 coverImage: "https://images.unsplash.com/photo-1638303289477-c74bcfc8852b?w=1600&q=80&auto=format&fit=crop"

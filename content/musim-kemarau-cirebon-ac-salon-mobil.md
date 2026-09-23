@@ -1,5 +1,6 @@
 ---
 title: "Musim Kemarau Cirebon: Kenapa AC Mobil dan Salon Mobil Jadi Kebutuhan Utama"
+metaTitle: "Musim Kemarau Cirebon: Saatnya Cek AC dan Salon Mobil"
 date: "2026-07-22"
 excerpt: "Musim kemarau di Cirebon membawa debu jalanan yang lebih pekat dan suhu udara yang lebih panas. Ini alasan AC mobil dan salon mobil jadi prioritas perawatan."
 coverImage: "https://images.unsplash.com/photo-1571056134329-6683e7216fdc?w=1600&q=80&auto=format&fit=crop"

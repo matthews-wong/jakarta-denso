@@ -1,5 +1,6 @@
 ---
 title: "Rating Google Maps 4.9/5: Kenapa Ulasan Penting Saat Cari Bengkel di Cirebon"
+metaTitle: "Kenapa Ulasan Google Penting Saat Cari Bengkel Cirebon"
 date: "2026-07-19"
 excerpt: "Rating dan ulasan Google Maps sering jadi acuan pertama saat mencari bengkel atau tempat cuci mobil di Cirebon. Ini cara membaca rating dengan benar sebelum memilih."
 coverImage: "https://images.unsplash.com/photo-1633613286991-611fe299c4be?w=1600&q=80&auto=format&fit=crop"

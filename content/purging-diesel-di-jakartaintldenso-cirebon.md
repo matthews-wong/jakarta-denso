@@ -1,6 +1,6 @@
 ---
 title: "Pentingnya Purging Diesel untuk Performa Optimal Mesin"
-date: "2025-02-7"
+date: "2025-02-07"
 excerpt: "Pahami manfaat purging diesel untuk kendaraan Anda dan bagaimana layanan ini dapat membantu meningkatkan performa mesin diesel."
 coverImage: "/images/purging.jpeg"
 author: "Tim Jakarta Int'l Denso"

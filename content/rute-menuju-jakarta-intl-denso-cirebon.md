@@ -1,5 +1,6 @@
 ---
 title: "Rute dan Cara Menuju Jakarta Int'l Denso Cirebon dari Berbagai Arah"
+metaTitle: "Rute ke Jakarta Int'l Denso Cirebon dari Berbagai Arah"
 date: "2026-07-15"
 excerpt: "Panduan lengkap rute menuju Jakarta Int'l Denso Cirebon di Jl. Garuda No.2, baik dari dalam kota Cirebon maupun dari Kuningan, Indramayu, dan Majalengka."
 coverImage: "https://images.unsplash.com/photo-1603638725135-928baf863eff?w=1600&q=80&auto=format&fit=crop"

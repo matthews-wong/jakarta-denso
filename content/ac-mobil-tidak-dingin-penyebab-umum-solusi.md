@@ -1,5 +1,6 @@
 ---
 title: "AC Mobil Tidak Dingin? Kenali 7 Penyebab Umum dan Cara Mengatasinya"
+metaTitle: "AC Mobil Tidak Dingin? 7 Penyebab dan Cara Mengatasinya"
 date: "2025-06-05"
 excerpt: "AC mobil tiba-tiba tidak dingin? Jangan panik! Pahami berbagai penyebab umumnya, mulai dari freon hingga masalah kompresor, dan temukan solusinya."
 coverImage: "/images/ac-mobil-kurang-dingin.jpg"

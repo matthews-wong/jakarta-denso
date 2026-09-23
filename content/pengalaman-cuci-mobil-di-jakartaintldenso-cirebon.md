@@ -1,5 +1,6 @@
 ---
 title: "Pengalaman Cuci Mobil di Jakarta Intl Denso Cirebon: Kebersihan Maksimal, Layanan Ramai tapi Memuaskan"
+metaTitle: "Pengalaman Cuci Mobil di Jakarta Int'l Denso Cirebon"
 date: "2025-02-15"
 excerpt: "Rasakan pengalaman cuci mobil premium dengan hasil bersih maksimal di Jakarta Intl Denso Cirebon. Meskipun ramai, layanan mereka tetap memuaskan!"
 coverImage: "/images/blog-cuci-mobil.jpeg"

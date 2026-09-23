@@ -1,5 +1,6 @@
 ---
 title: "Jadwal Ideal Cuci Mobil, Salon Mobil, dan Service AC Mobil di Cirebon"
+metaTitle: "Jadwal Ideal Cuci, Salon dan Service AC Mobil"
 date: "2026-07-08"
 excerpt: "Bingung kapan harus cuci mobil, kapan salon mobil, dan kapan service AC? Berikut jadwal perawatan ideal supaya mobil selalu prima sepanjang tahun di Cirebon."
 coverImage: "https://images.unsplash.com/photo-1596986952526-3be237187071?w=1600&q=80&auto=format&fit=crop"

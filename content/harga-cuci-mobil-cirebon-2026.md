@@ -1,5 +1,6 @@
 ---
 title: "Harga Cuci Mobil Cirebon 2026: Daftar Paket Lengkap & Terbaru"
+metaTitle: "Harga Cuci Mobil Cirebon 2026: Daftar Paket Lengkap"
 date: "2026-06-01"
 excerpt: "Cari tahu kisaran harga cuci mobil di Cirebon tahun 2026, mulai dari cuci salju hingga paket wetlook, plus tips memilih tempat cuci mobil yang worth the price."
 coverImage: "https://images.unsplash.com/photo-1750492786588-fa447659b42b?w=1600&q=80&auto=format&fit=crop"

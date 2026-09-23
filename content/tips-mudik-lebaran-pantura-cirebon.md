@@ -1,5 +1,6 @@
 ---
 title: "Tips Merawat Mobil Sebelum Mudik Lebaran Lewat Jalur Pantura Cirebon"
+metaTitle: "Tips Merawat Mobil Sebelum Mudik Lewat Pantura"
 date: "2026-07-17"
 excerpt: "Cirebon jadi titik transit penting jalur mudik Pantura. Ini persiapan mobil yang wajib dilakukan sebelum melanjutkan perjalanan panjang, dari AC hingga kondisi mesin."
 coverImage: "https://images.unsplash.com/photo-1551952237-954a0e68786c?w=1600&q=80&auto=format&fit=crop"

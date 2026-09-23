@@ -1,5 +1,6 @@
 ---
 title: "Cuci Mobil vs Salon Mobil di Cirebon: Apa Bedanya dan Kapan Harus Pilih yang Mana?"
+metaTitle: "Cuci Mobil vs Salon Mobil: Apa Bedanya dan Kapan Dipilih"
 date: "2026-07-03"
 excerpt: "Banyak yang mengira cuci mobil dan salon mobil itu sama. Padahal keduanya beda tujuan. Simak perbedaannya dan kapan waktu yang tepat memilih masing-masing layanan."
 coverImage: "https://images.unsplash.com/photo-1689182358896-2514cd65dfff?w=1600&q=80&auto=format&fit=crop"

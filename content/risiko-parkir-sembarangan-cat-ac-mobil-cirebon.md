@@ -1,5 +1,6 @@
 ---
 title: "Parkir Sembarangan di Kota Cirebon? Ini Risikonya untuk Cat dan AC Mobil"
+metaTitle: "Risiko Parkir Sembarangan bagi Cat dan AC Mobil"
 date: "2026-07-20"
 excerpt: "Kebiasaan parkir di pinggir jalan tanpa naungan di Cirebon ternyata berdampak pada cat dan sistem AC mobil. Kenali risikonya dan cara mengatasinya."
 coverImage: "https://images.unsplash.com/photo-1778357166857-5e1621fde358?w=1600&q=80&auto=format&fit=crop"

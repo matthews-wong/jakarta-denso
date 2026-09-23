@@ -1,5 +1,6 @@
 ---
 title: "Semua Tentang Freon AC Mobil: Kapan Harus Isi Ulang dan Mengapa?"
+metaTitle: "Freon AC Mobil: Kapan Harus Isi Ulang dan Mengapa?"
 date: "2025-06-05"
 excerpt: "Freon adalah nyawa bagi AC mobil. Pahami fungsi, tanda-tanda kekurangan freon, dan mengapa pengisian ulang perlu dilakukan oleh profesional."
 coverImage: "/images/isi-freon-mobil.jpg"

@@ -1,6 +1,6 @@
 ---
 title: "Cek Rutin AC Mobil: Rahasia AC Selalu Dingin dan Awet"
-date: "2025-02-6"
+date: "2025-02-06"
 excerpt: "Ketahui mengapa pemeriksaan AC mobil secara rutin sangat penting dan bagaimana layanan profesional dapat membantu menjaga kenyamanan berkendara Anda."
 coverImage: "/images/cek-ac-mobil.jpeg"
 author: "Tim Jakarta Int'l Denso"

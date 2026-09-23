@@ -1,5 +1,6 @@
 ---
 title: "Panduan Lengkap Alamat dan Jam Operasional Jakarta Int'l Denso Cirebon"
+metaTitle: "Alamat dan Jam Buka Jakarta Int'l Denso Cirebon"
 date: "2026-07-24"
 excerpt: "Informasi lengkap alamat, jam operasional, kontak, dan layanan yang tersedia di Jakarta Int'l Denso Cirebon — satu lokasi untuk cuci mobil, salon mobil, dan service AC."
 coverImage: "https://images.unsplash.com/photo-1773415356322-81d6fa7c4de9?w=1600&q=80&auto=format&fit=crop"

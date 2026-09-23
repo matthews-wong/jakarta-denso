@@ -1,5 +1,6 @@
 ---
 title: "Wisata Kuliner Cirebon Naik Mobil? Servis Dulu Biar Perjalanan Nyaman"
+metaTitle: "Wisata Kuliner Cirebon Naik Mobil? Servis Dulu"
 date: "2026-07-23"
 excerpt: "Cirebon terkenal dengan empal gentong hingga nasi jamblang. Sebelum keliling wisata kuliner naik mobil pribadi, pastikan kendaraan dalam kondisi nyaman dan prima."
 coverImage: "https://images.unsplash.com/photo-1780484201829-1c783ab01078?w=1600&q=80&auto=format&fit=crop"

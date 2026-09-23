@@ -1,5 +1,6 @@
 ---
 title: "Bengkel AC Mobil Cirebon Terpercaya: Ciri dan Alasan Wajib Servis Rutin"
+metaTitle: "Bengkel AC Mobil Cirebon Terpercaya: Ciri dan Tipsnya"
 date: "2026-06-29"
 excerpt: "Panduan memilih bengkel AC mobil Cirebon yang terpercaya, ciri-ciri AC mobil perlu diservis, dan kenapa perawatan rutin lebih hemat dibanding menunggu rusak total."
 coverImage: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?w=1600&q=80&auto=format&fit=crop"

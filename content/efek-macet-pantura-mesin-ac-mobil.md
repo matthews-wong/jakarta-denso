@@ -1,5 +1,6 @@
 ---
 title: "Macet di Jalur Pantura Cirebon: Efeknya untuk Mesin dan AC Mobil Anda"
+metaTitle: "Efek Macet Pantura Cirebon pada Mesin dan AC Mobil"
 date: "2026-07-21"
 excerpt: "Kemacetan di jalur Pantura yang melintasi Cirebon punya dampak nyata pada mesin dan AC mobil. Kenali efeknya dan cara merawat mobil agar tetap prima."
 coverImage: "https://images.unsplash.com/photo-1717039044041-82399017e236?w=1600&q=80&auto=format&fit=crop"

@@ -1,6 +1,7 @@
 ---
 title: "Keunggulan Layanan Cuci Mobil Premium Jakarta Int'l Denso Cirebon"
-date: "2025-02-8"
+metaTitle: "Keunggulan Cuci Mobil Premium di Jakarta Int'l Denso"
+date: "2025-02-08"
 excerpt: "Nikmati pengalaman cuci mobil premium dengan standar profesional dan hasil maksimal di Jakarta Int'l Denso Cirebon."
 coverImage: "/images/cuci-mobil12.jpeg"
 author: "Tim Jakarta Int'l Denso"

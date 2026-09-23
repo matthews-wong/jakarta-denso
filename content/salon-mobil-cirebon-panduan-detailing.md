@@ -1,5 +1,6 @@
 ---
 title: "Salon Mobil Cirebon: Panduan Lengkap Detailing Eksterior & Interior"
+metaTitle: "Salon Mobil Cirebon: Panduan Detailing Luar dan Dalam"
 date: "2026-06-15"
 excerpt: "Panduan lengkap salon mobil di Cirebon: apa saja tahapan detailing eksterior dan interior, berapa lama prosesnya, dan bagaimana memilih salon mobil yang tepat."
 coverImage: "https://images.unsplash.com/photo-1508974239320-0a029497e820?w=1600&q=80&auto=format&fit=crop"
