@@ -18,7 +18,6 @@ import {
 import { DEFAULT_OG_IMAGE, OG_IMAGE_HEIGHT, OG_IMAGE_WIDTH } from "@/lib/seo";
 import { businessNode, graph, websiteNode } from "@/lib/structured-data";
 
-
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   display: "swap",
@@ -76,8 +75,18 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+/**
+ * `data-scroll-behavior="smooth"` makes Next.js switch the global smooth
+ * scroll (globals.css) off during route changes, so a new page opens at the
+ * top instantly instead of animating up from the previous scroll position.
+ * In-page anchors (table of contents, price tabs) still scroll smoothly.
+ */
 const RootLayout = ({ children }: RootLayoutProps): React.JSX.Element => (
-  <html lang="id" className={instrumentSans.variable}>
+  <html
+    lang="id"
+    className={instrumentSans.variable}
+    data-scroll-behavior="smooth"
+  >
     <body>
       <a
         href="#konten"
