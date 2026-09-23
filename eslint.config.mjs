@@ -1,29 +1,25 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
+/**
+ * eslint-config-next 16 ships native flat configs; the old FlatCompat bridge
+ * crashed ESLint ("Converting circular structure to JSON").
+ */
 const eslintConfig = [
-  // Extend Next.js + TS defaults
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-
+  ...nextCoreWebVitals,
+  ...nextTypescript,
   {
     rules: {
-      // ✅ Downgrade unused vars to warnings, ignore if prefixed with "_"
+      // Unused vars are warnings, and ignored when prefixed with "_".
       "@typescript-eslint/no-unused-vars": [
         "warn",
-        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
-
-      // ✅ Downgrade "any" usage from error → warning
       "@typescript-eslint/no-explicit-any": "warn",
     },
+  },
+  {
+    ignores: [".next/**", "node_modules/**", "public/**"],
   },
 ];
 

@@ -2,423 +2,267 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import type { MDXComponents } from "mdx/types";
 import remarkGfm from "remark-gfm";
-import rehypeHighlight from "rehype-highlight";
-import {
-  Calendar,
-  Clock,
-  ChevronLeft,
-  ArrowRight,
-  MapPin,
-  Car,
-  Sparkles,
-  Wrench,
-  Phone,
-  Lightbulb,
-  DollarSign,
-  MessageSquare,
-} from "lucide-react";
-import { getAllSlugs, getPostBySlug } from "@/lib/blog";
-import ShareButton from "./ShareButton";
 
-// Statically generate every post at build time; 404 for unknown slugs.
+import { Breadcrumbs } from "@/components/site/Breadcrumbs";
+import { JsonLd } from "@/components/site/JsonLd";
+import { mdxComponents } from "@/components/site/mdxComponents";
+import { PostCard } from "@/components/site/PostCard";
+import { SectionHeading } from "@/components/site/SectionHeading";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import {
+  BLOG_PATH,
+  categoryById,
+  formatDateId,
+  getAllSlugs,
+  getPostBySlug,
+  getRelatedPosts,
+  readingLabel,
+  type BlogCategoryId,
+} from "@/lib/blog";
+import { HOME_CRUMB } from "@/lib/navigation";
+import {
+  findPriceItem,
+  formatItemPrice,
+  type PriceCategoryId,
+} from "@/lib/prices";
+import {
+  OPENING_HOURS,
+  bookingMessage,
+  formatHoursRange,
+  whatsappLink,
+} from "@/lib/site";
+import {
+  blogPostingNode,
+  breadcrumbNode,
+  graph,
+  webPageNode,
+} from "@/lib/structured-data";
+
+/** Every post is statically generated at build time; unknown slugs 404. */
 export const dynamicParams = false;
 
-export const generateStaticParams = async (): Promise<{ slug: string }[]> => {
-  const slugs = await getAllSlugs();
-  return slugs.map((slug) => ({ slug }));
-};
+export const generateStaticParams = async (): Promise<{ slug: string }[]> =>
+  (await getAllSlugs()).map((slug) => ({ slug }));
 
-// MDX component overrides. All presentational — safe to render on the server.
-const mdxComponents: MDXComponents = {
-  h1: ({ children }) => (
-    <h1 className="text-3xl md:text-4xl font-bold mt-12 mb-6 text-gray-800 border-b pb-2 bg-gradient-to-r from-blue-100 to-blue-50 px-4 py-2 rounded-lg">
-      {children}
-    </h1>
-  ),
-  h2: ({ children }) => (
-    <h2 className="text-2xl md:text-3xl font-semibold mt-8 mb-4 text-gray-700 border-l-4 border-blue-500 pl-4">
-      {children}
-    </h2>
-  ),
-  h3: ({ children }) => (
-    <h3 className="text-xl md:text-2xl font-semibold mt-6 mb-3 text-gray-600">
-      {children}
-    </h3>
-  ),
-  p: ({ children }) => (
-    <p className="mb-6 leading-relaxed text-gray-600 text-lg">{children}</p>
-  ),
-  ul: ({ children }) => (
-    <ul className="list-disc pl-6 mb-6 text-gray-600 space-y-2">{children}</ul>
-  ),
-  ol: ({ children }) => (
-    <ol className="list-decimal pl-6 mb-6 text-gray-600 space-y-2">
-      {children}
-    </ol>
-  ),
-  li: ({ children }) => <li className="text-lg">{children}</li>,
-  blockquote: ({ children }) => (
-    <blockquote className="border-l-4 border-blue-500 pl-4 py-2 mb-6 italic text-gray-700 bg-blue-50 rounded-r-lg">
-      {children}
-    </blockquote>
-  ),
-  table: ({ children }) => (
-    <div className="overflow-x-auto mb-6 rounded-xl border border-gray-200 shadow-sm">
-      <table className="w-full text-left border-collapse">{children}</table>
-    </div>
-  ),
-  thead: ({ children }) => (
-    <thead className="bg-blue-50 text-gray-900">{children}</thead>
-  ),
-  tbody: ({ children }) => (
-    <tbody className="divide-y divide-gray-100">{children}</tbody>
-  ),
-  tr: ({ children }) => <tr>{children}</tr>,
-  th: ({ children }) => (
-    <th className="px-4 py-3 font-semibold text-sm">{children}</th>
-  ),
-  td: ({ children }) => (
-    <td className="px-4 py-3 text-gray-600 text-base">{children}</td>
-  ),
-  img: ({ src, alt }) => (
-    <figure className="my-8">
-      <Image
-        src={typeof src === "string" ? src : "/images/og-image.jpg"}
-        alt={alt || ""}
-        width={800}
-        height={500}
-        className="rounded-xl shadow-lg object-cover w-full"
-      />
-      {alt && (
-        <figcaption className="text-center text-sm text-gray-500 mt-2">
-          {alt}
-        </figcaption>
-      )}
-    </figure>
-  ),
-  a: ({ href, children }) => (
-    <Link
-      href={href || "#"}
-      className="text-blue-600 hover:text-blue-800 underline transition-colors"
-    >
-      {children}
-    </Link>
-  ),
-  Tip: ({ children }: { children: React.ReactNode }) => (
-    <div className="bg-gradient-to-r from-green-100 to-green-50 p-6 rounded-lg my-8 border-l-4 border-green-500 shadow-md">
-      <div className="flex items-center gap-3">
-        <Lightbulb className="w-6 h-6 text-green-500" />
-        <span className="font-semibold text-green-700">Tip:</span>
-      </div>
-      <div className="mt-2 text-green-700">{children}</div>
-    </div>
-  ),
-  Highlight: ({ children }: { children: React.ReactNode }) => (
-    <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-6 rounded-lg my-8 shadow-md border-t-4 border-purple-500">
-      <div className="text-purple-800">{children}</div>
-    </div>
-  ),
-};
+interface CallToAction {
+  title: string;
+  service: string;
+  priceCategory: PriceCategoryId;
+  priceItem: string;
+}
 
-// Quick Links Data - matches current routes
-const quickLinks = [
-  {
-    href: "/cuci-mobil-terbaik-cirebon",
-    icon: Car,
-    title: "Cuci Mobil",
-    description: "Layanan cuci mobil premium",
-    bgClass: "bg-blue-50",
-    hoverClass: "hover:bg-blue-100",
-    iconBgClass: "bg-blue-500",
-    textClass: "text-blue-900",
-    descClass: "text-blue-600",
+/** Contextual CTA per category: the matching service and one real price. */
+const CTA_BY_CATEGORY: Record<BlogCategoryId, CallToAction> = {
+  "service-ac": {
+    title: `AC kurang dingin?`,
+    service: `service AC`,
+    priceCategory: `ac`,
+    priceItem: `Ganti Freon AC`,
   },
-  {
-    href: "/salon-mobil-terbaik-cirebon",
-    icon: Sparkles,
-    title: "Salon Mobil",
-    description: "Detailing & poles mobil",
-    bgClass: "bg-purple-50",
-    hoverClass: "hover:bg-purple-100",
-    iconBgClass: "bg-purple-500",
-    textClass: "text-purple-900",
-    descClass: "text-purple-600",
+  "cuci-mobil": {
+    title: `Mobil perlu dicuci?`,
+    service: `cuci mobil`,
+    priceCategory: `cuci`,
+    priceItem: `Cuci Mobil Salju`,
   },
-  {
-    href: "/service-ac-dan-mesin-terbaik-cirebon",
-    icon: Wrench,
-    title: "Service AC & Mesin",
-    description: "Perbaikan AC dan mesin",
-    bgClass: "bg-orange-50",
-    hoverClass: "hover:bg-orange-100",
-    iconBgClass: "bg-orange-500",
-    textClass: "text-orange-900",
-    descClass: "text-orange-600",
+  "salon-mobil": {
+    title: `Interior mulai kusam?`,
+    service: `salon mobil`,
+    priceCategory: `salon`,
+    priceItem: `Paket Salon Komplit`,
   },
-  {
-    href: "/harga",
-    icon: DollarSign,
-    title: "Daftar Harga",
-    description: "Lihat harga layanan",
-    bgClass: "bg-green-50",
-    hoverClass: "hover:bg-green-100",
-    iconBgClass: "bg-green-500",
-    textClass: "text-green-900",
-    descClass: "text-green-600",
+  "mesin-oli": {
+    title: `Mesin terasa berat?`,
+    service: `service mesin`,
+    priceCategory: `mesin`,
+    priceItem: `Purging Diesel`,
   },
-  {
-    href: "/ulasan-kami",
-    icon: MessageSquare,
-    title: "Ulasan",
-    description: "Testimoni pelanggan",
-    bgClass: "bg-pink-50",
-    hoverClass: "hover:bg-pink-100",
-    iconBgClass: "bg-pink-500",
-    textClass: "text-pink-900",
-    descClass: "text-pink-600",
+  "tips-info": {
+    title: `Mau servis sekalian?`,
+    service: `cuci atau service AC`,
+    priceCategory: `cuci`,
+    priceItem: `Cuci Mobil Salju`,
   },
-  {
-    href: "/kontak-kami",
-    icon: Phone,
-    title: "Kontak",
-    description: "Hubungi kami",
-    bgClass: "bg-red-50",
-    hoverClass: "hover:bg-red-100",
-    iconBgClass: "bg-red-500",
-    textClass: "text-red-900",
-    descClass: "text-red-600",
-  },
-];
+};
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export default async function BlogPostPage({
+const BlogPostPage = async ({
   params,
-}: BlogPostPageProps): Promise<React.JSX.Element> {
+}: BlogPostPageProps): Promise<React.JSX.Element> => {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
+  if (!post) notFound();
 
-  if (!post) {
-    notFound();
-  }
-
-  const { frontmatter, source, structuredData } = post;
+  const related = await getRelatedPosts(post);
+  const category = categoryById(post.categoryId);
+  const cta = CTA_BY_CATEGORY[post.categoryId];
+  const ctaPrice = formatItemPrice(
+    findPriceItem(cta.priceCategory, cta.priceItem),
+  );
+  const crumbs = [
+    HOME_CRUMB,
+    { name: `Blog`, path: BLOG_PATH },
+    { name: post.title, path: post.path },
+  ];
+  const weekdayHours = OPENING_HOURS[0];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* BlogPosting structured data — server-rendered into the DOM */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    <>
+      <JsonLd
+        data={graph(
+          webPageNode({
+            path: post.path,
+            name: post.title,
+            description: post.excerpt,
+            image: post.coverImage,
+          }),
+          breadcrumbNode(post.path, crumbs),
+          blogPostingNode({
+            path: post.path,
+            headline: post.title,
+            description: post.excerpt,
+            image: post.coverImage,
+            datePublished: post.datePublished,
+            dateModified: post.dateModified,
+            section: post.categoryName,
+            keywords: post.keywords,
+          }),
+        )}
       />
-
-      {/* Simple Navbar */}
-      <nav className="fixed w-full z-50 py-3 bg-white shadow-md">
-        <div className="container mx-auto px-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/images/logo-jid.png"
-              alt="Jakarta Intl Denso"
-              width={40}
-              height={40}
-              className="rounded-lg"
-            />
-            <span className="font-bold text-gray-900 hidden sm:block">
-              Jakarta Intl Denso
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/blogs"
-              className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              Semua Artikel
-            </Link>
-            <Link
-              href="https://wa.me/62819647333"
-              className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-full hover:bg-blue-700 transition-colors"
-            >
-              Hubungi Kami
-            </Link>
-          </div>
-        </div>
-      </nav>
-
-      <main>
-        <article className="pt-16 bg-white">
-          {/* Hero Image */}
-          <div className="relative h-[40vh] md:h-[50vh] lg:h-[60vh] w-full">
-            <Image
-              src={frontmatter.coverImage || "/images/og-image.jpg"}
-              alt={frontmatter.title}
-              fill
-              priority
-              className="object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/50 to-transparent" />
-          </div>
-
-          {/* Content Card */}
-          <div className="container mx-auto px-4 py-8 -mt-32 relative z-10">
-            <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-xl p-6 md:p-12">
-              {/* Navigation */}
-              <nav className="flex items-center justify-between mb-8">
-                <Link
-                  href="/blogs"
-                  className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
-                >
-                  <ChevronLeft className="w-5 h-5 mr-1" />
-                  Kembali
-                </Link>
-                <ShareButton
-                  title={frontmatter.title}
-                  text={frontmatter.excerpt}
-                />
-              </nav>
-
-              {/* Header */}
-              <header className="mb-8">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight text-gray-900">
-                  {frontmatter.title}
-                </h1>
-
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-6">
-                  <div className="flex items-center">
-                    <Calendar className="h-4 w-4 mr-2" />
-                    <time dateTime={frontmatter.date}>
-                      {new Date(frontmatter.date).toLocaleDateString("id-ID", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </time>
-                  </div>
-                  <div className="flex items-center">
-                    <Clock className="h-4 w-4 mr-2" />
-                    <span>{frontmatter.readingTime}</span>
-                  </div>
-                  {frontmatter.category && (
-                    <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium">
-                      {frontmatter.category}
-                    </span>
-                  )}
-                </div>
-              </header>
-
-              {/* MDX Content — rendered on the server */}
-              <div className="prose prose-lg max-w-none">
-                <MDXRemote
-                  source={source}
-                  components={mdxComponents}
-                  options={{
-                    mdxOptions: {
-                      remarkPlugins: [remarkGfm],
-                      rehypePlugins: [rehypeHighlight],
-                    },
-                  }}
-                />
-              </div>
-
-              {/* Quick Links Section */}
-              <div className="mt-12 pt-8 border-t border-gray-200">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">
-                  Jelajahi Layanan Kami
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {quickLinks.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className={`group flex items-center p-4 ${item.bgClass} rounded-xl ${item.hoverClass} transition-all`}
-                    >
-                      <div
-                        className={`flex-shrink-0 w-10 h-10 ${item.iconBgClass} rounded-lg flex items-center justify-center`}
-                      >
-                        <item.icon className="w-5 h-5 text-white" />
-                      </div>
-                      <div className="ml-4">
-                        <p className={`font-medium ${item.textClass}`}>
-                          {item.title}
-                        </p>
-                        <p className={`text-sm ${item.descClass}`}>
-                          {item.description}
-                        </p>
-                      </div>
-                      <ArrowRight
-                        className={`w-4 h-4 ml-auto ${item.descClass} opacity-0 group-hover:opacity-100 transition-opacity`}
-                      />
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Service Area CTA */}
-                <div className="bg-gray-50 rounded-xl p-4 mt-6">
-                  <div className="flex items-start gap-3 text-gray-600">
-                    <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                    <p className="text-sm">
-                      Kunjungi <strong>Jakarta Intl Denso Cirebon</strong> di
-                      Jl. Garuda No.2, Cirebon. Melayani pelanggan dari{" "}
-                      <strong>Indramayu</strong>, <strong>Majalengka</strong>,{" "}
-                      <strong>Kuningan</strong>, dan sekitarnya.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Tags */}
-              {frontmatter.tags && frontmatter.tags.length > 0 && (
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  <div className="flex flex-wrap gap-2">
-                    {frontmatter.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </article>
-      </main>
-
-      {/* Simple Footer */}
-      <footer className="bg-gray-900 text-white py-12 mt-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-center md:text-left">
-              <h3 className="text-xl font-bold mb-2">
-                Jakarta Intl Denso Cirebon
-              </h3>
-              <p className="text-gray-400 text-sm">
-                Spesialis AC Mobil & Perawatan Kendaraan
-              </p>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link
-                href="https://wa.me/62819647333"
-                className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-full transition-colors"
-              >
-                WhatsApp: 0819-647-333
-              </Link>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
-            <p>
-              &copy; {new Date().getFullYear()} Jakarta Intl Denso Cirebon. All
-              rights reserved.
+      <SiteHeader active="blog" />
+      <main id="konten">
+        <div className="container-site grid gap-10 pb-[72px] pt-7 lg:grid-cols-[minmax(0,720px)_280px] lg:justify-center lg:gap-[88px] lg:pb-28 lg:pt-[52px]">
+          <article>
+            <Breadcrumbs crumbs={crumbs} />
+            <p className="mb-3.5 text-[15px] font-semibold text-brand">
+              {post.categoryName}
             </p>
-          </div>
+            <h1 className="text-[36px] font-semibold leading-[1.04] tracking-[-0.035em] lg:text-[54px]">
+              {post.title}
+            </h1>
+            <p className="mb-8 mt-7 text-[15px] text-muted">
+              <b className="block font-semibold text-ink">{post.author}</b>
+              Terbit{" "}
+              <time dateTime={post.datePublished}>
+                {formatDateId(post.datePublished)}
+              </time>
+              {post.dateModified !== post.datePublished && (
+                <>
+                  , diperbarui{" "}
+                  <time dateTime={post.dateModified}>
+                    {formatDateId(post.dateModified)}
+                  </time>
+                </>
+              )}
+              , {readingLabel(post.readingMinutes)}.
+            </p>
+            <figure className="relative m-0 aspect-video overflow-hidden rounded-[22px] bg-ice">
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                priority
+                sizes="(min-width: 1024px) 720px, 100vw"
+                className="object-cover"
+              />
+            </figure>
+            <section
+              aria-labelledby="ringkasan"
+              className="my-9 rounded-[20px] bg-ice px-7 py-6"
+            >
+              <h2 id="ringkasan" className="mb-2 text-xl font-semibold">
+                Ringkasan
+              </h2>
+              <p className="text-[17px] leading-[1.65] text-[#29334F]">
+                {post.excerpt}
+              </p>
+            </section>
+
+            <MDXRemote
+              source={post.source}
+              components={mdxComponents}
+              options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }}
+            />
+
+            <aside className="my-11 flex flex-col items-start gap-5 rounded-[22px] bg-navy p-7 text-white lg:flex-row lg:items-center lg:gap-6">
+              <div className="flex-1">
+                <h2 className="mb-1.5 text-[22px] font-semibold">
+                  {cta.title}
+                </h2>
+                <p className="text-base text-white/75">
+                  {cta.priceItem} {ctaPrice}. Konsultasi gratis di Jl. Garuda
+                  No. 2, {weekdayHours.label}
+                  {` `}
+                  {formatHoursRange(weekdayHours)}.
+                </p>
+              </div>
+              <a
+                href={whatsappLink(bookingMessage(cta.service))}
+                className="btn btn-wa"
+              >
+                <WhatsAppIcon className="h-5 w-5" />
+                Tanya lewat WhatsApp
+              </a>
+            </aside>
+            <p className="text-base text-muted">
+              Lihat juga{` `}
+              <Link href={category.servicePath} className="text-link">
+                layanan {category.name.toLowerCase()}
+              </Link>
+              {` `}dan{` `}
+              <Link href="/harga" className="text-link">
+                daftar harga lengkap
+              </Link>
+              .
+            </p>
+          </article>
+
+          {post.headings.length > 0 && (
+            <aside aria-label="Daftar isi" className="hidden lg:block">
+              <nav className="sticky top-6">
+                <h2 className="mb-3.5 text-[15px] font-semibold">
+                  Di artikel ini
+                </h2>
+                <ol className="border-l-2 border-line">
+                  {post.headings.map((heading) => (
+                    <li
+                      key={heading.id}
+                      className="-ml-0.5 border-l-2 border-transparent py-1.5 pl-4 text-[15px] text-muted hover:border-brand hover:text-ink"
+                    >
+                      <a href={`#${heading.id}`}>{heading.text}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </aside>
+          )}
         </div>
-      </footer>
-    </div>
+
+        {related.length > 0 && (
+          <section aria-labelledby="related-heading" className="section bg-ice">
+            <div className="container-site">
+              <SectionHeading id="related-heading" title="Baca juga">
+                <p>
+                  Artikel lain dari kategori {post.categoryName.toLowerCase()}{" "}
+                  dan terbaru.
+                </p>
+              </SectionHeading>
+              <div className="grid gap-8 lg:grid-cols-3">
+                {related.map((entry) => (
+                  <PostCard key={entry.slug} post={entry} />
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+    </>
   );
-}
+};
+
+export default BlogPostPage;

@@ -1,68 +1,70 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import PriceList from "../components/price-list";
-import WhatsAppButton from "../components/WhatsAppButton";
+import { JsonLd } from "@/components/site/JsonLd";
+import { PageHeader } from "@/components/site/PageHeader";
+import { PriceTable } from "@/components/site/PriceTable";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { HOME_CRUMB } from "@/lib/navigation";
+import { HARGA_META } from "@/lib/page-meta";
+import { PRICE_CATEGORIES, PRICES_UPDATED } from "@/lib/prices";
+import {
+  breadcrumbNode,
+  graph,
+  priceCatalogNode,
+  webPageNode,
+} from "@/lib/structured-data";
 
-export default function PriceListPage() {
-  return (
-    <>
-      <Navbar />
 
-      <main className="min-h-screen bg-background">
-        {/*
-          The previous large header section has been removed.
-          The page now starts directly with the PriceList component,
-          making the price grid the first thing the user sees.
-        */}
-        <PriceList />
+const CRUMBS = [HOME_CRUMB, { name: `Harga`, path: HARGA_META.path }];
+const CATEGORY_IDS = PRICE_CATEGORIES.map((category) => category.id);
 
-        {/* Why Choose Us Section */}
-        <section className="py-16 bg-card">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Mengapa Pilih Bengkel Cirebon?</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Kami berkomitmen memberikan layanan terbaik dengan standar kualitas tinggi
-              </p>
-            </div>
+const HargaPage = (): React.JSX.Element => (
+  <>
+    <JsonLd
+      data={graph(
+        webPageNode({
+          path: HARGA_META.path,
+          name: HARGA_META.title,
+          description: HARGA_META.description,
+          image: HARGA_META.ogImage,
+          extra: { dateModified: PRICES_UPDATED },
+        }),
+        breadcrumbNode(HARGA_META.path, CRUMBS),
+        priceCatalogNode(HARGA_META.path, CATEGORY_IDS),
+      )}
+    />
+    <SiteHeader active="harga" />
+    <main id="konten">
+      <PageHeader
+        crumbs={CRUMBS}
+        title="Daftar harga 2026"
+        lead="Untuk mobil ukuran standar, diperbarui 23 September 2026. Mobil yang lebih besar bisa berbeda; tanyakan dulu lewat WhatsApp."
+      >
+        <nav
+          aria-label="Kategori harga"
+          className="mt-9 inline-flex max-w-full flex-wrap gap-0.5 rounded-[13px] bg-ice p-1"
+        >
+          {PRICE_CATEGORIES.map((category) => (
+            <a
+              key={category.id}
+              href={`#${category.id}`}
+              className="whitespace-nowrap rounded-[10px] px-3 py-2.5 text-[14px] font-semibold text-muted hover:bg-white hover:text-ink lg:px-[18px] lg:text-[15px]"
+            >
+              {category.name}
+            </a>
+          ))}
+        </nav>
+      </PageHeader>
+      <section
+        aria-label="Tabel harga"
+        className="bg-ice py-10 lg:pb-28 lg:pt-16"
+      >
+        <div className="container-site grid items-start gap-4 lg:grid-cols-2 lg:gap-6">
+          {PRICE_CATEGORIES.map((category) => (
+            <PriceTable key={category.id} category={category} />
+          ))}
+        </div>
+      </section>
+    </main>
+  </>
+);
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center p-6 bg-background rounded-lg border border-border shadow-sm">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-primary">🔧</span>
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Teknisi Berpengalaman</h3>
-                <p className="text-muted-foreground">
-                  Tim teknisi profesional dengan pengalaman 10+ tahun di bidang otomotif
-                </p>
-              </div>
-
-              <div className="text-center p-6 bg-background rounded-lg border border-border shadow-sm">
-                <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-accent">⚡</span>
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Peralatan Modern</h3>
-                <p className="text-muted-foreground">
-                  Menggunakan peralatan dan teknologi terkini untuk hasil maksimal
-                </p>
-              </div>
-
-              <div className="text-center p-6 bg-background rounded-lg border border-border shadow-sm">
-                <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl text-secondary">💎</span>
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">Kualitas Premium</h3>
-                <p className="text-muted-foreground">
-                  Garansi kualitas dan kepuasan pelanggan adalah prioritas utama kami
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <Footer />
-      <WhatsAppButton />
-    </>
-  );
-}
+export default HargaPage;

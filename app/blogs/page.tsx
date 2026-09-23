@@ -1,91 +1,85 @@
-import type { Metadata, Viewport } from "next";
-import BlogPageClient from "./BlogPageClient";
-import { getAllPosts } from "@/lib/blog";
+import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Blog Otomotif",
-  description:
-    "Temukan tips dan informasi terbaru seputar perawatan mobil, cuci mobil, dan layanan otomotif di Cirebon.",
-  keywords: [
-    "Cuci Mobil Cirebon",
-    "Cuci Mobil Terbaik",
-    "Cuci Mobil Indonesia",
-    "Cuci Mobil dekat CSB Mall",
-    "AC Mobil Cirebon",
-    "Bengkel AC Mobil Cirebon",
-    "Service AC Mobil Cirebon",
-    "Salon Mobil Cirebon",
-    "Cuci Mobil dekat Grage Mall",
-    "Cuci Mobil Murah Cirebon",
-    "Cuci Mobil Premium Cirebon",
-    "Jakarta Intl Denso Cirebon",
-    "Bengkel Jakarta Intl Denso",
-    "Jakarta Intl Denso Jl Garuda No 2",
-    "Service AC Mobil Cirebon",
-    "Service AC Mobil Terbaik Cirebon",
-    "Bengkel AC Mobil Cirebon",
-    "Perbaikan AC Mobil Cirebon",
-    "Servis AC Mobil Cirebon",
-    "Service AC Mobil Terdekat Cirebon",
-    "Service AC Mobil Murah Cirebon",
-    "Service AC Mobil Profesional Cirebon",
-    "Service AC Mobil Berkualitas Cirebon",
-    "Service AC Mobil Bergaransi Cirebon",
-    "Service AC Mobil Panggilan Cirebon",
-    "Perawatan AC Mobil Berkala Cirebon",
-    "Pengisian Freon AC Mobil Cirebon",
-    "Perbaikan Kompresor AC Mobil Cirebon",
-    "Pembersihan Evaporator AC Mobil Cirebon",
-    "Deteksi Kebocoran AC Mobil Cirebon",
-    "Servis AC Mobil Tanpa Bongkar Cirebon",
-    "Upgrade Sistem AC Mobil Cirebon",
-    "Konsultasi Masalah AC Mobil Cirebon",
-    "Layanan Darurat AC Mobil Cirebon",
-    "Paket Hemat Servis AC Mobil Cirebon",
-    "Garansi Servis AC Mobil Cirebon",
-    "Spare Part AC Mobil Original Cirebon",
-    "Promo Servis AC Mobil Cirebon",
-    "Servis AC Mobil Semua Merek Cirebon",
-    "Testimoni Pelanggan Servis AC Mobil Cirebon",
-    "Bengkel AC Mobil Cirebon",
-    "Service AC Mobil Cirebon",
-    "Salon Mobil Cirebon",
-    "Blog Otomotif",
-    "Tips Perawatan Mobil",
-  ].join(", "),
-  openGraph: {
-    title: "Blog Otomotif | Jakarta Int'l Denso Cirebon",
-    description:
-      "Temukan tips dan informasi terbaru seputar perawatan mobil, cuci mobil, dan layanan otomotif di Cirebon.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Blog Otomotif | Jakarta Int'l Denso Cirebon",
-    description:
-      "Temukan tips dan informasi terbaru seputar perawatan mobil, cuci mobil, dan layanan otomotif di Cirebon.",
-  },
-};
+import { BlogIndex, type BlogIndexPost } from "@/components/site/BlogIndex";
+import { JsonLd } from "@/components/site/JsonLd";
+import { PageHeader } from "@/components/site/PageHeader";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import {
+  BLOG_CATEGORIES,
+  formatDateId,
+  getAllPosts,
+  readingLabel,
+} from "@/lib/blog";
+import { HOME_CRUMB } from "@/lib/navigation";
+import { BLOG_META } from "@/lib/page-meta";
+import { pageMetadata } from "@/lib/seo";
+import { absoluteUrl } from "@/lib/site";
+import {
+  breadcrumbNode,
+  graph,
+  itemListNode,
+  webPageNode,
+} from "@/lib/structured-data";
 
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-};
+export const metadata: Metadata = pageMetadata({
+  path: BLOG_META.path,
+  title: BLOG_META.title,
+  description: BLOG_META.description,
+  image: BLOG_META.ogImage,
+});
 
-export default async function BlogPage() {
+const CRUMBS = [HOME_CRUMB, { name: `Blog`, path: BLOG_META.path }];
+
+const BlogPage = async (): Promise<React.JSX.Element> => {
   const posts = await getAllPosts();
-
-  const viewPosts = posts.map(({ slug, frontmatter }) => ({
-    slug,
-    frontmatter: {
-      title: frontmatter.title,
-      date: frontmatter.date,
-      excerpt: frontmatter.excerpt,
-      coverImage: frontmatter.coverImage,
-      category: frontmatter.category,
-    },
+  const indexPosts: BlogIndexPost[] = posts.map((post) => ({
+    slug: post.slug,
+    path: post.path,
+    title: post.title,
+    excerpt: post.excerpt,
+    coverImage: post.coverImage,
+    categoryId: post.categoryId,
+    categoryName: post.categoryName,
+    datePublished: post.datePublished,
+    dateLabel: formatDateId(post.datePublished),
+    readingLabel: readingLabel(post.readingMinutes),
   }));
+  const categories = BLOG_CATEGORIES.filter((category) =>
+    posts.some((post) => post.categoryId === category.id),
+  );
 
-  return <BlogPageClient posts={viewPosts} />;
-}
+  return (
+    <>
+      <JsonLd
+        data={graph(
+          webPageNode({
+            path: BLOG_META.path,
+            name: BLOG_META.title,
+            description: BLOG_META.description,
+            type: `CollectionPage`,
+            extra: { mainEntity: { "@id": `${absoluteUrl(BLOG_META.path)}#list` } },
+          }),
+          breadcrumbNode(BLOG_META.path, CRUMBS),
+          itemListNode(
+            BLOG_META.path,
+            posts.map((post) => post.path),
+          ),
+        )}
+      />
+      <SiteHeader active="blog" />
+      <main id="konten">
+        <PageHeader
+          crumbs={CRUMBS}
+          title="Blog perawatan mobil"
+          lead="Dari bengkel kami: kapan AC perlu dicek, berapa harga cuci dan salon di Cirebon, dan rute dari kota sekitar."
+        />
+        <BlogIndex
+          posts={indexPosts}
+          categories={categories.map(({ id, name }) => ({ id, name }))}
+        />
+      </main>
+    </>
+  );
+};
+
+export default BlogPage;

@@ -1,81 +1,51 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Design tokens for the v3 redesign: one navy family from the logo, cool
+ * neutrals, WhatsApp green reserved for booking actions and the logo red
+ * reserved for the "Terlaris" tag.
+ */
 export default {
-  darkMode: ["class"],
-  content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./app/**/*.{ts,tsx,mdx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
+        navy: { DEFAULT: "#081733", 2: "#122A5C" },
+        ink: "#0B1633",
+        muted: "#5A6580",
+        line: "#E1E6EE",
+        ice: "#F1F5FA",
+        brand: {
+          DEFAULT: "#2449B8",
+          soft: "#E7EDFB",
+          red: "#D6392F",
+          "red-soft": "#FCEAE8",
         },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
-        },
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
-        },
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))'
-        }
+        wa: { DEFAULT: "#0E8F47", dark: "#0B7A3C", soft: "#E2F5E9" },
+      },
+      fontFamily: {
+        sans: [
+          "var(--font-sans)",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "sans-serif",
+        ],
+      },
+      maxWidth: {
+        site: "1440px",
+        prose: "44rem",
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
+        panel: "22px",
+        tile: "26px",
       },
-      keyframes: {
-        blob: {
-          "0%": {
-            transform: "translate(0px, 0px) scale(1)"
-          },
-          "33%": {
-            transform: "translate(30px, -50px) scale(1.1)"
-          },
-          "66%": {
-            transform: "translate(-20px, 20px) scale(0.9)"
-          },
-          "100%": {
-            transform: "translate(0px, 0px) scale(1)"
-          }
-        }
+      boxShadow: {
+        panel: "0 40px 80px -30px rgba(2, 8, 26, 0.7)",
+        seg: "0 1px 3px rgba(11, 22, 51, 0.14)",
+        bar: "0 -10px 30px rgba(8, 23, 51, 0.08)",
       },
-      animation: {
-        blob: "blob 7s infinite"
-      }
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [],
 } satisfies Config;
